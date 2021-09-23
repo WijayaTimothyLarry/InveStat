@@ -1,0 +1,17 @@
+.main-body {
+  width: 20%;
+  border: 1px solid lightgrey;
+  background-color: rgba(255, 255, 255, 0.884);
+  border-radius: 20px;
+  padding: 30px;
+  text-align: center;
+  margin-top: 200px;
+}
+
+.login-btn {
+  padding-left: 10px;
+}
+
+.newUser {
+  color: grey;
+}

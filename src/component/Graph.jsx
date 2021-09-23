@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Chart } from "chart.js";
-class Graph extends React.Component {
+class Graph extends Component {
   render() {
     const src =
       "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js";

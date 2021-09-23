@@ -1,12 +1,16 @@
-const portfolioList = [
+const StockList = [
   {
-    portfolioID: "portfolio 1",
-    totalValue: 1250,
-    pnl: 250,
-    ytdReturn: 0.25,
+    stockID: "",
+    price: 0,
+    quantity: 0,
+    value: 0,
+    capitalGains: 0,
+    dividends: 0,
+    currency: 0,
+    return: 0,
   },
 ];
 
-export function getPortfolioList() {
-  return portfolioList;
+export function getStockList() {
+  return StockList;
 }

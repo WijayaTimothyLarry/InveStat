@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import { getPortfolioList } from "../controller class/PortfolioPageController";
-import BarMenu from "./BarMenu";
+import { getPortfolioList } from "../controller class/MainPageController";
 
-class PortfolioTable extends React.Component {
+class PortfolioTable extends Component {
   state = {
-    portfolioList: [],
+    portfolioList: getPortfolioList,
   };
 
   render() {
@@ -12,9 +11,10 @@ class PortfolioTable extends React.Component {
     if (numberOfPortfolio === 0)
       return (
         <React.Fragment>
+          <navBar />
           <p>
             Your Portfolio:
-            <button className="btn float-right mr-2">Add Portfolio</button>
+            <button className="btn float-right mr-2 ">Add Portfolio</button>
           </p>
           <table className="table">
             <thead>
