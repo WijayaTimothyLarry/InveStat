@@ -4,7 +4,7 @@ const NavBar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <Link className="navbar-brand" to="/">
-        InveStat
+        Vidly
       </Link>
       <button
         className="navbar-toggler"
@@ -19,26 +19,23 @@ const NavBar = () => {
       </button>
       <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div className="navbar-nav">
-          <NavLink className="nav-item nav-link" to="/main-page">
-            Main
-          </NavLink>
-          <NavLink className="nav-item nav-link" to="/watchlist">
-            Watchlist
-          </NavLink>
-          <NavLink className="nav-item nav-link" to="/goal-setting">
-            Goal Setting
+          <NavLink className="nav-item nav-link" to="/movies">
+            Movies
           </NavLink>
           <NavLink className="nav-item nav-link" to="/customers">
-            Profile
+            Customes
+          </NavLink>
+          <NavLink className="nav-item nav-link" to="/rentals">
+            Rentals
+          </NavLink>
+          <NavLink className="nav-item nav-link" to="/login">
+            Login
+          </NavLink>
+          <NavLink className="nav-item nav-link" to="/signup">
+            Sign Up
           </NavLink>
         </div>
       </div>
-      <Link className="btn btn-primary float-right mr-2" to="/login">
-        Login
-      </Link>
-      <Link className="btn btn-primary float-right" to="/signup">
-        Sign Up
-      </Link>
     </nav>
   );
 };

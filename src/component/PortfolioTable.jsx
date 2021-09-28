@@ -1,67 +1,43 @@
 import React, { Component } from "react";
-import { getPortfolioList } from "../controller class/MainPageController";
+import Table from "./common/table";
+import { Link } from "react-router-dom";
 
 class PortfolioTable extends Component {
-  state = {
-    portfolioList: getPortfolioList,
-  };
+  columns = [
+    {
+      path: "portfolioName",
+      label: "Portfolio",
+      content: (portfolio) => (
+        <Link to={`/portfolio/${portfolio._id}`}>
+          {portfolio.portfolioName}
+        </Link>
+      ),
+    },
+    { path: "totalValue", label: "Total Value" },
+    { path: "pnl", label: "PNL" },
+    { path: "ytdReturn", label: "YTD Return" },
+    {
+      key: "delete",
+      content: (portfolio) => (
+        <button
+          onClick={() => this.props.onDelete(portfolio)}
+          className="btn btn-danger btn-sm"
+        >
+          Delete
+        </button>
+      ),
+    },
+  ];
 
   render() {
-    const numberOfPortfolio = this.state.portfolioList.length;
-    if (numberOfPortfolio === 0)
-      return (
-        <React.Fragment>
-          <navBar />
-          <p>
-            Your Portfolio:
-            <button className="btn float-right mr-2 ">Add Portfolio</button>
-          </p>
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Portfolio Name</th>
-                <th>Total Value</th>
-                <th>PNL</th>
-                <th>YTD Return</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td> You dont have any portfolio</td>
-              </tr>
-            </tbody>
-          </table>
-        </React.Fragment>
-      );
+    const { portfolioList, onSort, sortColumn } = this.props;
     return (
-      <React.Fragment>
-        <p>Your Portfolio:</p>
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Portfolio Name</th>
-              <th>Total Value</th>
-              <th>PNL</th>
-              <th>YTD Return</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.portfolioList.map((portfolio) => (
-              <tr key={portfolio.portfolioID}>
-                <td>{portfolio.portfolioID}</td>
-                <td>{portfolio.totalValue}</td>
-                <td>{portfolio.pnl}</td>
-                <td>{portfolio.ytdReturn}</td>
-                <td>
-                  <button className="btn btn-danger btn-sm">Delete</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </React.Fragment>
+      <Table
+        data={portfolioList}
+        onSort={onSort}
+        sortColumn={sortColumn}
+        columns={this.columns}
+      ></Table>
     );
   }
 }

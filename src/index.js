@@ -4,12 +4,15 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.css";
-import WelcomePage from "./component/WelcomePage";
-import BarMenu from "./component/BarMenu";
-import PortfolioTable from "./component/PortfolioTable";
-import MainPage from "./component/MainPage";
-import Graph from "./component/Graph";
-ReactDOM.render(<WelcomePage />, document.getElementById("root"));
+import "font-awesome/css/font-awesome.css";
+import { BrowserRouter } from "react-router-dom";
+
+ReactDOM.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
+  document.getElementById("root")
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

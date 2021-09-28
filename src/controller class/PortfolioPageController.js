@@ -1,13 +1,14 @@
 const StockList = [
   {
-    stockID: "",
-    price: 0,
-    quantity: 0,
-    value: 0,
-    capitalGains: 0,
+    _id: "asdads",
+    stockID: "Apple",
+    price: 120.0,
+    quantity: 3,
+    value: 450,
+    capitalGains: 90,
     dividends: 0,
-    currency: 0,
-    return: 0,
+    currency: 0.7856,
+    return: 100,
   },
 ];
 

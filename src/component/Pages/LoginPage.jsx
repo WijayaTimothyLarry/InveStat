@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../css/LoginPage.css";
-import LoginSignUpNavBar from "./Navigation Bars/LoginSignUpNavBar";
+import LoginSignUpNavBar from "../Navigation Bars/LoginSignUpNavBar";
 
 class LoginPage extends Component {
   render() {
@@ -8,20 +8,20 @@ class LoginPage extends Component {
       <React.Fragment>
         <LoginSignUpNavBar />
         <main className="main-body container">
-          <form class="form-signin">
+          <form className="form-signin">
             <h1 class="h3 mb-3 font-weight-normal">Please log in</h1>
-            <label for="inputEmail" class="sr-only">
+            <label for="inputEmail" className="sr-only">
               Email address
             </label>
             <input
               type="email"
               id="inputEmail"
-              class="form-control"
+              className="form-control"
               placeholder="Email address"
               required
               autofocus
             />
-            <label for="inputPassword" class="sr-only">
+            <label for="inputPassword" className="sr-only">
               Password
             </label>
             <input

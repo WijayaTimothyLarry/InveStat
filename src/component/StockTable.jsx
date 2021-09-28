@@ -1,74 +1,45 @@
 import React, { Component } from "react";
-import { getStockList } from "../controller class/PortfolioPageController";
+import Link from "react-router-dom/Link";
+import Table from "./common/table";
 
 class StockTable extends Component {
-  state = {
-    stockList: getStockList(),
-  };
+  columns = [
+    {
+      path: "stockID",
+      label: "Stock",
+      content: (stock) => (
+        <Link to={`/stock/${stock.stockID}`}>{stock.stockID}</Link>
+      ),
+    },
+    { path: "price", label: "Price" },
+    { path: "quantity", label: "Quantity" },
+    { path: "value", label: "Value" },
+    { path: "capitalGains", label: "Capital Gains" },
+    { path: "dividends", label: "Dividends" },
+    { path: "currency", label: "Currency" },
+    { path: "return", label: "Return" },
+    {
+      key: "delete",
+      content: (portfolio) => (
+        <button
+          onClick={() => this.props.onDelete(portfolio)}
+          className="btn btn-danger btn-sm"
+        >
+          Delete
+        </button>
+      ),
+    },
+  ];
+
   render() {
-    const numberOfStocks = this.state.stockList.length;
-    if (numberOfStocks === 0)
-      return (
-        <React.Fragment>
-          {" "}
-          <p>Your Stocks:</p>
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Average Price</th>
-                <th>Quantity</th>
-                <th>Current Value</th>
-                <th>Capital Gains</th>
-                <th>Dividends</th>
-                <th>Currency</th>
-                <th>Return</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td> You dont have any stocks in this portfolio</td>
-              </tr>
-            </tbody>
-          </table>
-        </React.Fragment>
-      );
+    const { stockList, onSort, sortColumn } = this.props;
     return (
-      <React.Fragment>
-        {" "}
-        <p>Your Stocks:</p>
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Stock ticker</th>
-              <th>Average Price</th>
-              <th>Quantity</th>
-              <th>Current Value</th>
-              <th>Capital Gains</th>
-              <th>Dividends</th>
-              <th>Currency</th>
-              <th>Return</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.stockList.map((stock) => (
-              <tr key={stock.stockID}>
-                <td>{stock.stockID}</td>
-                <td>{stock.price}</td>
-                <td>{stock.quantity}</td>
-                <td>{stock.value}</td>
-                <td>{stock.capitalGains}</td>
-                <td>{stock.dividends}</td>
-                <td>{stock.currency}</td>
-                <td>{stock.return}</td>
-                <td>
-                  <button className="btn btn-danger btn-sm">Delete</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </React.Fragment>
+      <Table
+        data={stockList}
+        onSort={onSort}
+        sortColumn={sortColumn}
+        columns={this.columns}
+      ></Table>
     );
   }
 }
