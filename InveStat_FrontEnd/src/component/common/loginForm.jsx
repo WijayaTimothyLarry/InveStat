@@ -16,6 +16,9 @@ class LoginForm extends Form {
   doSubmit = () => {
     //call the server
     console.log("submitted");
+    const { data } = this.state;
+    localStorage.setItem("token", data.username);
+    window.location = "/main-page";
   };
 
   render() {

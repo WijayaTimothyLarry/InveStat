@@ -38,13 +38,15 @@ class MainPage extends Component {
   render() {
     const count = this.state.portfolioList.length;
     const { sortColumn } = this.state;
+    const user = localStorage.getItem("token");
+    console.log(user);
     if (count === 0)
       return (
         <React.Fragment>
           <main className="container">
-            <h1 className="welcome-message mb-5">Welcome Back User</h1>
+            <h1 className="welcome-message mb-5">Welcome Back {user}</h1>
             <p>
-              There are no portfolio in the database.{" "}
+              There are no portfolio in the database.
               <Link
                 className="btn btn-primary float-right  "
                 to="/portfolio/new"

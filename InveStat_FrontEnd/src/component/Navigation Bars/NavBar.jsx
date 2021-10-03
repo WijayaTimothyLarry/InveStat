@@ -33,11 +33,8 @@ const NavBar = () => {
           </NavLink>
         </div>
       </div>
-      <Link className="btn btn-primary float-right mr-2" to="/login">
-        Login
-      </Link>
-      <Link className="btn btn-primary float-right" to="/signup">
-        Sign Up
+      <Link className="btn btn-primary float-right mr-2" to="/logout">
+        Log Out
       </Link>
     </nav>
   );
