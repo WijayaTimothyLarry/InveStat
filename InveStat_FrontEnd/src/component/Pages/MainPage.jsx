@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Link from "react-router-dom/Link";
 import _ from "lodash";
-import PortfolioTable from "../PortfolioTable";
+import PortfolioTable from "../Tables/PortfolioTable";
 import { getPortfolioList } from "../../controller class/MainPageController";
 
 class MainPage extends Component {
@@ -62,7 +62,7 @@ class MainPage extends Component {
     return (
       <React.Fragment>
         <main className="container">
-          <h1 className="welcome-message mb-5">Welcome Back User</h1>
+          <h1 className="welcome-message mb-5">Welcome Back {user}</h1>
           <p className="mt-5">
             Showing {totalCount} portfolio in the database
             <Link

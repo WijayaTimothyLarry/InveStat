@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Link from "react-router-dom/Link";
-import Table from "./common/table";
+import Table from "../common/table";
 
 class StockTable extends Component {
   columns = [

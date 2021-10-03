@@ -13,6 +13,8 @@ import SignUpForm from "./component/common/signUpForm";
 import "./App.css";
 import NotLoggedInNavBar from "./component/Navigation Bars/LoginSignUpNavBar";
 import Logout from "./component/common/logout";
+import NewPortfolioForm from "./component/common/newPortfolioForm";
+import WatchListPage from "./component/Pages/WatchListPage";
 class App extends Component {
   state = {};
   componentDidMount() {
@@ -36,7 +38,9 @@ class App extends Component {
             <Route path="/signup" component={SignUpForm} />
             <Route path="/welcome-page" component={WelcomePage} />
             <Route path="/main-page" component={MainPage} />
+            <Route path="/portfolio/new" component={NewPortfolioForm} />
             <Route path="/portfolio/:id" component={IndividualPortfolioPage} />
+            <Route path="/watchlist" component={WatchListPage} />
             <Redirect from="/" exact to="/welcome-page" />
           </Switch>
         </main>

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Link from "react-router-dom/Link";
 import _ from "lodash";
-import StockTable from "../StockTable";
+import StockTable from "../Tables/StockTable";
 import { getStockList } from "../../controller class/PortfolioPageController";
 
 class IndividualPortfolioPage extends Component {
