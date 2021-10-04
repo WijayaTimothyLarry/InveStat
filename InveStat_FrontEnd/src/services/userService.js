@@ -11,4 +11,4 @@ export function register(user) {
   });
 }
 
-export { register };
+export default { register };
