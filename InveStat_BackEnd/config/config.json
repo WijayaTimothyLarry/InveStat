@@ -1,12 +1,13 @@
 {
+
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "investat_expressjs",
-    "host": "localhost",
+    "host": "investat-database.c4x9cbbouqsz.us-east-2.rds.amazonaws.com",
+    "port":"3306",
+    "username": "admin",
+    "password": "cz2006investat",
+    "database":"investat_db",
     "dialect": "mysql"
   },
-
   "test": {
     "username": "root",
     "password": null,

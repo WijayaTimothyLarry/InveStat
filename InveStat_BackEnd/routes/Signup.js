@@ -11,6 +11,9 @@ router.get("/", async(req, res) => {
 
 router.post("/", async(req, res) => {
   const userInfo = req.body;
+  console.log(userInfo.name);
+  console.log(userInfo.email);
+  console.log(userInfo.password);
 
   // now we set user password to hashed password
   const salt = await bcrypt.genSalt(10);
