@@ -1,10 +1,11 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import logo from "../../logo/InveStatLogo.png";
 const NavBar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <Link className="navbar-brand" to="/main-page">
-        InveStat
+        <img src={logo} width="60" height="40" />
       </Link>
       <button
         className="navbar-toggler"
