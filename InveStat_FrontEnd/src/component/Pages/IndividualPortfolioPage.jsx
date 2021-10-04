@@ -54,7 +54,10 @@ class IndividualPortfolioPage extends Component {
 
           <p className="mt-5">
             Showing {totalCount} stocks in the database
-            <Link className="btn btn-primary float-right  " to="/stock/new">
+            <Link
+              className="btn btn-primary float-right  "
+              to="/transaction/new"
+            >
               Add Stock
             </Link>
           </p>
