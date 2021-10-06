@@ -31,6 +31,26 @@ Object.keys(db).forEach(modelName => {
   }
 });
 
+//associations
+db.user.hasMany(db.portfolio, {onDelete:'cascade'}, {onUpdate:'cascade'})
+db.portfolio.belongsTo(db.user, {onDelete:'cascade'}, {onUpdate:'cascade'})
+
+db.portfolio.hasMany(db.purchasedStock, {onDelete:'cascade'}, {onUpdate:'cascade'})
+db.purchasedStock.belongsTo(db.portfolio, {onDelete:'cascade'}, {onUpdate:'cascade'})
+
+db.portfolio.hasMany(db.transaction, {onDelete:'cascade'}, {onUpdate:'cascade'})
+db.transaction.belongsTo(db.portfolio, {onDelete:'cascade'}, {onUpdate:'cascade'})
+
+db.purchasedStock.hasMany(db.transaction, {onDelete:'cascade'}, {onUpdate:'cascade'})
+db.transaction.belongsTo(db.purchasedStock, {onDelete:'cascade'}, {onUpdate:'cascade'})
+
+db.user.hasOne(db.goalSetting, {onDelete:'cascade'}, {onUpdate:'cascade'})
+db.goalSetting.belongsTo(db.user, {onDelete:'cascade'}, {onUpdate:'cascade'})
+
+db.user.hasMany(db.watchlistStock, {onDelete:'cascade'}, {onUpdate:'cascade'})
+db.watchlistStock.belongsTo(db.user, {onDelete:'cascade'}, {onUpdate:'cascade'})
+
+
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 

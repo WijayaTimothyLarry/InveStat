@@ -1,19 +1,24 @@
 const express = require("express");
 const mysql = require("mysql");
 const cors = require("cors");
- 
+const db = require("./models");
+
 const app = express();
 app.use(express.json());
 app.use(cors());
-const db = require("./models");
 
-// // Routers
-const signUpRouter = require("./routes/Signup");
+// Routers
+const signUpRouter = require("./routes/signup");
+const loginRouter = require("./routes/login");
+const portfolioRouter = require("./routes/portfolio");
+const transactionRouter = require("./routes/transaction");
+const purchasedStocksRouter = require("./routes/purchasedStock");
+
 app.use("/users", signUpRouter);
-
-const loginRouter = require("./routes/Login");
 app.use("/login", loginRouter);
-
+app.use("/portfolio", portfolioRouter);
+app.use("/transaction", transactionRouter);
+app.use("/purchasedStock", purchasedStocksRouter);
 
 db.sequelize.sync().then(()=> {
 
@@ -21,24 +26,3 @@ db.sequelize.sync().then(()=> {
         console.log('running server on 3001');
     })
 });
-
-// var mysql = require('mysql');
-
-// var connection = mysql.createConnection({
-//   host     : "investat.c4x9cbbouqsz.us-east-2.rds.amazonaws.com",
-//   user     : "admin",
-//   password : "cz2006investat",
-//   port     : "3306",
-//   database :""
-// });
-
-// connection.connect(function(err) {
-//   if (err) {
-//     console.error('Database connection failed: ' + err.stack);
-//     return;
-//   }
-
-//   console.log('Connected to database.');
-// });
-
-// connection.end();
