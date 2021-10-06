@@ -1,12 +1,24 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
-//table name
 const { user } = require("../models"); 
+const db = require("../models");
 
 router.get("/", async(req, res) => {
   const listOfUser = await user.findAll()
   res.json(listOfUser);
+});
+
+router.get("/delete/:email", async function(req, res, next) {
+  let currentUser = await user.findOne({where: {email: req.params.email}}).catch(e => {
+     console.log(e.message)
+  })
+  if (!currentUser){
+    console.log("err");
+  }
+  currentUser.destroy();
+  res.redirect('/');
+  console.log('deleted');
 });
 
 router.post("/", async(req, res) => {
@@ -15,7 +27,6 @@ router.post("/", async(req, res) => {
   console.log(userInfo.email);
   console.log(userInfo.password);
 
-  // now we set user password to hashed password
   const salt = await bcrypt.genSalt(10);
   userInfo.password = await bcrypt.hash(userInfo.password, salt);
   
@@ -23,4 +34,5 @@ router.post("/", async(req, res) => {
   res.json(userInfo);
 
 })
+
 module.exports = router;

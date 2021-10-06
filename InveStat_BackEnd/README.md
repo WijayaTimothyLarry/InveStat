@@ -18,8 +18,4 @@ npm install mysql2\
 npm install sequelize-cli\
 npm install sequelize
 
-### `Database setup`
-
-Create a schema on mysqlWorkBench with the name "investat_expressjs"
-
 
