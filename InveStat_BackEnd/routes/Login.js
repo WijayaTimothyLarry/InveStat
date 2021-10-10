@@ -3,10 +3,10 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const { user } = require("../models"); 
 const bcrypt = require("bcrypt");
+const env = require('dotenv').config();
+
 //global variable
 var token ="";
-
-
 
 const verifyJWT = (req,res,next) => {
     const token = req.headers["x-access-token"]
@@ -14,7 +14,7 @@ const verifyJWT = (req,res,next) => {
         res.send('we need token')
     }
     else{
-        jwt.verify(token,"jwtSecret",(err,decoded) => {
+        jwt.verify(token,"process.env.JWT_SECRET_TOKEN",(err,decoded) => {
             if (err){
                 res.json({auth : false, message: "u failed to authenticate"});
             }else{
@@ -44,7 +44,7 @@ router.post("/", async(req, res) =>{
         }
         else{
             const id = currentUser.email
-            const token = jwt.sign({email : id}, "jwtSecret", {expiresIn:"1h"});            
+            const token = jwt.sign({email : id}, "process.env.JWT_SECRET_TOKEN", {expiresIn:"1h"});            
             res.json({auth : true, token: token, currentUser : currentUser})
         }
     });
