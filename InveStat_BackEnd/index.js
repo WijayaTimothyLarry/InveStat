@@ -14,15 +14,14 @@ const portfolioRouter = require("./routes/portfolio");
 const transactionRouter = require("./routes/transaction");
 const purchasedStocksRouter = require("./routes/purchasedStock");
 
-app.use("/users", signUpRouter);
-app.use("/login", loginRouter);
-app.use("/portfolio", portfolioRouter);
-app.use("/transaction", transactionRouter);
-app.use("/purchasedStock", purchasedStocksRouter);
+app.use("/api/users", signUpRouter);
+app.use("/api/login", loginRouter);
+app.use("/api/portfolio", portfolioRouter);
+app.use("/api/transaction", transactionRouter);
+app.use("/api/purchasedStock", purchasedStocksRouter);
 
-db.sequelize.sync().then(()=> {
-
-    app.listen(3001,() => {
-        console.log('running server on 3001');
-    })
+db.sequelize.sync().then(() => {
+  app.listen(3900, () => {
+    console.log("running server on 3900");
+  });
 });
