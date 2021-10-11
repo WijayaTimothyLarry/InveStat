@@ -25,14 +25,10 @@ router.get("/delete/:email", async function (req, res, next) {
 
 router.post("/", async (req, res) => {
   const userInfo = req.body;
-  console.log("req info");
-  console.log(req);
-  console.log("User info");
   console.log(userInfo);
   console.log(userInfo.name);
   console.log(userInfo.email);
   console.log(userInfo.password);
-  console.log("done");
 
   const salt = await bcrypt.genSalt(10);
   userInfo.password = await bcrypt.hash(userInfo.password, salt);
