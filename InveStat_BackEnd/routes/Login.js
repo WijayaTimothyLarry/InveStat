@@ -38,14 +38,15 @@ router.post("/", async(req, res) =>{
 
     bcrypt.compare(password, currentUser.password , function(err, result) {
         // result == true
-        if (result==false){
-            console.log("wrong password")
-            res.json({auth : false, message:"wrong password"})
-        }
-        else{
+        if (result){
             const id = currentUser.email
             const token = jwt.sign({email : id}, "process.env.JWT_SECRET_TOKEN", {expiresIn:"1h"});            
             res.json({auth : true, token: token, currentUser : currentUser})
+            
+        }
+        else{
+            console.log("wrong password")
+            res.json({auth : false, message:"wrong password"})
         }
     });
     delete currentUser.password;
