@@ -4,7 +4,6 @@ const cors = require("cors");
 const db = require("./models");
 const app = express();
 
-
 app.use(express.json());
 app.use(cors());
 
@@ -21,9 +20,8 @@ app.use("/portfolio", portfolioRouter);
 app.use("/transaction", transactionRouter);
 app.use("/purchasedStock", purchasedStocksRouter);
 
-db.sequelize.sync().then(()=> {
-
-    app.listen(3001,() => {
-        console.log('running server on 3001');
-    })
+db.sequelize.sync().then(() => {
+  app.listen(3001, () => {
+    console.log("running server on 3001");
+  });
 });

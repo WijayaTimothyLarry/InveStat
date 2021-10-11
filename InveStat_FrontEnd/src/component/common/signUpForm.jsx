@@ -17,16 +17,16 @@ class SignUpForm extends Form {
 
   doSubmit = async () => {
     //call the server
-    try{
-      const response = await userService.register(this.state.data);
+    try {
+      const { data } = this.state;
+      const response = await userService.register(data);
       authService.loginWithJwt(response.headers["x-auth-token"]);
-      window.location="/main-page";
-    }
-    catch (ex){
-      if (ex.response && ex.response.status === 400){
-        const errors = {...this.state.errors};
+      window.location = "/main-page";
+    } catch (ex) {
+      if (ex.response && ex.response.status === 400) {
+        const errors = { ...this.state.errors };
         errors.username = ex.response.data;
-        this.setState({errors});
+        this.setState({ errors });
       }
     }
   };
