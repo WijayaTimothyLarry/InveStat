@@ -2,8 +2,9 @@ const express = require("express");
 const mysql = require("mysql");
 const cors = require("cors");
 const db = require("./models");
-
 const app = express();
+
+
 app.use(express.json());
 app.use(cors());
 
@@ -15,7 +16,7 @@ const transactionRouter = require("./routes/transaction");
 const purchasedStocksRouter = require("./routes/purchasedStock");
 
 app.use("/users", signUpRouter);
-app.use("/login", loginRouter);
+app.use("/userlogin", loginRouter);
 app.use("/portfolio", portfolioRouter);
 app.use("/transaction", transactionRouter);
 app.use("/purchasedStock", purchasedStocksRouter);
