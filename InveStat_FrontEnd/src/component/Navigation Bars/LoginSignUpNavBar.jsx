@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../../logo/InveStatLogo2.png";
+import logo from "../../logo/InveStatLogo3.png";
+import "../../css/NavBarLogo.css";
 const NotLoggedInNavBar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <Link className="navbar-brand" to="/">
-        <img src={logo} width="53" height="30" />
+        <img className="logo" src={logo} width="53" height="30" />
       </Link>
       <button
         className="navbar-toggler"
