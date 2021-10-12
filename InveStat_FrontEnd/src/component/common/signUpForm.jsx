@@ -5,13 +5,18 @@ import * as userService from "../../services/userService";
 import authService from "../../services/authService";
 class SignUpForm extends Form {
   state = {
-    data: { username: "", password: "", name: "" },
+    data: { username: "", password: "", reenterPass: "", name: "" },
     errors: {},
   };
 
   schema = {
     username: Joi.string().email().required().label("Username"),
     password: Joi.string().min(5).required().label("Password"),
+    reenterPass: Joi.any()
+      .valid(Joi.ref("password"))
+      .required()
+      .options({ language: { any: { allowOnly: "must match password" } } })
+      .label("Confirm Password"),
     name: Joi.string().required().label("Name"),
   };
 
@@ -19,7 +24,11 @@ class SignUpForm extends Form {
     //call the server
     try {
       const { data } = this.state;
-      const response = await userService.register(data);
+      const response = await userService.register(
+        data.username,
+        data.password,
+        data.name
+      );
       authService.loginWithJwt(response.headers["x-auth-token"]);
       window.location = "/main-page";
     } catch (ex) {
@@ -37,6 +46,7 @@ class SignUpForm extends Form {
         <form onSubmit={this.handleSubmit}>
           {this.renderInput("username", "Username")}
           {this.renderInput("password", "Password", "password")}
+          {this.renderInput("reenterPass", "Confirm Password", "password")}
           {this.renderInput("name", "Name")}
           {this.renderButton("Sign Up")}
         </form>
