@@ -1,13 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
-const { user } = require("../models");
-// const db = require("../models");
+const { user } = require("../models"); 
+
 
 router.get("/", async (req, res) => {
   const listOfUser = await user.findAll();
   res.json(listOfUser);
 });
+
 
 router.get("/delete/:email", async function (req, res, next) {
   let currentUser = await user
@@ -23,7 +24,10 @@ router.get("/delete/:email", async function (req, res, next) {
   console.log("deleted");
 });
 
-router.post("/", async (req, res) => {
+
+
+router.post("/", async(req, res) => {
+
   const userInfo = req.body;
   console.log(userInfo);
   console.log(userInfo.name);
@@ -38,3 +42,4 @@ router.post("/", async (req, res) => {
 });
 
 module.exports = router;
+
