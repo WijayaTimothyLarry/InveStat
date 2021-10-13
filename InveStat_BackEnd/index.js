@@ -5,12 +5,13 @@ const db = require("./models");
 const app = express();
 
 
+require('dotenv').config();
 app.use(express.json());
 app.use(cors());
 
 // Routers
 const signUpRouter = require("./routes/signup");
-const loginRouter = require("./routes/login");
+const loginRouter= require("./routes/login");
 const portfolioRouter = require("./routes/portfolio");
 const transactionRouter = require("./routes/transaction");
 const purchasedStocksRouter = require("./routes/purchasedStock");

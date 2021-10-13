@@ -9,6 +9,7 @@ router.get("/", async(req, res) => {
   res.json(listOfUser);
 });
 
+
 router.get("/delete/:email", async function(req, res, next) {
   let currentUser = await user.findOne({where: {email: req.params.email}}).catch(e => {
      console.log(e.message)
@@ -21,11 +22,9 @@ router.get("/delete/:email", async function(req, res, next) {
   console.log('deleted');
 });
 
+
 router.post("/", async(req, res) => {
   const userInfo = req.body;
-  console.log(userInfo.name);
-  console.log(userInfo.email);
-  console.log(userInfo.password);
 
   const salt = await bcrypt.genSalt(10);
   userInfo.password = await bcrypt.hash(userInfo.password, salt);
@@ -34,5 +33,6 @@ router.post("/", async(req, res) => {
   res.json(userInfo);
 
 })
+
 
 module.exports = router;
