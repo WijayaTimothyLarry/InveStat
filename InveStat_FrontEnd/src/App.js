@@ -33,18 +33,29 @@ class App extends Component {
       <React.Fragment>
         {this.state.user ? <NavBar /> : <NotLoggedInNavBar />}
         <main className="container">
-          <Switch>
-            <Route path="/login" component={LoginForm} />
-            <Route path="/logout" component={Logout} />
-            <Route path="/signup" component={SignUpForm} />
-            <Route path="/welcome-page" component={WelcomePage} />
-            <Route path="/main-page" component={MainPage} />
-            <Route path="/portfolio/new" component={NewPortfolioForm} />
-            <Route path="/portfolio/:id" component={IndividualPortfolioPage} />
-            <Route path="/transaction/new" component={TransactionPage} />
-            <Route path="/watchlist" component={WatchListPage} />
-            <Redirect from="/" exact to="/welcome-page" />
-          </Switch>
+          {this.state.user ? (
+            <Switch>
+              <Route path="/logout" component={Logout} />
+              <Route path="/main-page" component={MainPage} />
+              <Route path="/portfolio/new" component={NewPortfolioForm} />
+              <Route
+                path="/portfolio/:id"
+                component={IndividualPortfolioPage}
+              />
+              <Route path="/transaction/new" component={TransactionPage} />
+              <Route path="/watchlist" component={WatchListPage} />
+              <Redirect from="/" exact to="/main-page" />
+              <Redirect to="/main-page" />
+            </Switch>
+          ) : (
+            <Switch>
+              <Route path="/login" component={LoginForm} />
+              <Route path="/signup" component={SignUpForm} />
+              <Route path="/welcome-page" component={WelcomePage} />
+              <Redirect from="/" exact to="/welcome-page" />
+              <Redirect to="/welcome-page" />
+            </Switch>
+          )}
         </main>
       </React.Fragment>
     );
