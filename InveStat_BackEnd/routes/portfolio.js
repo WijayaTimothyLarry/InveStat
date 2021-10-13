@@ -4,7 +4,7 @@ const { portfolio } = require("../models");
 var auth = require("../../middleware/auth") 
 
 
-
+//get
 router.get("/", auth, async(req, res) => {
   console.log(req.user.email);
   const userEmail = req.user.email;
@@ -22,7 +22,9 @@ router.post("/",  async(req, res) => {
   const portfolioInfo = req.body;
   console.log(portfolioInfo.portfolioName);
   console.log(portfolioInfo.userEmail); 
-  console.log(portfolioInfo.totalValue); //totalValue -> need to add?
+  console.log(portfolioInfo.totalValue); 
+  //totalValue -> need to add?
+  
   await portfolio.create(portfolioInfo);  
   res.json(portfolioInfo);
 })
@@ -47,6 +49,4 @@ router.get("/delete", auth, async function(req, res) {
 
 
 //change portfolioname
-
-
 module.exports = router;

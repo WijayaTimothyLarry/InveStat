@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const { user } = require("../models"); 
-// const db = require("../models");
 
 router.get("/", async(req, res) => {
   const listOfUser = await user.findAll()
@@ -10,7 +9,7 @@ router.get("/", async(req, res) => {
 });
 
 
-router.get("/delete/:email", async function(req, res, next) {
+router.get("/delete/:email", async function(req, res) {
   let currentUser = await user.findOne({where: {email: req.params.email}}).catch(e => {
      console.log(e.message)
   })
@@ -25,6 +24,9 @@ router.get("/delete/:email", async function(req, res, next) {
 
 router.post("/", async(req, res) => {
   const userInfo = req.body;
+  console.log(userInfo.name);
+  console.log(userInfo.email);
+  console.log(userInfo.password);
 
   const salt = await bcrypt.genSalt(10);
   userInfo.password = await bcrypt.hash(userInfo.password, salt);

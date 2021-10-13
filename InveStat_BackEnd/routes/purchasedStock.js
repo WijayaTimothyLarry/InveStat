@@ -4,7 +4,6 @@ const { purchasedStock } = require("../models");
 
 
 router.get("/", async(req, res) => {
-
   console.log(req.body);
   const reqInfo = req.body
   const portfolioId = reqInfo.portfolioId
@@ -15,10 +14,8 @@ router.get("/", async(req, res) => {
 
 router.post("/", async(req, res) => {
   const stockInfo = req.body;
-
   await purchasedStock.create(stockInfo);  
   res.json(stockInfo);
-
 })
 
 

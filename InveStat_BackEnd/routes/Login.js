@@ -1,12 +1,10 @@
+// require("dotenv").config(); 
 const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const { user } = require("../models"); 
 const bcrypt = require("bcrypt");
-const { portfolio } = require("../models");
-// require("dotenv").config(); 
 const JWT_SECRET = "test";
-
 
 
 function verifyJWT (req,res,next) {
@@ -38,26 +36,26 @@ router.get("/", verifyJWT, (req,res) => {
 router.post("/", async(req, res) =>{
     const {email, password}= req.body;
     const currentUser = await user.findOne({ where: { email: email } });
-
     bcrypt.compare(password, currentUser.password , function(err, result) {
+
         if (result==false){
-            
             console.log("wrong password")
             res.json({auth : false, message:"wrong password"})
-        
         }
-        else{
 
+        else{
             const id = currentUser.email
             const name = currentUser.name
             console.log('JWT_SECRET', JWT_SECRET)
             const token = jwt.sign({email : id}, JWT_SECRET, {expiresIn:"1h"});            
-
             res.json({auth : true, token: token, currentUser : currentUser})
         }
+
     });
+
     delete currentUser.password;
     console.log("successful_login")
+
 })
 
 module.exports = router;
