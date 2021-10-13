@@ -4,7 +4,6 @@ const cors = require("cors");
 const db = require("./models");
 const app = express();
 
-
 app.use(express.json());
 app.use(cors());
 
@@ -22,7 +21,9 @@ app.use("/api/transaction", transactionRouter);
 app.use("/api/purchasedStock", purchasedStocksRouter);
 
 db.sequelize.sync().then(() => {
-  app.listen(3900, () => {
-    console.log("running server on 3900");
+
+  app.listen(3001, () => {
+    console.log("running server on 3001");
+
   });
 });
