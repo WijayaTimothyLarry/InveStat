@@ -1,3 +1,6 @@
+
+var Sequelize = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
     const transaction = sequelize.define("transaction", {
       transactionId: {
@@ -21,24 +24,27 @@ module.exports = (sequelize, DataTypes) => {
       transactionDate:  {
         type: DataTypes.DATE,
       },
+      
       portfolioPortfolioId:{
-        type : DataTypes.INTEGER,
+        type : Sequelize.UUID,
         references:{
             model:"portfolio",
-            key:"portfolioId",
+            key:"id",
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
     },
+
     purchasedStockStockTickerId:{
-        type : DataTypes.INTEGER,
-        references:{
-            model:"purchasedStock",
-            key:"StockTickerId",
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-    }
+      type : Sequelize.UUID,
+      references:{
+          model:"purchasedStock",
+          key:"id",
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE',
+  },
+
     });
     return transaction;
   };

@@ -1,8 +1,16 @@
+
+var Sequelize = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
     const purchasedStock = sequelize.define("purchasedStock", {
+      id: {
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
+        allowNull: false,
+        primaryKey: true
+      },
       stockTickerId: {
         type: DataTypes.STRING,
-        primaryKey: true,
         allowNull: false,
       },
       stockName: {
@@ -20,11 +28,12 @@ module.exports = (sequelize, DataTypes) => {
       exchangeRate:  {
         type: DataTypes.FLOAT,
       },
+
       portfolioPortfolioId:{
-        type : DataTypes.INTEGER,
+        type : Sequelize.UUID,
         references:{
-            model:"portfolio",
-            key:"portfolioId",
+            model:"portfolios",
+            key:"id",
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
