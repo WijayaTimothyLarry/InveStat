@@ -23,8 +23,8 @@ export async function logout() {
 export function getCurrentUser() {
   try {
     const jwt = localStorage.getItem(tokenKey);
-    const user = jwtDecode(jwt);
-    return user;
+    const token = jwtDecode(jwt);
+    return token.name;
   } catch (ex) {
     return null;
   }

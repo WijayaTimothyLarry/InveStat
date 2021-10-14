@@ -3,6 +3,7 @@ import Link from "react-router-dom/Link";
 import _ from "lodash";
 import PortfolioTable from "../Tables/PortfolioTable";
 import { getPortfolioList } from "../../controller class/MainPageController";
+import authService from "../../services/authService";
 
 class MainPage extends Component {
   state = {
@@ -38,7 +39,7 @@ class MainPage extends Component {
   render() {
     const count = this.state.portfolioList.length;
     const { sortColumn } = this.state;
-    const user = localStorage.getItem("name");
+    const user = authService.getCurrentUser();
     if (count === 0)
       return (
         <React.Fragment>
