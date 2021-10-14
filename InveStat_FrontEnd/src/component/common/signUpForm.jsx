@@ -24,10 +24,7 @@ class SignUpForm extends Form {
     //call the server
     try {
       const { data } = this.state;
-      console.log(data);
       const response = await userService.register(data);
-      console.log(response);
-      console.log(response.data.token);
       authService.loginWithJwt(response.data.token);
       window.location = "/main-page";
     } catch (ex) {

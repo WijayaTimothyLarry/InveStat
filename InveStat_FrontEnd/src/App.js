@@ -41,7 +41,7 @@ class App extends Component {
               <Route path="/main-page" component={MainPage} />
               <Route path="/portfolio/new" component={NewPortfolioForm} />
               <Route
-                path="/portfolio/:id"
+                path="/portfolio/:id/:portfolioname"
                 component={IndividualPortfolioPage}
               />
               <Route path="/transaction/new" component={TransactionPage} />

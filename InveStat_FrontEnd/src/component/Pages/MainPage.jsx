@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import Link from "react-router-dom/Link";
 import _ from "lodash";
 import PortfolioTable from "../Tables/PortfolioTable";
-import { getPortfolioList } from "../../controller class/MainPageController";
-import authService from "../../services/authService";
+import portfolioService from "../../services/portfolioService";
+import auth from "../../services/authService";
 
 class MainPage extends Component {
   state = {
@@ -11,8 +11,12 @@ class MainPage extends Component {
     sortColumn: { path: "portfolioName", order: "asc" },
   };
 
-  componentDidMount() {
-    this.setState({ portfolioList: getPortfolioList() });
+  async componentDidMount() {
+    const res = await portfolioService.getPortfolioList(auth.getJwt());
+    console.log(res);
+    this.setState({
+      portfolioList: res.data,
+    });
   }
 
   handleDelete = (portfolio) => {
@@ -39,7 +43,7 @@ class MainPage extends Component {
   render() {
     const count = this.state.portfolioList.length;
     const { sortColumn } = this.state;
-    const user = authService.getCurrentUser();
+    const user = auth.getCurrentUser();
     if (count === 0)
       return (
         <React.Fragment>
