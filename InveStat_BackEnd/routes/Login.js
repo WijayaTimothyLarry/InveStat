@@ -37,6 +37,7 @@ router.post("/", async(req, res) =>{
     const {email, password}= req.body;
     const currentUser = await user.findOne({ where: { email: email } });
     bcrypt.compare(password, currentUser.password , function(err, result) {
+        
         // result == true
         if (result){
             const id = currentUser.email
@@ -44,7 +45,6 @@ router.post("/", async(req, res) =>{
             console.log('JWT_SECRET', JWT_SECRET)
             const token = jwt.sign({email : id}, JWT_SECRET, {expiresIn:"1h"});            
             res.json({auth : true, token: token, currentUser : currentUser})
-            
         }
         else{
             console.log("wrong password")
