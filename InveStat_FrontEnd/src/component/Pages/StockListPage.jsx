@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import _ from "lodash";
-import WatchListTable from "../Tables/WatchListTable";
 import { paginate } from "./../utils/paginate";
 import SearchBox from "../common/searchBox";
 import Pagination from "../common/pagination";
-import { getStockList } from "./../../controller class/WatchlistController";
+import { getStockList } from "../../services/watchlistService";
+import StockListTable from "./../Tables/StockListTable";
 
-class WatchListPage extends Component {
+class StockListPage extends Component {
   state = {
     stockList: [],
-    pageSize: 4,
+    pageSize: 1000,
     currentPage: 1,
     searchQuery: "",
-    sortColumn: { path: "stockID", order: "asc" },
+    sortColumn: { path: "Code", order: "asc" },
   };
 
   componentDidMount() {
@@ -46,8 +46,10 @@ class WatchListPage extends Component {
 
     let filtered = stockList;
     if (searchQuery)
-      filtered = stockList.filter((s) =>
-        s.stockID.toLowerCase().startsWith(searchQuery.toLowerCase())
+      filtered = stockList.filter(
+        (s) =>
+          s.Name.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
+          s.Code.toLowerCase().startsWith(searchQuery.toLowerCase())
       );
 
     const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
@@ -65,15 +67,12 @@ class WatchListPage extends Component {
     return (
       <div className="row">
         <div className="col">
-          <Link className="btn btn-primary" to="/movies/new">
-            New Stock
-          </Link>
           <p>Showing {totalCount} stocks in the watchlist </p>
           <SearchBox
             onChange={this.handleSearch}
             value={this.state.searchQuery}
           />
-          <WatchListTable
+          <StockListTable
             stockList={data}
             onLike={this.handleLike}
             onSort={this.handleSort}
@@ -91,4 +90,4 @@ class WatchListPage extends Component {
   }
 }
 
-export default WatchListPage;
+export default StockListPage;

@@ -21,7 +21,7 @@ class MainPage extends Component {
 
   handleDelete = (portfolio) => {
     const portfolioList = this.state.portfolioList.filter(
-      (p) => p._id !== portfolio._id
+      (p) => p.id !== portfolio.id
     );
     this.setState({ portfolioList });
   };

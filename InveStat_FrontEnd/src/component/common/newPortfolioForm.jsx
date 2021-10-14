@@ -17,7 +17,7 @@ class NewPortfolioForm extends Form {
     console.log("submitted");
     const { data } = this.state;
     portfolioControl.addPortfolio({
-      _id: data.portfolioName,
+      id: data.portfolioName,
       portfolioName: data.portfolioName,
       totalValue: 0,
       pnl: 0,

@@ -2,19 +2,18 @@ import React, { Component } from "react";
 import Link from "react-router-dom/Link";
 import Table from "../common/table";
 import Like from "../common/like";
-class WatchListTable extends Component {
+class StockListTable extends Component {
   columns = [
     {
-      path: "stockID",
-      label: "Stock",
-      content: (stock) => (
-        <Link to={`/stock/${stock.stockID}`}>{stock.stockID}</Link>
-      ),
+      path: "Code",
+      label: "Ticker",
     },
-    { path: "price", label: "Price" },
-    { path: "lastClose", label: "Last Close" },
-    { path: "lastOpen", label: "Last Open" },
-    { path: "dayChange", label: "Day Change" },
+    {
+      path: "Name",
+      label: "Name",
+    },
+    { path: "Exchange", label: "Exchange" },
+
     {
       key: "like",
       content: (stock) => (
@@ -35,4 +34,4 @@ class WatchListTable extends Component {
   }
 }
 
-export default WatchListTable;
+export default StockListTable;

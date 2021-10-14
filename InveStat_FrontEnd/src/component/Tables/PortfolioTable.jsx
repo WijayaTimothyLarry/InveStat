@@ -8,9 +8,7 @@ class PortfolioTable extends Component {
       path: "portfolioName",
       label: "Portfolio",
       content: (portfolio) => (
-        <Link
-          to={`/portfolio/${portfolio.portfolioId}/${portfolio.portfolioName}`}
-        >
+        <Link to={`/portfolio/${portfolio.portfolioName}/${portfolio.id}`}>
           {portfolio.portfolioName}
         </Link>
       ),
