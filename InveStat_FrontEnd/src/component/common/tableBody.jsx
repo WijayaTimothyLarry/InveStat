@@ -14,6 +14,7 @@ class TableBody extends Component {
     return (
       <tbody>
         {data.map((item) => (
+          // rethink id
           <tr key={item._id}>
             {columns.map((column) => (
               <td key={this.createKey(item, column)}>

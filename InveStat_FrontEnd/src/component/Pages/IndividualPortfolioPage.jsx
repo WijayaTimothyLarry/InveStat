@@ -50,7 +50,9 @@ class IndividualPortfolioPage extends Component {
     return (
       <React.Fragment>
         <main className="container">
-          <h1 className="portfolio-name">{this.props.match.params.id}</h1>
+          <h1 className="portfolio-name">
+            {this.props.match.params.portfolioname}
+          </h1>
 
           <p className="mt-5">
             Showing {totalCount} stocks in the database

@@ -8,14 +8,16 @@ class PortfolioTable extends Component {
       path: "portfolioName",
       label: "Portfolio",
       content: (portfolio) => (
-        <Link to={`/portfolio/${portfolio._id}`}>
+        <Link
+          to={`/portfolio/${portfolio.portfolioId}/${portfolio.portfolioName}`}
+        >
           {portfolio.portfolioName}
         </Link>
       ),
     },
     { path: "totalValue", label: "Total Value" },
-    { path: "pnl", label: "PNL" },
-    { path: "ytdReturn", label: "YTD Return" },
+    { path: "PnL", label: "PNL" },
+    { path: "YTD_return", label: "YTD Return" },
     {
       key: "delete",
       content: (portfolio) => (

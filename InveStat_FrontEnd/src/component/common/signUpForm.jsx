@@ -24,17 +24,14 @@ class SignUpForm extends Form {
     //call the server
     try {
       const { data } = this.state;
-      const response = await userService.register(
-        data.username,
-        data.password,
-        data.name
-      );
-      authService.loginWithJwt(response.headers["x-auth-token"]);
+      const response = await userService.register(data);
+      authService.loginWithJwt(response.data.token);
       window.location = "/main-page";
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };
         errors.username = ex.response.data;
+        console.log(errors);
         this.setState({ errors });
       }
     }

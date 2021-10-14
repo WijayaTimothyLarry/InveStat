@@ -16,11 +16,13 @@ import Logout from "./component/common/logout";
 import NewPortfolioForm from "./component/common/newPortfolioForm";
 import WatchListPage from "./component/Pages/WatchListPage";
 import TransactionPage from "./component/Pages/TransactionPage";
+import auth from "./services/authService";
+
 class App extends Component {
   state = {};
   componentDidMount() {
     try {
-      const user = localStorage.getItem("token");
+      const user = auth.getCurrentUser();
       this.setState({ user });
     } catch (error) {
       const user = null;
@@ -39,7 +41,7 @@ class App extends Component {
               <Route path="/main-page" component={MainPage} />
               <Route path="/portfolio/new" component={NewPortfolioForm} />
               <Route
-                path="/portfolio/:id"
+                path="/portfolio/:id/:portfolioname"
                 component={IndividualPortfolioPage}
               />
               <Route path="/transaction/new" component={TransactionPage} />

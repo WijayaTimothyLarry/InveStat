@@ -10,10 +10,10 @@ class WelcomePage extends Component {
     return (
       <React.Fragment>
         <main className="container">
-          <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-            <h1 class="display-4">Welcome to </h1>
+          <div className="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+            <h1 className="display-4">Welcome to </h1>
             <img className="logo" src={logo} width="500" height="193" />
-            <p class>
+            <p className>
               InveStat is equipped with goal setting feature that will help you
               staying on track to your financial goals.
             </p>

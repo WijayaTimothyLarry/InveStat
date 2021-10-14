@@ -1,6 +1,7 @@
 // const uuid = require('uuid/v4'); // ES5
 var Sequelize      = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
+
     const portfolio = sequelize.define("portfolio", {
       id: {
         type: Sequelize.UUID,
