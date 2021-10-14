@@ -38,7 +38,9 @@ router.post("/", async (req, res) => {
       const id = currentUser.email;
       const name = currentUser.name;
       console.log("JWT_SECRET", JWT_SECRET);
-      const token = jwt.sign({ email: id }, JWT_SECRET, { expiresIn: "1h" });
+      const token = jwt.sign({ email: id, name: name }, JWT_SECRET, {
+        expiresIn: "1h",
+      });
       res.json({ auth: true, token: token, currentUser: currentUser });
     } else {
       console.log("wrong password");
