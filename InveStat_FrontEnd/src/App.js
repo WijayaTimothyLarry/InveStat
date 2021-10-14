@@ -16,11 +16,13 @@ import Logout from "./component/common/logout";
 import NewPortfolioForm from "./component/common/newPortfolioForm";
 import WatchListPage from "./component/Pages/WatchListPage";
 import TransactionPage from "./component/Pages/TransactionPage";
+import auth from "./services/authService";
+
 class App extends Component {
   state = {};
   componentDidMount() {
     try {
-      const user = localStorage.getItem("token");
+      const user = auth.getCurrentUser();
       this.setState({ user });
     } catch (error) {
       const user = null;

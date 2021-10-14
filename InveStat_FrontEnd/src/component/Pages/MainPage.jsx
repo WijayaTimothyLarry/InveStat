@@ -38,8 +38,7 @@ class MainPage extends Component {
   render() {
     const count = this.state.portfolioList.length;
     const { sortColumn } = this.state;
-    const user = localStorage.getItem("token");
-    console.log(user);
+    const user = localStorage.getItem("name");
     if (count === 0)
       return (
         <React.Fragment>

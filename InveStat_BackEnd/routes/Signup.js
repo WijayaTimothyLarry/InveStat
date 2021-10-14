@@ -1,14 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
-const { user } = require("../models"); 
-
+const jwt = require("jsonwebtoken");
+const { user } = require("../models");
+const JWT_SECRET = "test";
 
 router.get("/", async (req, res) => {
   const listOfUser = await user.findAll();
   res.json(listOfUser);
 });
-
 
 router.get("/delete/:email", async function (req, res, next) {
   let currentUser = await user
@@ -24,22 +24,28 @@ router.get("/delete/:email", async function (req, res, next) {
   console.log("deleted");
 });
 
-
-
-router.post("/", async(req, res) => {
-
+router.post("/", async (req, res) => {
   const userInfo = req.body;
   console.log(userInfo);
   console.log(userInfo.name);
   console.log(userInfo.email);
   console.log(userInfo.password);
 
+  //Compare with existing user (if email has been used return exception saying email has been used)
+
   const salt = await bcrypt.genSalt(10);
   userInfo.password = await bcrypt.hash(userInfo.password, salt);
 
-  await user.create(userInfo);
-  res.json(userInfo);
+  const currentUser = await user.create(userInfo);
+  const token = jwt.sign(
+    { email: userInfo.email, name: userInfo.name },
+    JWT_SECRET,
+    {
+      expiresIn: "1h",
+    }
+  );
+  res.json({ auth: true, token: token });
+  //res.json(userInfo);
 });
 
 module.exports = router;
-
