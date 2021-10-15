@@ -12,10 +12,9 @@ class MainPage extends Component {
   };
 
   async componentDidMount() {
-    const res = await portfolioService.getPortfolioList(auth.getJwt());
-    console.log(res);
+    const { data } = await portfolioService.getPortfolioList(auth.getJwt());
     this.setState({
-      portfolioList: res.data,
+      portfolioList: data,
     });
   }
 
