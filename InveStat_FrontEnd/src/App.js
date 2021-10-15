@@ -18,6 +18,7 @@ import WatchListPage from "./component/Pages/WatchListPage";
 import StockListPage from "./component/Pages/StockListPage";
 import TransactionPage from "./component/Pages/TransactionPage";
 import auth from "./services/authService";
+import IndividualStockPage from "./component/Pages/IndividualStockPage";
 
 class App extends Component {
   state = {};
@@ -48,6 +49,7 @@ class App extends Component {
               <Route path="/transaction/new" component={TransactionPage} />
               <Route path="/watchlist" component={WatchListPage} />
               <Route path="/stocklist" component={StockListPage} />
+              <Route path="/stock-page" component={IndividualStockPage} />
 
               <Redirect from="/" exact to="/main-page" />
               <Redirect to="/main-page" />
@@ -57,7 +59,8 @@ class App extends Component {
               <Route path="/login" component={LoginForm} />
               <Route path="/signup" component={SignUpForm} />
               <Route path="/welcome-page" component={WelcomePage} />
-              <Redirect from="/" exact to="/welcome-page" />
+
+              <Route from="/" exact to="/welcome-page" />
               <Redirect to="/welcome-page" />
             </Switch>
           )}
