@@ -60,7 +60,7 @@ class App extends Component {
               <Route path="/signup" component={SignUpForm} />
               <Route path="/welcome-page" component={WelcomePage} />
 
-              <Route from="/" exact to="/welcome-page" />
+              <Redirect from="/" exact to="/welcome-page" />
               <Redirect to="/welcome-page" />
             </Switch>
           )}
