@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
       portfolioPortfolioId:{
         type : Sequelize.UUID,
         references:{
-            model:"portfolio",
+            model:"portfolios",
             key:"id",
         },
         onUpdate: 'CASCADE',
@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
     purchasedStockStockTickerId:{
       type : Sequelize.UUID,
       references:{
-          model:"purchasedStock",
+          model:"purchasedStocks",
           key:"id",
       },
       onUpdate: 'CASCADE',

@@ -7,11 +7,12 @@ module.exports = (sequelize, DataTypes) => {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
         allowNull: false,
-        primaryKey: true
+        unique: true
       },
       stockTickerId: {
         type: DataTypes.STRING,
         allowNull: false,
+        primaryKey: true
       },
       stockName: {
         type: DataTypes.STRING,
@@ -29,12 +30,13 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.FLOAT,
       },
 
-      portfolioPortfolioId:{
+      portfolioId:{
         type : Sequelize.UUID,
         references:{
             model:"portfolios",
             key:"id",
         },
+        primaryKey: true,
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
     }
