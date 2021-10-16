@@ -9,7 +9,12 @@
 }
 
 .login-btn {
-  padding-left: 10px;
+  height: 38px;
+width: 111px;
+left: 766px;
+top: 549px;
+border-radius: 0px;
+
 }
 
 .newUser {
