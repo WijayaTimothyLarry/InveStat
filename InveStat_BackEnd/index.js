@@ -15,7 +15,11 @@ const portfolioRouter = require("./routes/portfolio");
 const transactionRouter = require("./routes/transaction");
 const purchasedStocksRouter = require("./routes/purchasedStock");
 
+const test = require("./routes/test");
+
 app.use("/users", signUpRouter);
+
+
 app.use("/userlogin", loginRouter);
 app.use("/portfolio", portfolioRouter);
 app.use("/transaction", transactionRouter);
