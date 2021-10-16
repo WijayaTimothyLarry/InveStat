@@ -12,16 +12,15 @@ class MainPage extends Component {
   };
 
   async componentDidMount() {
-    const res = await portfolioService.getPortfolioList(auth.getJwt());
-    console.log(res);
+    const { data } = await portfolioService.getPortfolioList(auth.getJwt());
     this.setState({
-      portfolioList: res.data,
+      portfolioList: data,
     });
   }
 
   handleDelete = (portfolio) => {
     const portfolioList = this.state.portfolioList.filter(
-      (p) => p._id !== portfolio._id
+      (p) => p.id !== portfolio.id
     );
     this.setState({ portfolioList });
   };

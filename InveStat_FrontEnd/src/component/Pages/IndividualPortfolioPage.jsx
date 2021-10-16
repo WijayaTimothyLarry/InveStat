@@ -15,7 +15,7 @@ class IndividualPortfolioPage extends Component {
   }
 
   handleDelete = (stock) => {
-    const stockList = this.state.stockList.filter((s) => s._id !== stock._id);
+    const stockList = this.state.stockList.filter((s) => s.id !== stock.id);
     this.setState({ stockList });
   };
 

@@ -26,11 +26,17 @@ const NavBar = () => {
           <NavLink className="nav-item nav-link" to="/watchlist">
             Watchlist
           </NavLink>
+          <NavLink className="nav-item nav-link" to="/stocklist">
+            Stock List
+          </NavLink>
           <NavLink className="nav-item nav-link" to="/goal-setting">
             Goal Setting
           </NavLink>
           <NavLink className="nav-item nav-link" to="/customers">
             Profile
+          </NavLink>
+          <NavLink className="nav-item nav-link" to="/stock-page">
+            Stock Page
           </NavLink>
         </div>
       </div>

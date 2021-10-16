@@ -15,8 +15,10 @@ import NotLoggedInNavBar from "./component/Navigation Bars/LoginSignUpNavBar";
 import Logout from "./component/common/logout";
 import NewPortfolioForm from "./component/common/newPortfolioForm";
 import WatchListPage from "./component/Pages/WatchListPage";
+import StockListPage from "./component/Pages/StockListPage";
 import TransactionPage from "./component/Pages/TransactionPage";
 import auth from "./services/authService";
+import IndividualStockPage from "./component/Pages/IndividualStockPage";
 
 class App extends Component {
   state = {};
@@ -41,11 +43,14 @@ class App extends Component {
               <Route path="/main-page" component={MainPage} />
               <Route path="/portfolio/new" component={NewPortfolioForm} />
               <Route
-                path="/portfolio/:id/:portfolioname"
+                path="/portfolio/:portfolioname/:id"
                 component={IndividualPortfolioPage}
               />
               <Route path="/transaction/new" component={TransactionPage} />
               <Route path="/watchlist" component={WatchListPage} />
+              <Route path="/stocklist" component={StockListPage} />
+              <Route path="/stock-page" component={IndividualStockPage} />
+
               <Redirect from="/" exact to="/main-page" />
               <Redirect to="/main-page" />
             </Switch>
@@ -54,6 +59,7 @@ class App extends Component {
               <Route path="/login" component={LoginForm} />
               <Route path="/signup" component={SignUpForm} />
               <Route path="/welcome-page" component={WelcomePage} />
+
               <Redirect from="/" exact to="/welcome-page" />
               <Redirect to="/welcome-page" />
             </Switch>

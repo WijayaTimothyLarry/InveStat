@@ -1,6 +1,6 @@
 const StockList = [
   {
-    _id: "asdads",
+    id: "asdads",
     stockID: "Apple",
     price: 120.0,
     quantity: 3,

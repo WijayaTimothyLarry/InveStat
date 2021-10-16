@@ -5,14 +5,14 @@ import * as userService from "../../services/userService";
 import authService from "../../services/authService";
 class SignUpForm extends Form {
   state = {
-    data: { username: "", password: "", reenterPass: "", name: "" },
+    data: { username: "", password: "", confirmPass: "", name: "" },
     errors: {},
   };
 
   schema = {
     username: Joi.string().email().required().label("Username"),
     password: Joi.string().min(5).required().label("Password"),
-    reenterPass: Joi.any()
+    confirmPass: Joi.any()
       .valid(Joi.ref("password"))
       .required()
       .options({ language: { any: { allowOnly: "must match password" } } })
@@ -43,7 +43,7 @@ class SignUpForm extends Form {
         <form onSubmit={this.handleSubmit}>
           {this.renderInput("username", "Username")}
           {this.renderInput("password", "Password", "password")}
-          {this.renderInput("reenterPass", "Confirm Password", "password")}
+          {this.renderInput("confirmPass", "Confirm Password", "password")}
           {this.renderInput("name", "Name")}
           {this.renderButton("Sign Up")}
         </form>

@@ -12,7 +12,10 @@ class TransactionPage extends Form {
       price: 0,
       brokerCost: 0,
     },
-    portfolioList: [{ portfolioID: "asdfaf", name: "portfolio 1" }],
+    portfolioList: [
+      { portfolioID: "asdfaf", name: "portfolio 1" },
+      { portfolioID: "asdaf", name: "portfolio 2" },
+    ],
     errors: {},
   };
 
