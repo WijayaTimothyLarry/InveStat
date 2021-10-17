@@ -6,13 +6,7 @@ const DateSelect = ({ name, label, error, ...rest }) => {
   return (
     <div>
       <label htmlFor={name}>{label}</label>
-      <DatePicker
-        {...rest}
-        name={name}
-        id={name}
-        selected={startDate}
-        onChange={(date) => setStartDate(date)}
-      />
+      <DatePicker {...rest} name={name} id={name} />
       {error && <div className="alert alert-danger">{error}</div>}
     </div>
   );

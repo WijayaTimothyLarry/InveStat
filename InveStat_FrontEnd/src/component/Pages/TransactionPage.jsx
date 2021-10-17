@@ -36,7 +36,7 @@ class TransactionPage extends Form {
 
   schema = {
     id: Joi.string().required(),
-    date: Joi.required().label("Date"),
+    date: Joi.label("Date"),
     stockID: Joi.string().required(),
     quantity: Joi.number().max(100).min(1).required(),
     price: Joi.number().min(0).required(),
