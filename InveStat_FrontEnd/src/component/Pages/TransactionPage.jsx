@@ -3,6 +3,7 @@ import Joi from "joi-browser";
 import Form from "./../common/form";
 import portfolioService from "../../services/portfolioService";
 import auth from "../../services/authService";
+import { getStockList } from "../../services/watchlistService";
 class TransactionPage extends Form {
   state = {
     data: {
@@ -14,6 +15,7 @@ class TransactionPage extends Form {
       brokerCost: 0,
     },
     portfolioList: [],
+    stockList: [],
     errors: {},
   };
 
@@ -22,8 +24,13 @@ class TransactionPage extends Form {
     const portfolioList = data.map((p) => {
       return { id: p.id, name: p.portfolioName };
     });
+    const rawStockList = getStockList();
+    const stockList = rawStockList.slice(0, 10000).map((s) => {
+      return { value: s.Code, label: s.Name };
+    });
     this.setState({
       portfolioList,
+      stockList,
     });
   }
 
@@ -47,7 +54,7 @@ class TransactionPage extends Form {
         <form onSubmit={this.handleSubmit}>
           {this.renderSelect("id", "Portfolio", this.state.portfolioList)}
           {this.renderDateSelect("date", "Date")}
-          {this.renderInput("stockID", "Stock")}
+          {this.renderCustomSelect("stockID", "Stock", this.state.stockList)}
           {this.renderInput("quantity", "Quatity", "number")}
           {this.renderInput("price", "Price", "number")}
           {this.renderInput("brokerCost", "Broker Cost", "number")}

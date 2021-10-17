@@ -3,6 +3,7 @@ import Joi from "joi-browser";
 import Input from "./input";
 import Select from "./select";
 import DateSelect from "./selectDate";
+import CustomSelect from "./customSelect";
 
 class Form extends Component {
   state = {
@@ -45,6 +46,9 @@ class Form extends Component {
     data[input.name] = input.value;
     this.setState({ data, errors });
   };
+  handleChange2 = (value) => {
+    console.log(value);
+  };
 
   //handleDateChange = ({ currentTarget: input }) => {
   //  const errors = { ...this.state.errors };
@@ -74,6 +78,20 @@ class Form extends Component {
         value={data[name]}
         label={label}
         onChange={this.handleChange}
+        error={errors[name]}
+      />
+    );
+  }
+
+  renderCustomSelect(name, label, options) {
+    const { data, errors } = this.state;
+    return (
+      <CustomSelect
+        name={name}
+        data-value={data[name]}
+        label={label}
+        options={options}
+        onChange={this.handleChange2}
         error={errors[name]}
       />
     );
