@@ -10,7 +10,6 @@ import IndividualPortfolioPage from "./component/Pages/IndividualPortfolioPage";
 import WelcomePage from "./component/Pages/WelcomePage";
 import LoginForm from "./component/common/loginForm";
 import SignUpForm from "./component/common/signUpForm";
-import "./App.css";
 import NotLoggedInNavBar from "./component/Navigation Bars/LoginSignUpNavBar";
 import Logout from "./component/common/logout";
 import NewPortfolioForm from "./component/common/newPortfolioForm";
@@ -21,6 +20,7 @@ import IndividualStockPage from "./component/Pages/IndividualStockPage";
 import GoalProgressPage from "./component/Pages/GoalProgressPage";
 import GoalSettingPage from "./component/Pages/GoalSettingPage";
 import auth from "./services/authService";
+import "./App.css";
 
 class App extends Component {
   state = {};
@@ -34,7 +34,6 @@ class App extends Component {
     }
   }
   render() {
-    console.log(this.state);
     return (
       <React.Fragment>
         {this.state.user ? <NavBar /> : <NotLoggedInNavBar />}
@@ -52,7 +51,7 @@ class App extends Component {
               <Route path="/watchlist" component={WatchListPage} />
               <Route path="/stocklist" component={StockListPage} />
               <Route
-                path="/stock-page/:ticker"
+                path="/stock-page/:ticker/:name"
                 component={IndividualStockPage}
               />
               <Route
