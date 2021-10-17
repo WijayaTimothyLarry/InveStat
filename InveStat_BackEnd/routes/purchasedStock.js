@@ -1,24 +1,28 @@
 const express = require("express");
 const router = express.Router();
 const { purchasedStock } = require("../models"); 
+const { parse: uuidParse } = require("uuid");
+
+
 
 router.get("/", async(req, res) => {
-  const ListOfPurchasedStocks = await purchasedStock.findAll()
-  res.json(ListOfPurchasedStocks);
+  let currentPurchasedStock = await purchasedStock
+  .findAll({ where: { portfolioId: req.body.portfolioId } })
+  .catch((e) => {
+    console.log(e.message);
+  });
+  // const purchasedStockInfo = await purchasedStock.findAll()
+  res.json(currentPurchasedStock);
 });
+
 
 router.post("/", async (req, res) => {
   const purchasedStockInfo = req.body;
-  console.log(purchasedStockInfo);
-  console.log(purchasedStockInfo.stockTickerId);
-  console.log(purchasedStockInfo.stockName);
-  console.log(purchasedStockInfo.totalQuantity);
-  console.log(purchasedStockInfo.avgPurchasePriceUsd);
-  // avgPurchasedPriceUsd = (transactionPrice * changeInQuantity * exchangeRate)/totalQuantity
-  // calculation method not yet set up
-  console.log(purchasedStockInfo.exchangeRate);
-  console.log(purchasedStockInfo.portfolioPortfolioId);
-  // foreign key issue not resolved
+  // console.log(purchasedStockInfo);
+  // console.log(purchasedStockInfo.stockTickerId);
+  // console.log(purchasedStockInfo.stockName);
+  // console.log(purchasedStockInfo.totalQuantity);
+  // console.log(purchasedStockInfo.avgPurchasePriceUsd);
   
   await purchasedStock.create(purchasedStockInfo);
   res.json(purchasedStockInfo);
