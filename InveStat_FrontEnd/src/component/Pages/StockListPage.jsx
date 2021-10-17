@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import _ from "lodash";
 import { paginate } from "./../utils/paginate";
 import SearchBox from "../common/searchBox";
