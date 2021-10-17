@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Joi from "joi-browser";
 import Input from "./input";
 import Select from "./select";
+import CustomSelect from "./customSelect";
 class Form extends Component {
   state = {
     data: {},
@@ -44,6 +45,10 @@ class Form extends Component {
     this.setState({ data, errors });
   };
 
+  handleChange2 = (value) => {
+    console.log(value);
+  };
+
   renderButton(label) {
     return (
       <button disabled={this.validate()} className="btn btn-primary">
@@ -61,6 +66,20 @@ class Form extends Component {
         value={data[name]}
         label={label}
         onChange={this.handleChange}
+        error={errors[name]}
+      />
+    );
+  }
+
+  renderCustomSelect(name, label, options) {
+    const { data, errors } = this.state;
+    return (
+      <CustomSelect
+        name={name}
+        data-value={data[name]}
+        label={label}
+        options={options}
+        onChange={this.handleChange2}
         error={errors[name]}
       />
     );
