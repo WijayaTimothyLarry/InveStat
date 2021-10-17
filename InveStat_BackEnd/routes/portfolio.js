@@ -3,12 +3,13 @@ const router = express.Router();
 const { portfolio } = require("../models");
 var auth = require("../middleware/auth");
 
+const { parse: uuidParse } = require("uuid");
 //get
 router.get("/", auth, async (req, res) => {
   console.log(req.user.email);
   const userEmail = req.user.email;
   const listOfPortfolio = await portfolio.findAll({
-    where: { userEmail: userEmail },
+    where: { userEmail: userEmail},
   });
   if (listOfPortfolio === null) {
     console.log("Not found!");
@@ -36,8 +37,9 @@ router.get("/delete", auth, async function (req, res) {
   let currentPortfolio = await portfolio
     .findOne({
       where: {
-        portfolioName: reqBody.portfolioName,
-        userEmail: req.user.email,
+        //portfolioId
+        id: reqBody.id,
+        // userEmail: req.user.email,
       },
     })
     .catch((e) => {
