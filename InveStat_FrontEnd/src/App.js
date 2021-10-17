@@ -1,9 +1,5 @@
 import React, { Component } from "react";
-import {
-  Route,
-  Redirect,
-  Switch,
-} from "react-router-dom/cjs/react-router-dom.min";
+import { Route, Redirect, Switch } from "react-router-dom";
 import NavBar from "./component/Navigation Bars/NavBar";
 import MainPage from "./component/Pages/MainPage";
 import IndividualPortfolioPage from "./component/Pages/IndividualPortfolioPage";
