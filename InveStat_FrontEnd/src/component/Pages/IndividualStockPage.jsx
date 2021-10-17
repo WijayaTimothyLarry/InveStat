@@ -7,13 +7,14 @@ class IndividualStockPage extends Component {
     stockData: stockData,
   };
 
-  componentDidMount() {
-    const data = getData();
-    console.log(data);
-  }
+  componentDidMount() {}
 
   render() {
-    return <div> test </div>;
+    return (
+      <React.Fragment>
+        <h1>{this.props.match.params.ticker}</h1>
+      </React.Fragment>
+    );
   }
 }
 
