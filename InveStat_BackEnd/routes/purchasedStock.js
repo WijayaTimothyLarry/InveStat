@@ -3,7 +3,7 @@ const router = express.Router();
 const { purchasedStock } = require("../models"); 
 
 
-
+//get
 router.get("/", async(req, res) => {
   let currentPurchasedStock = await purchasedStock
   .findAll({ where: { portfolioId: req.body.portfolioId } })
@@ -14,17 +14,36 @@ router.get("/", async(req, res) => {
 });
 
 
+//create
 router.post("/", async (req, res) => {
   const purchasedStockInfo = req.body;
-  // console.log(purchasedStockInfo);
-  // console.log(purchasedStockInfo.stockTickerId);
-  // console.log(purchasedStockInfo.stockName);
-  // console.log(purchasedStockInfo.totalQuantity);
-  // console.log(purchasedStockInfo.avgPurchasePriceUsd);
   
   await purchasedStock.create(purchasedStockInfo);
   res.json(purchasedStockInfo);
 });
+
+
+//delete
+router.get("/delete", async function (req, res) {
+  const reqBody = req.body;
+  console.log(reqBody);
+  let currentPurchasedStock = await purchasedStock
+    .findOne({
+      where: {
+        id: reqBody.id,
+      },
+    })
+    .catch((e) => {
+      console.log(e.message);
+    });
+  if (!currentPurchasedStock) {
+    console.log("err");
+  }
+  currentPurchasedStock.destroy();
+  console.log("deleted");
+  res.json("deleted");
+});
+
 
 
 module.exports = router;

@@ -3,11 +3,15 @@ const router = express.Router();
 const { transaction } = require("../models"); 
 const { purchasedStock } = require("../models"); 
 
+//get
 router.get("/", async(req, res) => {
   const listOfTransactions = await transaction.findAll()
   res.json(listOfTransactions);
 });
 
+
+
+//create
 router.post("/", createPStock, async (req, res) => {
   const transactionInfo = req.body;
 
@@ -43,22 +47,20 @@ async function createPStock (req,res,next){
   }catch (err) {
     console.log('err');
   }
-  console.log(existingStock);
+
   if (existingStock=== null) {
     new_stock = await purchasedStock.create({
     "stockTickerId" :stockTickerId,
     "portfolioId" : portfolioId
   });
-  res.purchasedStockId= new_stock.id;
 
+  res.purchasedStockId= new_stock.id;
   console.log('new stock created');
 }
 else{
   res.purchasedStockId= existingStock.id;
-
   console.log('existing stock exists');
 }
-
   next()
 }
 

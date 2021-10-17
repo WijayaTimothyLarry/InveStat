@@ -4,9 +4,9 @@ const { portfolio } = require("../models");
 var auth = require("../middleware/auth");
 
 const { parse: uuidParse } = require("uuid");
+
 //get
 router.get("/", auth, async (req, res) => {
-  console.log(req.user.email);
   const userEmail = req.user.email;
   const listOfPortfolio = await portfolio.findAll({
     where: { userEmail: userEmail},
@@ -18,17 +18,16 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
+
 //set
 router.post("/", async (req, res) => {
   const portfolioInfo = req.body;
-  console.log(portfolioInfo.portfolioName);
-  console.log(portfolioInfo.userEmail);
-  console.log(portfolioInfo.totalValue);
   //totalValue -> need to add?
 
   await portfolio.create(portfolioInfo);
   res.json(portfolioInfo);
 });
+
 
 //delete
 router.get("/delete", auth, async function (req, res) {
@@ -37,9 +36,7 @@ router.get("/delete", auth, async function (req, res) {
   let currentPortfolio = await portfolio
     .findOne({
       where: {
-        //portfolioId
         id: reqBody.id,
-        // userEmail: req.user.email,
       },
     })
     .catch((e) => {
@@ -53,5 +50,7 @@ router.get("/delete", auth, async function (req, res) {
   res.json("deleted");
 });
 
+
 //change portfolioname
+
 module.exports = router;
