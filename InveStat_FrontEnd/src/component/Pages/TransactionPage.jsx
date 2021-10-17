@@ -7,7 +7,7 @@ class TransactionPage extends Form {
   state = {
     data: {
       id: "",
-      startDate: "",
+      date: "",
       stockID: "",
       quantity: 0,
       price: 0,
