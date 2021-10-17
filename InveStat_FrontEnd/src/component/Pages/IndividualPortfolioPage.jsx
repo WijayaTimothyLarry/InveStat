@@ -60,7 +60,7 @@ class IndividualPortfolioPage extends Component {
               className="btn btn-primary float-right  "
               to="/transaction/new"
             >
-              Add Stock
+              Add Transaction
             </Link>
           </p>
           <StockTable

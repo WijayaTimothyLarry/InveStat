@@ -32,6 +32,16 @@ export function getCurrentUser() {
   }
 }
 
+export function getCurrentUserEmail() {
+  try {
+    const jwt = localStorage.getItem(tokenKey);
+    const token = jwtDecode(jwt);
+    return token.email;
+  } catch (ex) {
+    return null;
+  }
+}
+
 export function getJwt() {
   return localStorage.getItem(tokenKey);
 }
@@ -41,5 +51,6 @@ export default {
   loginWithJwt,
   logout,
   getCurrentUser,
+  getCurrentUserEmail,
   getJwt,
 };
