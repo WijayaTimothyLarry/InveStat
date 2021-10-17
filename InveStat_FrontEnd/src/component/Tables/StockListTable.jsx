@@ -8,7 +8,7 @@ class StockListTable extends Component {
       path: "Code",
       label: "Ticker",
       content: (stock) => (
-        <Link to={`/stock-page/${stock.Code}`}>{stock.Code}</Link>
+        <Link to={`/stock-page/${stock.Code}/${stock.Name}`}>{stock.Code}</Link>
       ),
     },
     {

@@ -1,7 +1,9 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import Joi from "joi-browser";
 import Input from "./input";
 import Select from "./select";
+import DateSelect from "./selectDate";
+
 class Form extends Component {
   state = {
     data: {},
@@ -44,6 +46,17 @@ class Form extends Component {
     this.setState({ data, errors });
   };
 
+  //handleDateChange = ({ currentTarget: input }) => {
+  //  const errors = { ...this.state.errors };
+  //  const errorMessage = this.validateProperty(input);
+  //  if (errorMessage != null) errors[input.name] = errorMessage;
+  //  else delete errors[input.name];
+  //
+  //  const data = { ...this.state.data };
+  //  data[input.name] = input.value;
+  //  this.setState({ data, errors });
+  //};
+
   renderButton(label) {
     return (
       <button disabled={this.validate()} className="btn btn-primary">
@@ -76,6 +89,20 @@ class Form extends Component {
         options={options}
         onChange={this.handleChange}
         error={errors[name]}
+      />
+    );
+  }
+
+  renderDateSelect(name, label) {
+    const { data, errors } = this.state;
+    const [startDate, setStartDate] = useState(new Date());
+    return (
+      <DateSelect
+        name={name}
+        label={label}
+        selected={data[name]}
+        onChange={this.handleDateChange}
+        error={errors.name}
       />
     );
   }

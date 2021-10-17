@@ -4,10 +4,10 @@ var Sequelize = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
     const transaction = sequelize.define("transaction", {
       transactionId: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement:true,
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
         allowNull: false,
+        primaryKey: true,
       },
       transactionType: {
         type: DataTypes.STRING,
@@ -25,17 +25,17 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATE,
       },
       
-      portfolioPortfolioId:{
-        type : Sequelize.UUID,
-        references:{
-            model:"portfolios",
-            key:"id",
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-    },
+    //   portfolioId:{
+    //     type : Sequelize.UUID,
+    //     references:{
+    //         model:"portfolios",
+    //         key:"id",
+    //     },
+    //     onUpdate: 'CASCADE',
+    //     onDelete: 'CASCADE',
+    // },
 
-    purchasedStockStockTickerId:{
+    purchasedStockId:{
       type : Sequelize.UUID,
       references:{
           model:"purchasedStocks",
@@ -43,6 +43,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
+      unique : false,
   },
 
     });
