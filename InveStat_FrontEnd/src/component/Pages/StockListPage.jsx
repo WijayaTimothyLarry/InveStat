@@ -10,7 +10,7 @@ import StockListTable from "./../Tables/StockListTable";
 class StockListPage extends Component {
   state = {
     stockList: [],
-    pageSize: 1000,
+    pageSize: 50,
     currentPage: 1,
     searchQuery: "",
     sortColumn: { path: "Code", order: "asc" },
