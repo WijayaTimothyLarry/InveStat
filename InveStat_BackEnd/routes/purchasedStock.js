@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const { purchasedStock } = require("../models"); 
-const { parse: uuidParse } = require("uuid");
 
 
 
@@ -11,7 +10,6 @@ router.get("/", async(req, res) => {
   .catch((e) => {
     console.log(e.message);
   });
-  // const purchasedStockInfo = await purchasedStock.findAll()
   res.json(currentPurchasedStock);
 });
 

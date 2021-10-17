@@ -14,22 +14,13 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         primaryKey: true
       },
-      stockName: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
+
       totalQuantity:  {
         type: DataTypes.INTEGER,
-        allowNull: false,
       },
       avgPurchasePriceUsd:  {
         type: DataTypes.FLOAT,
-        allowNull: false,
       },
-      exchangeRate:  {
-        type: DataTypes.FLOAT,
-      },
-
       portfolioId:{
         type : Sequelize.UUID,
         references:{
@@ -43,3 +34,12 @@ module.exports = (sequelize, DataTypes) => {
     });
     return purchasedStock;
   };
+
+
+  // stockName: {
+  //   type: DataTypes.STRING,
+  //   allowNull: false,
+  // },
+  // exchangeRate:  {
+  //   type: DataTypes.FLOAT,
+  // },

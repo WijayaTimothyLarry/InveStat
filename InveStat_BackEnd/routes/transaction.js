@@ -1,26 +1,65 @@
 const express = require("express");
 const router = express.Router();
 const { transaction } = require("../models"); 
-
+const { purchasedStock } = require("../models"); 
 
 router.get("/", async(req, res) => {
   const listOfTransactions = await transaction.findAll()
   res.json(listOfTransactions);
 });
 
-router.post("/", async (req, res) => {
+router.post("/", createPStock, async (req, res) => {
   const transactionInfo = req.body;
-  console.log(transactionInfo);
-  console.log(transactionInfo.transactionId);
-  console.log(transactionInfo.transactionType);
-  console.log(transactionInfo.TransactionPrice);
-  console.log(transactionInfo.changeInQuantity);
-  console.log(transactionInfo.transactionDate);
-  // Error: portfolioPortfolioId and purchasedStockStockTickerId not showing up in sql DB
-  // ^This is because portfolioPortfolioId and purchasedStockStockTickerId not initialized in their main table
 
-  await transaction.create(transactionInfo);
+  await transaction.create({
+    transactionType : transactionInfo.transactionType,
+    changeInQuantity : transactionInfo.changeInQuantity,
+    transactionDate : transactionInfo.transactionDate,
+    purchasedStockId : res.purchasedStockId,
+    portfolioId : transactionInfo.portfolioId,
+    TransactionPrice : transactionInfo.TransactionPrice,
+    purchasedStockStockTickerId:transactionInfo.purchasedStockStockTickerId
+  });
   res.json(transactionInfo);
 });
+
+
+async function createPStock (req,res,next){
+  const purchasedStockInfo = req.body;
+  const portfolioId = purchasedStockInfo.portfolioId;
+  const stockTickerId = purchasedStockInfo.purchasedStockStockTickerId; 
+  console.log(stockTickerId);
+  var existingStock;
+  try{
+     existingStock = await purchasedStock
+    .findOne({
+      where: {
+        portfolioId : portfolioId,
+        stockTickerId : stockTickerId
+      },
+    }).catch((e) => {
+      console.log(e.message);
+    });
+  }catch (err) {
+    console.log('err');
+  }
+  console.log(existingStock);
+  if (existingStock=== null) {
+    new_stock = await purchasedStock.create({
+    "stockTickerId" :stockTickerId,
+    "portfolioId" : portfolioId
+  });
+  res.purchasedStockId= new_stock.id;
+
+  console.log('new stock created');
+}
+else{
+  res.purchasedStockId= existingStock.id;
+
+  console.log('existing stock exists');
+}
+
+  next()
+}
 
 module.exports = router;
