@@ -1,26 +1,9 @@
-var request = require("request");
+import http from "./httpService";
+import { stocDailykApi, apiKey } from "../config.json";
 
-// replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
-var url =
-  "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=IBM&apikey=demo";
-
-export async function getData() {
-  request.get(
-    {
-      url: url,
-      json: true,
-      headers: { "User-Agent": "request" },
-    },
-    (err, res, data) => {
-      if (err) {
-        console.log("Error:", err);
-      } else if (res.statusCode !== 200) {
-        console.log("Status:", res.statusCode);
-      } else {
-        // data is successfully parsed as a JSON object:
-        console.log(data);
-        return data;
-      }
-    }
-  );
+export function getDailyStockData(tickerId) {
+  const apiEndpoint = stocDailykApi + tickerId + "&apikey=" + apiKey;
+  return http.get(apiEndpoint);
 }
+
+export default { getDailyStockData };
