@@ -17,8 +17,10 @@ import NewPortfolioForm from "./component/common/newPortfolioForm";
 import WatchListPage from "./component/Pages/WatchListPage";
 import StockListPage from "./component/Pages/StockListPage";
 import TransactionPage from "./component/Pages/TransactionPage";
-import auth from "./services/authService";
 import IndividualStockPage from "./component/Pages/IndividualStockPage";
+import GoalProgressPage from "./component/Pages/GoalProgressPage";
+import GoalSettingPage from "./component/Pages/GoalSettingPage";
+import auth from "./services/authService";
 
 class App extends Component {
   state = {};
@@ -49,7 +51,15 @@ class App extends Component {
               <Route path="/transaction/new" component={TransactionPage} />
               <Route path="/watchlist" component={WatchListPage} />
               <Route path="/stocklist" component={StockListPage} />
-              <Route path="/stock-page" component={IndividualStockPage} />
+              <Route
+                path="/stock-page/:ticker"
+                component={IndividualStockPage}
+              />
+              <Route
+                path="/goal-setting/set-goal"
+                component={GoalSettingPage}
+              />
+              <Route path="/goal-setting" component={GoalProgressPage} />
 
               <Redirect from="/" exact to="/main-page" />
               <Redirect to="/main-page" />
