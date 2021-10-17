@@ -10,7 +10,7 @@ class NewPortfolioForm extends Form {
   };
 
   schema = {
-    portfolioName: Joi.string().required().label("Username"),
+    portfolioName: Joi.string().required().label("Portfolio Name"),
   };
   doSubmit = () => {
     //call the server
