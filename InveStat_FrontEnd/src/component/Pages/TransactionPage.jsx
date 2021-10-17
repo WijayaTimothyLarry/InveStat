@@ -28,6 +28,10 @@ class TransactionPage extends Form {
     brokerCost: Joi.number().min(0).required(),
   };
 
+  doSubmit() {
+    console.log(this.state.data);
+  }
+
   render() {
     return (
       <React.Fragment>
