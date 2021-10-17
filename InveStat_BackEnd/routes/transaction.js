@@ -14,17 +14,22 @@ router.get("/", async(req, res) => {
 //create
 router.post("/", createPStock, async (req, res) => {
   const transactionInfo = req.body;
-
-  await transaction.create({
+  var changeInQuantity = transactionInfo.changeInQuantity;
+  if (transactionInfo.transactionType=='Sell'){
+      changeInQuantity = -1 * parseInt(transactionInfo.changeInQuantity);
+      
+  };
+  TransactionDetail = await transaction.create({
     transactionType : transactionInfo.transactionType,
-    changeInQuantity : transactionInfo.changeInQuantity,
+    changeInQuantity : changeInQuantity,
     transactionDate : transactionInfo.transactionDate,
     purchasedStockId : res.purchasedStockId,
     portfolioId : transactionInfo.portfolioId,
     TransactionPrice : transactionInfo.TransactionPrice,
-    purchasedStockStockTickerId:transactionInfo.purchasedStockStockTickerId
+    purchasedStockStockTickerId:transactionInfo.purchasedStockStockTickerId,
+    brokerageCost : transactionInfo.brokerageCost
   });
-  res.json(transactionInfo);
+  res.json(TransactionDetail);
 });
 
 
