@@ -1,8 +1,10 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import Joi from "joi-browser";
 import Input from "./input";
 import Select from "./select";
+import DateSelect from "./selectDate";
 import CustomSelect from "./customSelect";
+
 class Form extends Component {
   state = {
     data: {},
@@ -27,9 +29,9 @@ class Form extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const errors = this.validate();
-    this.setState({ errors: errors || {} });
-    if (errors) return;
+    //const errors = this.validate();
+    //this.setState({ errors: errors || {} });
+    //if (errors) return;
 
     this.doSubmit();
   };
@@ -44,17 +46,24 @@ class Form extends Component {
     data[input.name] = input.value;
     this.setState({ data, errors });
   };
-
   handleChange2 = (value) => {
     console.log(value);
   };
 
+  handleDateChange = (date) => {
+    this.setState({ date });
+    //const errors = { ...this.state.errors };
+    //const errorMessage = this.validateProperty(input);
+    //if (errorMessage != null) errors[input.name] = errorMessage;
+    //else delete errors[input.name];
+    //
+    //const data = { ...this.state.data };
+    //data[input.name] = input.value;
+    //this.setState({ data, errors });
+  };
+
   renderButton(label) {
-    return (
-      <button disabled={this.validate()} className="btn btn-primary">
-        {label}
-      </button>
-    );
+    return <button className="btn btn-primary">{label}</button>;
   }
 
   renderInput(name, label, type = "text") {
@@ -95,6 +104,22 @@ class Form extends Component {
         options={options}
         onChange={this.handleChange}
         error={errors[name]}
+      />
+    );
+  }
+
+  renderDateSelect(name, label) {
+    const { data, errors } = this.state;
+    return (
+      <DateSelect
+        name={name}
+        label={label}
+        selected={data[name]}
+        onChange={(date) => {
+          data[name] = date;
+          this.setState({ data });
+        }}
+        error={errors.name}
       />
     );
   }

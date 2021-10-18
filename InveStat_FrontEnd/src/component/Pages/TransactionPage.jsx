@@ -36,7 +36,7 @@ class TransactionPage extends Form {
 
   schema = {
     id: Joi.string().required(),
-    date: Joi.string().required().label("Date"),
+    date: Joi.label("Date"),
     stockID: Joi.string().required(),
     quantity: Joi.number().max(100).min(1).required(),
     price: Joi.number().min(0).required(),
@@ -53,7 +53,7 @@ class TransactionPage extends Form {
         <h1>Transaction</h1>
         <form onSubmit={this.handleSubmit}>
           {this.renderSelect("id", "Portfolio", this.state.portfolioList)}
-          {this.renderInput("date", "Date")}
+          {this.renderDateSelect("date", "Date")}
           {this.renderCustomSelect("stockID", "Stock", this.state.stockList)}
           {this.renderInput("quantity", "Quatity", "number")}
           {this.renderInput("price", "Price", "number")}
