@@ -24,17 +24,10 @@ module.exports = (sequelize, DataTypes) => {
       transactionDate:  {
         type: DataTypes.DATE,
       },
-      
-    //   portfolioId:{
-    //     type : Sequelize.UUID,
-    //     references:{
-    //         model:"portfolios",
-    //         key:"id",
-    //     },
-    //     onUpdate: 'CASCADE',
-    //     onDelete: 'CASCADE',
-    // },
-
+      brokerageCost:{
+        type: DataTypes.FLOAT,
+        allowNull: false,
+      },
     purchasedStockId:{
       type : Sequelize.UUID,
       references:{
@@ -49,3 +42,14 @@ module.exports = (sequelize, DataTypes) => {
     });
     return transaction;
   };
+
+
+//   portfolioId:{
+//     type : Sequelize.UUID,
+//     references:{
+//         model:"portfolios",
+//         key:"id",
+//     },
+//     onUpdate: 'CASCADE',
+//     onDelete: 'CASCADE',
+// },

@@ -60,7 +60,6 @@ async function updateValue (req,res,next){
 
 
 
-
 //create
 router.post("/", async (req, res) => {
   const purchasedStockInfo = req.body;
