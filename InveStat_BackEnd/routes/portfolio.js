@@ -30,7 +30,7 @@ router.post("/", async (req, res) => {
 
 
 //delete
-router.get("/delete", auth, async function (req, res) {
+router.delete("/delete", auth, async function (req, res) {
   const reqBody = req.body;
   console.log(reqBody);
   let currentPortfolio = await portfolio

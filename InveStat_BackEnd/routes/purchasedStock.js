@@ -38,7 +38,7 @@ router.post("/", async (req, res) => {
 
 
 //delete
-router.get("/delete", async function (req, res) {
+router.delete("/delete", async function (req, res) {
   const reqBody = req.body;
   console.log(reqBody);
   let currentPurchasedStock = await purchasedStock
