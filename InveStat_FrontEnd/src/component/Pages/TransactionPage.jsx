@@ -25,9 +25,17 @@ class TransactionPage extends Form {
 
   async componentDidMount() {
     const rawStockList = getStockList();
-    const stockList = rawStockList.slice(0, 10000).map((s) => {
-      return { value: s.Code, label: s.Name };
-    });
+    const stockList = rawStockList
+      .filter((s) => {
+        return (
+          s.Type === "Common Stock" &&
+          (s.Exchange === "NASDAQ" || s.Exchange === "NYSE")
+        );
+      })
+      .map((s) => {
+        return { value: s.Code, label: s.Name };
+      });
+
     const { data } = await portfolioService.getPortfolioList(auth.getJwt());
     console.log(data);
     const portfolioList = data.map((p) => {
