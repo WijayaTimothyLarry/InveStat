@@ -18,11 +18,22 @@ class MainPage extends Component {
     });
   }
 
-  handleDelete = (portfolio) => {
+  handleDelete = async (portfolio) => {
     const portfolioList = this.state.portfolioList.filter(
       (p) => p.id !== portfolio.id
     );
+    const { id } = portfolio;
+    console.log(id);
     this.setState({ portfolioList });
+
+    //try {
+    //  await portfolioService.deletePortfolio(portfolio.id);
+    //} catch (ex) {
+    //  if (ex.response && ex.responsee.status === 404) {
+    //    toast.error("This movie is not in the database.");
+    //  }
+    //  this.setState({ movies: originalMovies });
+    //}
   };
 
   handleSort = (sortColumn) => {

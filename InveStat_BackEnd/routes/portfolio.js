@@ -9,7 +9,7 @@ const { parse: uuidParse } = require("uuid");
 router.get("/", auth, async (req, res) => {
   const userEmail = req.user.email;
   const listOfPortfolio = await portfolio.findAll({
-    where: { userEmail: userEmail},
+    where: { userEmail: userEmail },
   });
   if (listOfPortfolio === null) {
     console.log("Not found!");
@@ -17,7 +17,6 @@ router.get("/", auth, async (req, res) => {
     res.json(listOfPortfolio);
   }
 });
-
 
 //set
 router.post("/", async (req, res) => {
@@ -27,7 +26,6 @@ router.post("/", async (req, res) => {
   await portfolio.create(portfolioInfo);
   res.json(portfolioInfo);
 });
-
 
 //delete
 router.get("/delete", auth, async function (req, res) {
@@ -49,7 +47,6 @@ router.get("/delete", auth, async function (req, res) {
   console.log("deleted");
   res.json("deleted");
 });
-
 
 //change portfolioname
 

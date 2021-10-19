@@ -13,9 +13,10 @@ export async function addNewPortfolio(userEmail, portfolioName) {
   await http.post(apiEndpoint, { portfolioName, userEmail });
 }
 
-export async function deletePortfolio(userEmail, portfolioName) {
+export async function deletePortfolio(portfolioId) {
+  console.log(portfolioId);
   const deleteEndPoint = apiEndpoint + "/delete";
-  await http.get(deleteEndPoint, { portfolioName, userEmail });
+  await http.get(deleteEndPoint, { portfolioId });
 }
 
 export default { getPortfolioList, addNewPortfolio };
