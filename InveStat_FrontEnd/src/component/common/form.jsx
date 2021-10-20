@@ -11,7 +11,6 @@ class Form extends Component {
   validate = () => {
     const options = { abortEarly: false };
     const { error } = Joi.validate(this.state.data, this.schema, options);
-    console.log(error);
     if (!error) return null;
 
     const errors = {};
@@ -23,7 +22,6 @@ class Form extends Component {
     const obj = { [name]: value };
     const schema = { [name]: this.schema[name] };
     const { error } = Joi.validate(obj, schema);
-    console.log(error);
     return error ? error.details[0].message : null;
   };
 

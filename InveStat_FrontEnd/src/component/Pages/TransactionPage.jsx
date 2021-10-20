@@ -30,15 +30,19 @@ class TransactionPage extends Form {
       return { value: s.Code, label: s.Code + "   |   " + s.Name };
     });
 
-    const { data } = await portfolioService.getPortfolioList(auth.getJwt());
-    console.log(data);
-    const portfolioList = data.map((p) => {
+    const { data: portfolios } = await portfolioService.getPortfolioList(
+      auth.getJwt()
+    );
+    const portfolioList = portfolios.map((p) => {
       return { id: p.id, name: p.portfolioName };
     });
 
+    const { data } = this.state;
+    data["rawdate"] = new Date();
     this.setState({
       portfolioList,
       stockList,
+      data,
     });
   }
 
@@ -60,7 +64,6 @@ class TransactionPage extends Form {
   }
 
   handleDateChange = (date) => {
-    console.log(date);
     const data = { ...this.state.data };
     data["rawdate"] = date;
     if (date) {
@@ -80,7 +83,7 @@ class TransactionPage extends Form {
         name={name}
         label={label}
         selected={data[name]}
-        dateFormat="dd/MM/yyyy"
+        dateFormat="dd-MM-yyyy"
         onChange={this.handleDateChange}
         error={errors[name2]}
       />
@@ -102,7 +105,6 @@ class TransactionPage extends Form {
   }
 
   handleCustomSelectChange = (value) => {
-    console.log(value);
     const data = { ...this.state.data };
     data["purchasedStockStockTickerId"] = value.value;
     this.setState({ data });
