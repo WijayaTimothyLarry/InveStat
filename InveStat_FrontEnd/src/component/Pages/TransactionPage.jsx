@@ -95,13 +95,13 @@ class TransactionPage extends Form {
         data-value={data[name]}
         label={label}
         options={options}
-        onChange={this.handleCustomSelectChane}
+        onChange={this.handleCustomSelectChange}
         error={errors[name]}
       />
     );
   }
 
-  handleCustomSelectChane = (value) => {
+  handleCustomSelectChange = (value) => {
     console.log(value);
     const data = { ...this.state.data };
     data["purchasedStockStockTickerId"] = value.value;
