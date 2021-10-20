@@ -64,7 +64,7 @@ class TransactionPage extends Form {
   async doSubmit() {
     const { data } = this.state;
     const res = await transactionService.addTransaction(data);
-    console.log(res);
+    window.location = "/";
   }
 
   handleDateChange = (date) => {

@@ -20,7 +20,7 @@ class IndividualStockPage extends Component {
   render() {
     return (
       <React.Fragment>
-        <h1>{this.props.match.params.name}</h1>
+        <h1>{this.props.match.params.ticker}</h1>
       </React.Fragment>
     );
   }

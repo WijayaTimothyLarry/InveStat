@@ -9,7 +9,7 @@ export function getPortfolioList(token) {
 }
 
 export async function addNewPortfolio(userEmail, portfolioName) {
-  await http.post(apiEndpoint, { portfolioName, userEmail });
+  return await http.post(apiEndpoint, { portfolioName, userEmail });
 }
 
 export async function deletePortfolio(token, id) {
