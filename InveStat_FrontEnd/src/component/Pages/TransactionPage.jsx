@@ -5,6 +5,7 @@ import Form from "./../common/form";
 import portfolioService from "../../services/portfolioService";
 import auth from "../../services/authService";
 import { getStockList } from "../../services/watchlistService";
+import transactionService from "../../services/transactionService";
 import CustomSelect from "./../common/customSelect";
 import { join } from "lodash";
 class TransactionPage extends Form {
@@ -12,11 +13,12 @@ class TransactionPage extends Form {
     data: {
       id: "",
       rawdate: "",
-      date: "",
-      stockID: "",
-      quantity: 0,
-      price: 0,
-      brokerCost: 0,
+      transactionDate: "",
+      transactionType: "",
+      purchasedStockStockTickerId: "",
+      changeInQuantity: 0,
+      TransactionPrice: 0,
+      brokerageCost: 0,
     },
     portfolioList: [],
     stockList: [],
@@ -51,16 +53,18 @@ class TransactionPage extends Form {
   schema = {
     id: Joi.string().required().label("Portfolio"),
     rawdate: Joi.label("rawDate"),
-    date: Joi.string().required().label("Date"),
-    stockID: Joi.string().required().label("Stock"),
-    quantity: Joi.number().max(100).min(1).required().label("Quantity"),
-    price: Joi.number().min(0).required().label("Price"),
-    brokerCost: Joi.number().min(0).required().label("Brocker Cost"),
+    transactionDate: Joi.string().required().label("Date"),
+    transactionType: Joi.string().required().label("Transaction Type"),
+    purchasedStockStockTickerId: Joi.string().required().label("Stock"),
+    changeInQuantity: Joi.number().max(100).min(1).required().label("Quantity"),
+    TransactionPrice: Joi.number().min(0).required().label("Price"),
+    brokerageCost: Joi.number().min(0).required().label("Brocker Cost"),
   };
 
-  doSubmit() {
+  async doSubmit() {
     const { data } = this.state;
-    console.log(data);
+    const res = await transactionService.addTransaction(data);
+    console.log(res);
   }
 
   handleDateChange = (date) => {
@@ -68,11 +72,11 @@ class TransactionPage extends Form {
     const data = { ...this.state.data };
     data["rawdate"] = date;
     if (date) {
-      data["date"] = `${(date.getYear() % 100) + 2000}-${
+      data["transactionDate"] = `${(date.getYear() % 100) + 2000}-${
         date.getMonth() + 1
       }-${date.getDate()}`;
     } else {
-      data["date"] = "";
+      data["transactionDate"] = "";
     }
     this.setState({ data });
   };
@@ -108,7 +112,7 @@ class TransactionPage extends Form {
   handleCustomSelectChane = (value) => {
     console.log(value);
     const data = { ...this.state.data };
-    data["stockID"] = value.value;
+    data["purchasedStockStockTickerId"] = value.value;
     this.setState({ data });
   };
 
@@ -117,12 +121,20 @@ class TransactionPage extends Form {
       <React.Fragment>
         <h1>Transaction</h1>
         <form onSubmit={this.handleSubmit}>
-          {this.renderDateSelect("rawdate", "date", "Date")}
+          {this.renderDateSelect("rawdate", "transactionDate", "Date")}
+          {this.renderSelect("transactionType", "Transaction Type", [
+            { id: "buy", name: "Buy" },
+            { id: "sell", name: "Sell" },
+          ])}
           {this.renderSelect("id", "Portfolio", this.state.portfolioList)}
-          {this.renderCustomSelect("stockID", "Stock", this.state.stockList)}
-          {this.renderInput("quantity", "Quatity", "number")}
-          {this.renderInput("price", "Price", "number")}
-          {this.renderInput("brokerCost", "Broker Cost", "number")}
+          {this.renderCustomSelect(
+            "purchasedStockStockTickerId",
+            "Stock",
+            this.state.stockList
+          )}
+          {this.renderInput("changeInQuantity", "Quatity", "number")}
+          {this.renderInput("TransactionPrice", "Price", "number")}
+          {this.renderInput("brokerageCost", "Broker Cost", "number")}
           {this.renderButton("Submit")}
         </form>
       </React.Fragment>
