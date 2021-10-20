@@ -6,6 +6,8 @@ import { paginate } from "./../utils/paginate";
 import SearchBox from "../common/searchBox";
 import Pagination from "../common/pagination";
 import { getStockList } from "./../../controller class/WatchlistController";
+import watchlistService from "../../services/watchlistService";
+import auth from "../../services/authService";
 
 class WatchListPage extends Component {
   state = {
@@ -16,7 +18,9 @@ class WatchListPage extends Component {
     sortColumn: { path: "stockID", order: "asc" },
   };
 
-  componentDidMount() {
+  async componentDidMount() {
+    const { data } = await watchlistService.getUserWatchList(auth.getJwt());
+    console.log(data);
     this.setState({ stockList: getStockList() });
   }
 
@@ -59,7 +63,7 @@ class WatchListPage extends Component {
     const count = this.state.stockList.length;
     const { pageSize, currentPage, sortColumn } = this.state;
 
-    if (count === 0) return <h1>Your Watchlist is empty</h1>;
+    if (count === 0) return <h1>Your watchlist is empty</h1>;
 
     const { totalCount, data } = this.getPagedData();
     return (
