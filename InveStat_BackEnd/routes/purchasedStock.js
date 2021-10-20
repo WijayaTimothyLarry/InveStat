@@ -5,11 +5,15 @@ var updateValue = require("../middleware/updatePurchasedStockValue");
 
 
 //get
-router.get("/", updateValue, async (req, res) => {
+router.get("/", updateValue,async (req, res) => {
+  // console.log(req.header('portfolioId'));
+  const portfolioId = req.header('portfolioId');
+
+
   let currentPurchasedStock = await purchasedStock
     .findAll({
       where: {
-        portfolioId: req.body.portfolioId
+        portfolioId: portfolioId
       }
     })
     .catch((e) => {
@@ -18,7 +22,7 @@ router.get("/", updateValue, async (req, res) => {
   let currentPurchasedStock2 =  await purchasedStock
     .findAll({
       where: {
-        portfolioId: req.body.portfolioId
+        portfolioId: portfolioId
       }
     })
     .catch((e) => {
@@ -61,3 +65,6 @@ router.delete("/delete", async function (req, res) {
 
 
 module.exports = router;
+
+
+

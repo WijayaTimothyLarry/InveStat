@@ -3,9 +3,10 @@ const {transaction} = require("../models");
 const {purchasedStock} = require("../models");
 
 async function updateValue(req, res, next) {
+    const portfolioId = req.header('portfolioId');
     let currentPurchasedStock = await purchasedStock.findAll({
             where: {
-                portfolioId: req.body.portfolioId
+                portfolioId: portfolioId
             }
         })
         .catch((e) => {
