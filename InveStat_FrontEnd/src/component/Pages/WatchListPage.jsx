@@ -8,20 +8,20 @@ import Pagination from "../common/pagination";
 import { getStockList } from "./../../controller class/WatchlistController";
 import watchlistService from "../../services/watchlistService";
 import auth from "../../services/authService";
+import StockListPage from "./StockListPage";
 
 class WatchListPage extends Component {
   state = {
     stockList: [],
-    pageSize: 4,
+    pageSize: 10,
     currentPage: 1,
     searchQuery: "",
     sortColumn: { path: "stockID", order: "asc" },
   };
 
   async componentDidMount() {
-    const { data } = await watchlistService.getUserWatchList(auth.getJwt());
-    console.log(data);
-    this.setState({ stockList: getStockList() });
+    const stockList = await watchlistService.getUserWatchList(auth.getJwt());
+    this.setState({ stockList });
   }
 
   handleLike = (stock) => {

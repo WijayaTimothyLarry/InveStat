@@ -3,8 +3,9 @@ import _ from "lodash";
 import { paginate } from "./../utils/paginate";
 import SearchBox from "../common/searchBox";
 import Pagination from "../common/pagination";
-import { getStockList } from "../../services/watchlistService";
 import StockListTable from "./../Tables/StockListTable";
+import watchlistService from "../../services/watchlistService";
+import auth from "../../services/authService";
 
 class StockListPage extends Component {
   state = {
@@ -15,16 +16,34 @@ class StockListPage extends Component {
     sortColumn: { path: "Code", order: "asc" },
   };
 
-  componentDidMount() {
-    this.setState({ stockList: getStockList() });
+  async componentDidMount() {
+    const stockList = watchlistService.getStockList();
+    const watchlisted = await watchlistService.getUserWatchList(auth.getJwt());
+    for (const stock of watchlisted) {
+      console.log(stock);
+      const wStock = stockList.findIndex((s) => s.Code === stock.stockID);
+      stockList[wStock].liked = true;
+      stockList[wStock].id = stock.id;
+    }
+    this.setState({ stockList });
   }
 
-  handleLike = (stock) => {
+  handleLike = async (stock) => {
     const stockList = [...this.state.stockList];
     const index = stockList.indexOf(stock);
     stockList[index] = { ...stockList[index] };
-    stockList[index].liked = !stockList[index].liked;
-    this.setState({ stockList });
+    if (stockList[index].liked) {
+      stockList[index].liked = !stockList[index].liked;
+      this.setState({ stockList });
+      //watchlistService.
+    } else {
+      stockList[index].liked = !stockList[index].liked;
+      this.setState({ stockList });
+      watchlistService.addUserWatchList(
+        stockList[index].Code,
+        auth.getCurrentUserEmail()
+      );
+    }
   };
 
   handlePageChange = (page) => {

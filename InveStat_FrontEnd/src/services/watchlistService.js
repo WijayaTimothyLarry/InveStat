@@ -16,9 +16,21 @@ export function getStockList() {
   return StockList;
 }
 
-export function getUserWatchList(token) {
-  return http.get(apiEndpoint, {
+export async function getUserWatchList(token) {
+  const { data } = await http.get(apiEndpoint, {
     headers: { "x-access-token": token },
   });
+  const stockList = data.map((w) => {
+    return { id: w.id, stockID: w.wStockTickerId, liked: true };
+  });
+  return stockList;
 }
-export default { getStockList, getUserWatchList };
+
+export async function addUserWatchList(wStockTickerId, userEmail) {
+  await http.post(apiEndpoint, {
+    wStockTickerId,
+    userEmail,
+  });
+}
+
+export default { getStockList, getUserWatchList, addUserWatchList };
