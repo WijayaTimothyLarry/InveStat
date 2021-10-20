@@ -18,11 +18,17 @@ class MainPage extends Component {
     });
   }
 
-  handleDelete = (portfolio) => {
+  handleDelete = async (portfolio) => {
     const portfolioList = this.state.portfolioList.filter(
       (p) => p.id !== portfolio.id
     );
     this.setState({ portfolioList });
+
+    const res = await portfolioService.deletePortfolio(
+      auth.getJwt(),
+      portfolio.id
+    );
+    console.log(res);
   };
 
   handleSort = (sortColumn) => {
