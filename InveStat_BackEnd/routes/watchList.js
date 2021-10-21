@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { watchlistStock } = require("../models"); 
+const { watchlistStock } = require("../models");
 var auth = require("../middleware/auth");
 
 /*router.get("/", async(req, res) => {
@@ -12,7 +12,7 @@ var auth = require("../middleware/auth");
 router.get("/", auth, async (req, res) => {
   const userEmail = req.user.email;
   const listOfwatchlist = await watchlistStock.findAll({
-    where: { userEmail: userEmail},
+    where: { userEmail: userEmail },
   });
   if (listOfwatchlist === null) {
     console.log("Not found!");
@@ -21,24 +21,27 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
-
 //delete
 router.delete("/delete", async function (req, res) {
   const reqBody = req.body;
   console.log(reqBody);
-  let currentWatchlistStock = await watchlistStock
-    .findOne({
-      where: {
-        id: reqBody.id,
-      },
-    })
-    .catch((e) => {
-      console.log(e.message);
-    });
-  if (!currentWatchlistStock) {
-    console.log("err");
+  try {
+    let currentWatchlistStock = await watchlistStock
+      .findOne({
+        where: {
+          id: reqBody.id,
+        },
+      })
+      .catch((e) => {
+        console.log(e.message);
+      });
+    if (!currentWatchlistStock) {
+      console.log("err");
+    }
+    currentWatchlistStock.destroy();
+  } catch (ex) {
+    console.log(ex);
   }
-  currentWatchlistStock.destroy();
   console.log("deleted");
   res.json("deleted");
 });
@@ -47,10 +50,9 @@ router.delete("/delete", async function (req, res) {
 router.post("/", async (req, res) => {
   const watchlistInfo = req.body;
 
-  await watchlistStock.create(watchlistInfo);
-  res.json(watchlistInfo);
+  const { dataValues } = await watchlistStock.create(watchlistInfo);
+  console.log(dataValues);
+  res.json(dataValues);
 });
-
-
 
 module.exports = router;

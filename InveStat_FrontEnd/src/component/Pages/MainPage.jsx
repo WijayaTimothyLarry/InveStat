@@ -71,8 +71,8 @@ class MainPage extends Component {
     return (
       <React.Fragment>
         <main className="container">
-          <h1 className="welcome-message mb-5">Welcome Back {user}</h1>
-          <p className="mt-5">
+          <h1 className="welcome-message mb-4">Welcome Back {user}</h1>
+          <p>
             Showing {totalCount} portfolio in the database
             <Link
               className="btn btn-outline-primary float-right"

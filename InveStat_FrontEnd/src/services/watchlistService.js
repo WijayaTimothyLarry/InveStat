@@ -27,10 +27,23 @@ export async function getUserWatchList(token) {
 }
 
 export async function addUserWatchList(wStockTickerId, userEmail) {
-  await http.post(apiEndpoint, {
+  const res = await http.post(apiEndpoint, {
     wStockTickerId,
     userEmail,
   });
+  return res;
 }
 
-export default { getStockList, getUserWatchList, addUserWatchList };
+export async function deleteUserWatchList(id) {
+  const deleteEndPoint = apiEndpoint + "/delete";
+  await http.delete(deleteEndPoint, {
+    data: { id },
+  });
+}
+
+export default {
+  getStockList,
+  getUserWatchList,
+  addUserWatchList,
+  deleteUserWatchList,
+};
