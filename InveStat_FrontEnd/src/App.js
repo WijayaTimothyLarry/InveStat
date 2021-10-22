@@ -47,7 +47,7 @@ class App extends Component {
               <Route path="/watchlist" component={WatchListPage} />
               <Route path="/stocklist" component={StockListPage} />
               <Route
-                path="/stock-page/:ticker/:name"
+                path="/stock-page/:ticker"
                 component={IndividualStockPage}
               />
               <Route

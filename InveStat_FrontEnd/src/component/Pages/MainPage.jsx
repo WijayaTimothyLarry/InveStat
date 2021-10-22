@@ -26,14 +26,11 @@ class MainPage extends Component {
     console.log(id);
     this.setState({ portfolioList });
 
-    //try {
-    //  await portfolioService.deletePortfolio(portfolio.id);
-    //} catch (ex) {
-    //  if (ex.response && ex.responsee.status === 404) {
-    //    toast.error("This movie is not in the database.");
-    //  }
-    //  this.setState({ movies: originalMovies });
-    //}
+    const res = await portfolioService.deletePortfolio(
+      auth.getJwt(),
+      portfolio.id
+    );
+    console.log(res);
   };
 
   handleSort = (sortColumn) => {
@@ -54,38 +51,51 @@ class MainPage extends Component {
     const count = this.state.portfolioList.length;
     const { sortColumn } = this.state;
     const user = auth.getCurrentUser();
-    if (count === 0)
-      return (
-        <React.Fragment>
-          <main className="container">
-            <h1 className="welcome-message mb-5">Welcome Back {user}</h1>
-            <p>
-              There are no portfolio in the database.
-              <Link
-                className="btn btn-primary float-right  "
-                to="/portfolio/new"
-              >
-                New Portfolio
-              </Link>
-            </p>
-          </main>
-        </React.Fragment>
-      );
+    //f (count === 0)
+    // return (
+    //   <React.Fragment>
+    //     <main className="container">
+    //       <h1 className="welcome-message mb-5">Welcome Back {user}</h1>
+    //       <p>
+    //         There are no portfolio in the database.
+    //         <Link
+    //           className="btn btn-primary float-right  "
+    //           to="/portfolio/new"
+    //         >
+    //           New Portfolio
+    //         </Link>
+    //       </p>
+    //     </main>
+    //   </React.Fragment>
+    // );
 
     const { totalCount, data } = this.getPagedData();
     return (
       <React.Fragment>
         <main className="container">
-          <h1 className="welcome-message mb-5">Welcome Back {user}</h1>
-          <p className="mt-5">
-            Showing {totalCount} portfolio in the database
-            <Link
-              className="btn btn-outline-primary float-right"
-              to="/portfolio/new"
-            >
-              New Portfolio
-            </Link>
-          </p>
+          <h1 className="welcome-message mb-4">Welcome Back {user}</h1>
+          {totalCount ? (
+            <p>
+              Showing {totalCount} portfolio in the database
+              <Link
+                className="btn btn-outline-primary float-right"
+                to="/portfolio/new"
+              >
+                New Portfolio
+              </Link>
+            </p>
+          ) : (
+            <p>
+              You have no portfolio right now.
+              <Link
+                className="btn btn-outline-primary float-right"
+                to="/portfolio/new"
+              >
+                New Portfolio
+              </Link>
+            </p>
+          )}
+
           <PortfolioTable
             portfolioList={data}
             onDelete={this.handleDelete}

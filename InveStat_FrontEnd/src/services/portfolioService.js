@@ -1,6 +1,5 @@
 import http from "./httpService";
 import { apiUrl } from "../config.json";
-
 const apiEndpoint = apiUrl + "/portfolio";
 
 export function getPortfolioList(token) {
@@ -10,13 +9,17 @@ export function getPortfolioList(token) {
 }
 
 export async function addNewPortfolio(userEmail, portfolioName) {
-  await http.post(apiEndpoint, { portfolioName, userEmail });
+  return await http.post(apiEndpoint, { portfolioName, userEmail });
 }
 
-export async function deletePortfolio(portfolioId) {
-  console.log(portfolioId);
+export async function deletePortfolio(token, id) {
   const deleteEndPoint = apiEndpoint + "/delete";
-  await http.get(deleteEndPoint, { portfolioId });
+  await http.delete(deleteEndPoint, {
+    headers: {
+      "x-access-token": token,
+    },
+    data: { id: id },
+  });
 }
 
-export default { getPortfolioList, addNewPortfolio };
+export default { getPortfolioList, addNewPortfolio, deletePortfolio };
