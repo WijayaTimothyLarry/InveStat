@@ -34,7 +34,6 @@ export async function getStockList() {
     }
   });
   const StockList = _.orderBy(filtered, "symbol", "asc");
-  console.log(StockList);
   return StockList;
 }
 

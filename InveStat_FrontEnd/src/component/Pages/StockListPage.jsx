@@ -18,10 +18,8 @@ class StockListPage extends Component {
 
   async componentDidMount() {
     const stockList = await watchlistService.getStockList();
-    console.log(stockList);
     const watchlisted = await watchlistService.getUserWatchList(auth.getJwt());
     for (const stock of watchlisted) {
-      console.log(stock);
       const wStock = stockList.findIndex((s) => s.symbol === stock.stockID);
       stockList[wStock].liked = true;
       stockList[wStock].id = stock.id;
