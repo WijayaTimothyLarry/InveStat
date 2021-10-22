@@ -1,5 +1,6 @@
 import React from "react";
 import Joi from "joi-browser";
+import _ from "lodash";
 import DateSelect from "../common/selectDate";
 import Form from "./../common/form";
 import portfolioService from "../../services/portfolioService";
@@ -7,7 +8,6 @@ import auth from "../../services/authService";
 import { getStockList } from "../../services/watchlistService";
 import transactionService from "../../services/transactionService";
 import CustomSelect from "./../common/customSelect";
-import { join } from "lodash";
 class TransactionPage extends Form {
   state = {
     data: {
@@ -26,8 +26,9 @@ class TransactionPage extends Form {
   };
 
   async componentDidMount() {
-    const stockList = getStockList().map((s) => {
-      return { value: s.Code, label: s.Code + "   |   " + s.Name };
+    const rawStockList = await getStockList();
+    const stockList = rawStockList.map((s) => {
+      return { value: s.symbol, label: s.symbol + "   |   " + s.name };
     });
 
     const { data: portfolios } = await portfolioService.getPortfolioList(

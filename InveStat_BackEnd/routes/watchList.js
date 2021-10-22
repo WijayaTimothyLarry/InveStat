@@ -49,10 +49,13 @@ router.delete("/delete", async function (req, res) {
 // create - done
 router.post("/", async (req, res) => {
   const watchlistInfo = req.body;
-
-  const { dataValues } = await watchlistStock.create(watchlistInfo);
-  console.log(dataValues);
-  res.json(dataValues);
+  try {
+    const { dataValues } = await watchlistStock.create(watchlistInfo);
+    console.log(dataValues);
+    res.json(dataValues);
+  } catch (ex) {
+    console.log(ex);
+  }
 });
 
 module.exports = router;
