@@ -25,6 +25,17 @@ class TransactionPage extends Form {
     errors: {},
   };
 
+  schema = {
+    id: Joi.string().required().label("Portfolio"),
+    rawdate: Joi.label("rawDate"),
+    transactionDate: Joi.string().required().label("Date"),
+    transactionType: Joi.string().required().label("Transaction Type"),
+    purchasedStockStockTickerId: Joi.string().required().label("Stock"),
+    changeInQuantity: Joi.number().max(100).min(1).required().label("Quantity"),
+    TransactionPrice: Joi.number().min(0).required().label("Price"),
+    brokerageCost: Joi.number().min(0).required().label("Brocker Cost"),
+  };
+
   async componentDidMount() {
     const rawStockList = await getStockList();
     const stockList = rawStockList.map((s) => {
@@ -38,25 +49,18 @@ class TransactionPage extends Form {
       return { id: p.id, name: p.portfolioName };
     });
 
+    const date = new Date();
     const { data } = this.state;
-    data["rawdate"] = new Date();
+    data["rawdate"] = date;
+    data["transactionDate"] = `${(date.getYear() % 100) + 2000}-${
+      date.getMonth() + 1
+    }-${date.getDate()}`;
     this.setState({
       portfolioList,
       stockList,
       data,
     });
   }
-
-  schema = {
-    id: Joi.string().required().label("Portfolio"),
-    rawdate: Joi.label("rawDate"),
-    transactionDate: Joi.string().required().label("Date"),
-    transactionType: Joi.string().required().label("Transaction Type"),
-    purchasedStockStockTickerId: Joi.string().required().label("Stock"),
-    changeInQuantity: Joi.number().max(100).min(1).required().label("Quantity"),
-    TransactionPrice: Joi.number().min(0).required().label("Price"),
-    brokerageCost: Joi.number().min(0).required().label("Brocker Cost"),
-  };
 
   async doSubmit() {
     const { data } = this.state;
