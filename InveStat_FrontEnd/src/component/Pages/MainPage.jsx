@@ -83,6 +83,19 @@ class MainPage extends Component {
       </React.Fragment>
     );
   }
+
+
+  // const Wrapper = styled.div`
+  //   background-image: url(${bg1.png});
+  //   background-position: center;
+  //   background-size: cover;
+  //   background-repeat: no-repeat;
+  //   width: 100%;
+  //   height: 100%;
+  //   display: flex;
+  // `;
+
+
 }
 
 export default MainPage;

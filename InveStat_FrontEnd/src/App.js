@@ -31,7 +31,7 @@ class App extends Component {
     console.log(this.state);
     return (
       <React.Fragment>
-        {this.state.user ? <NavBar /> : <NotLoggedInNavBar />}
+        {this.state.user ? <NavBar /> : null}
         <main className="container">
           <Switch>
             <Route path="/login" component={LoginForm} />

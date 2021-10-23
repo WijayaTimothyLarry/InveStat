@@ -5,7 +5,15 @@ const NavBar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <Link className="navbar-brand" to="/main-page">
-        <img src={logo} width="53" height="30" />
+        <img src={logo} 
+         height="55px" 
+         width = "97px" 
+         left = "23px" 
+         top = "8px" 
+         border-radius = "0px" 
+         padding = "10px"
+        />
+        
       </Link>
       <button
         className="navbar-toggler"
