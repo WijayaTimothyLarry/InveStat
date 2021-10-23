@@ -22,22 +22,32 @@
 
 /* original */
 .bg {  
-    background: #DAEFFF;
-    position: absolute;
-    width: 1440px;
-    height: 892px;
-    left: 0px;
-    top: 0px;
-    opacity: 0.82;
+    background: #DAEFFF;    
+    background-size: cover;
+    position:absolute; 
+    width:100%;
+    height:100%;
+    left:0px;
+    opacity: 0.70;
 }
 
  .bg-pic {  
     background-image: url(../Images/bg2.png);
-    position: absolute;
-    width: 1440px;
+    /* background: #DAEFFF; */
+    /* background-size: auto; */
+    /* -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover; */
+    background-size: cover;
+    position:absolute; 
+    width:100%;
+    height:100%;
+    left:0px;
+    /* position: no-repeat center center fixed; */
+    /* width: 1440px;
     height: 892px;
     left: 0px;
-    top: 0px;
+    top: 0px; */
  }
 
  /* text */

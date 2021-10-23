@@ -11,8 +11,8 @@ class WelcomePage extends Component {
   }
   render() {
     return (
-      <React.Fragment>
-        <body className = "bg-pic">
+      // <React.Fragment>
+        <div className = "bg-pic">
           <div className = "bg">
             <main className="container">
               <div class="pricing-header px-3 py-3 pt-md-10 pb-md-4 mx-auto text-center">
@@ -29,14 +29,11 @@ class WelcomePage extends Component {
                   </div>
 
               </div>
-
-
-
             </main>
 
           </div>
-        </body>
-      </React.Fragment>
+        </div>
+      // </React.Fragment>
     );
   }
 }
