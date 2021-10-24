@@ -20,8 +20,8 @@ const StockGraph = ({ stockData }) => {
   };
 
   const optionsStock = {
-    plugins: { legend: { display: true } },
-    layout: { padding: { bottom: 100, top: 0 } },
+    plugins: { legend: { display: false } },
+    layout: { padding: { bottom: 60, top: 40 } },
     scales: {
       y: {
         ticks: {
