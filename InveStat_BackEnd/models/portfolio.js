@@ -13,8 +13,13 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.STRING,
           allowNull: false,
         },
-        totalValue:  {
+        costPrice:  {
           type: DataTypes.FLOAT,
+          defaultValue:0
+        },
+        totalValue: {
+          type: DataTypes.FLOAT,
+          defaultValue:0
         },
         userEmail:{
             type : DataTypes.STRING,
@@ -27,9 +32,11 @@ module.exports = (sequelize, DataTypes) => {
         },
         PnL :{
           type: DataTypes.FLOAT,
+          defaultValue:0
         },
         YTD_return:{
           type: DataTypes.FLOAT,
+          defaultValue:0
         }
       });
       return portfolio;

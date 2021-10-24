@@ -1,14 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const { purchasedStock } = require("../models");
-var updateValue = require("../middleware/updatePurchasedStockValue");
 
 //get
-router.get("/", updateValue, async (req, res) => {
-  // console.log(req.header('portfolioId'));
-
-  //router.get("/", async (req, res) => {
-  const portfolioId = req.header("portfolioId");
+router.get("/", async (req, res) => {
+  const portfolioId = req.header('portfolioId');
 
   let currentPurchasedStock = await purchasedStock
     .findAll({
@@ -19,17 +15,9 @@ router.get("/", updateValue, async (req, res) => {
     .catch((e) => {
       console.log(e.message);
     });
-  let currentPurchasedStock2 = await purchasedStock
-    .findAll({
-      where: {
-        portfolioId: portfolioId,
-      },
-    })
-    .catch((e) => {
-      console.log(e.message);
-    });
+  
+    res.json(currentPurchasedStock);
 
-  res.json(currentPurchasedStock2);
 });
 
 //create
