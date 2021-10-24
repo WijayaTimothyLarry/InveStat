@@ -59,7 +59,7 @@ router.post("/",createPStock, async (req, res) => {
   
 
   //total value
-  const totalValue = changeInQuantity * transactionInfo.TransactionPrice;
+  const costPrice = changeInQuantity * transactionInfo.TransactionPrice;
 
   
   //add transaction detail
@@ -72,7 +72,8 @@ router.post("/",createPStock, async (req, res) => {
     TransactionPrice: transactionInfo.TransactionPrice,
     purchasedStockStockTickerId: transactionInfo.purchasedStockStockTickerId,
     brokerageCost: transactionInfo.brokerageCost,
-    totalValue : totalValue
+    costPrice : costPrice,
+
   }).catch((e) => {
     console.log(e.message);
   });
@@ -99,7 +100,7 @@ router.put("/", async (req, res) => {
       portfolioId: transactionInfo.portfolioId,
       stockTickerId :transactionInfo.purchasedStockStockTickerId
     },
-    attributes:['stockTickerId','portfolioId','totalQuantity','avgPurchasePriceUsd']
+    attributes:['stockTickerId','portfolioId','costPrice','totalQuantity','avgPurchasePriceUsd']
   })
   .catch((e) => {
     console.log(e.message);
@@ -126,6 +127,7 @@ router.put("/", async (req, res) => {
     //make the update
     currentStockInfo.totalQuantity = updatedTotalQuantityValue;
     currentStockInfo.avgPurchasePriceUsd = updatedAverageValue;
+    currentStockInfo.costPrice = updatedTotalQuantityValue*updatedAverageValue;
     await currentStockInfo.save();
     res.json(currentStockInfo);
     return;
@@ -138,6 +140,7 @@ router.put("/", async (req, res) => {
 
     //make the update
     currentStockInfo.totalQuantity = updatedTotalQuantityValue;
+    currentStockInfo.costPrice = updatedTotalQuantityValue*updatedAverageValue;
     await currentStockInfo.save();
     res.json(currentStockInfo);
     return;

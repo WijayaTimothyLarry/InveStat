@@ -23,6 +23,15 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.FLOAT,
         defaultValue:0
       },
+      costPrice :{
+        type: DataTypes.FLOAT,
+            allowNull: false,
+            defaultValue:0
+      },
+      totalValue:{
+        type: DataTypes.FLOAT,
+        defaultValue:0  
+      },
       portfolioId:{
         type : Sequelize.UUID,
         references:{
