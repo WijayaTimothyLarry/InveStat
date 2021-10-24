@@ -1,7 +1,7 @@
 import React from "react";
 import _ from "lodash";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 const Pagination = ({ itemsCount, pageSize, currentPage, onPageChange }) => {
   const pagesCount = Math.ceil(itemsCount / pageSize);
 

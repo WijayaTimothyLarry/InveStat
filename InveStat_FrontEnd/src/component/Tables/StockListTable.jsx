@@ -30,7 +30,6 @@ class StockListTable extends Component {
   ];
   render() {
     const { stockList, onSort, sortColumn } = this.props;
-    console.log(stockList);
     return (
       <Table
         data={stockList}
