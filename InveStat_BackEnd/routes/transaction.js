@@ -158,11 +158,10 @@ router.put("/", async (req, res) => {
     //update total quantity
     changeInQuantity = -1 * parseInt(transactionInfo.changeInQuantity);
     const updatedTotalQuantityValue = currentTotalQuantityValue + changeInQuantity;
-    updatedAverageValue = ((currentTotalQuantityValue * currentAvgPurchasePriceUsdValue) + (changeInQuantity * transactionInfo.TransactionPrice)) / (currentTotalQuantityValue + changeInQuantity);
 
     //make the update
     currentStockInfo.totalQuantity = updatedTotalQuantityValue;
-    currentStockInfo.costPrice = updatedTotalQuantityValue * updatedAverageValue;
+    currentStockInfo.costPrice = updatedTotalQuantityValue * currentAvgPurchasePriceUsdValue;
 
     //exception handling
     if (currentStockInfo.totalQuantity ==0){
