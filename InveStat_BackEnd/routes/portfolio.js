@@ -23,8 +23,6 @@ router.get("/", auth, async (req, res) => {
 //set
 router.post("/", async (req, res) => {
   const portfolioInfo = req.body;
-  //totalValue -> need to add?
-
   await portfolio.create(portfolioInfo);
   res.json(portfolioInfo);
 });
@@ -72,10 +70,6 @@ router.put("/", auth, async function (req, res) {
     res.json("no current portfolio");
     return;
   };
-
-  const currentPortfolioJson = JSON.parse(JSON.stringify(currentPortfolio));
-  const currentPortfolioTotalValue = parseInt(currentPortfolioJson['costPrice']);
-  console.log("currentPortfolioTotalValue",currentPortfolioTotalValue);
   
   //add total value of stocks in the portfolio
   let totalCostPrice = await purchasedStock.findAll({
@@ -90,9 +84,15 @@ router.put("/", auth, async function (req, res) {
     console.log(e.message);
 });
 const totalCostPriceJson = JSON.parse(JSON.stringify(totalCostPrice));
+console.log('totalCostPriceJsonPrint',totalCostPriceJson);
 
-console.log("totalCostPriceJson",totalCostPriceJson);
-const totalCostPriceValue = parseInt(totalCostPriceJson[0]['costPrice']);
+try{
+  totalCostPriceValue = parseInt(totalCostPriceJson[0]['costPrice']);
+}
+catch{
+  totalCostPriceValue=0;
+}
+
  //make the update
  console.log('currentTotalValue',totalCostPriceValue);
  currentPortfolio.costPrice = totalCostPriceValue;
@@ -100,26 +100,6 @@ const totalCostPriceValue = parseInt(totalCostPriceJson[0]['costPrice']);
  res.json(currentPortfolio);
  return;
 
-
-  //update total value
-
-  // const reqBody = req.body;
-  // console.log(reqBody);
-  // let currentPortfolio = await portfolio
-  //   .findOne({
-  //     where: {
-  //       id: reqBody.id,
-  //     },
-  //   })
-  //   .catch((e) => {
-  //     console.log(e.message);
-  //   });
-  // if (!currentPortfolio) {
-  //   console.log("err");
-  // }
-  // currentPortfolio.destroy();
-  // console.log("deleted");
-  // res.json("deleted");
 });
 
 

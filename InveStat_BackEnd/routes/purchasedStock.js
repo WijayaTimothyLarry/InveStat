@@ -1,13 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const {purchasedStock} = require("../models");
-var updateValue = require("../middleware/updatePurchasedStockValue");
 
 
-// router.get("/", updateValue, async (req, res) => {
-  //get
+//get
 router.get("/", async (req, res) => {
-  // console.log(req.header('portfolioId'));
   const portfolioId = req.header('portfolioId');
 
   let currentPurchasedStock = await purchasedStock

@@ -34,12 +34,19 @@ async function createPStock (req,res,next){
     
     //if doesn't exist, create a stock
     if (existingStock=== null) {
+
+      //exception handling
+      if (purchasedStockInfo.transactionType == 'Sell') {
+        res.json({"message":"unable to sell stock as current total quantity is 0"})
+        return;
+      }
+      else{
       new_stock = await purchasedStock.create({
       "stockTickerId" :stockTickerId,
       "portfolioId" : portfolioId
-    });
+    })
+    };
   
-    
     res.purchasedStockId= new_stock.id;
     console.log('new stock created');
   }

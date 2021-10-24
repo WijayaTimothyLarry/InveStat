@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const {  transaction, portfolio, purchasedStock } = require("../models");
+const {
+  transaction,
+  portfolio,
+  purchasedStock
+} = require("../models");
 var createPStock = require("../middleware/createStock");
 
 
@@ -10,45 +14,53 @@ router.get("/", async (req, res) => {
 
   const currentPurchasedStock = req.header('purchasedStockId');
 
-  let listOfTransactions = await transaction.findAll({ 
-        where: { purchasedStockId: currentPurchasedStock } })
-        .catch((e) => {
-          console.log(e.message);
-        });
-        if (!listOfTransactions) {
-              res.json(listOfTransactions);
-              };
+  let listOfTransactions = await transaction.findAll({
+      where: {
+        purchasedStockId: currentPurchasedStock
+      }
+    })
+    .catch((e) => {
+      console.log(e.message);
+    });
+  if (!listOfTransactions) {
+    res.json(listOfTransactions);
+  };
 });
 
-//create
-//create stock if it doesnt exist. //create transaction.
-router.post("/",createPStock, async (req, res) => {
 
-  const transactionInfo = req.body; 
+//create stock if it doesnt exist. //create transaction.
+router.post("/", createPStock, async (req, res) => {
+
+  const transactionInfo = req.body;
 
   //quantity to add
   var changeInQuantity = transactionInfo.changeInQuantity;
   console.log(transactionInfo.brokerageCost);
-  if (transactionInfo.transactionType == 'Sell') {
-    changeInQuantity = -1 * parseInt(transactionInfo.changeInQuantity);
-  };
 
 
   //check if current portfolio exists
   let currentPortfolio = await portfolio
-      .findOne({ where: { id: transactionInfo.portfolioId } })
-      .catch((e) => {
-        console.log(e.message);
-      });
-    if (!currentPortfolio) {
-      res.json("no current portfolio");
-      return;
-    };
-    
+    .findOne({
+      where: {
+        id: transactionInfo.portfolioId
+      }
+    })
+    .catch((e) => {
+      console.log(e.message);
+    });
+  if (!currentPortfolio) {
+    res.json("no current portfolio");
+    return;
+  };
+
 
   //check if current stock exists
   let currentStock = await purchasedStock
-    .findOne({ where: { stockTickerId: transactionInfo.purchasedStockStockTickerId} })
+    .findOne({
+      where: {
+        stockTickerId: transactionInfo.purchasedStockStockTickerId
+      }
+    })
     .catch((e) => {
       console.log(e.message);
     });
@@ -56,12 +68,16 @@ router.post("/",createPStock, async (req, res) => {
     res.json("no current stock");
     return;
   };
-  
+
+
+  if (transactionInfo.transactionType == 'Sell') {
+    changeInQuantity = -1 * parseInt(transactionInfo.changeInQuantity);
+  };
 
   //total value
   const costPrice = changeInQuantity * transactionInfo.TransactionPrice;
 
-  
+
   //add transaction detail
   let TransactionDetail = await transaction.create({
     transactionType: transactionInfo.transactionType,
@@ -72,18 +88,18 @@ router.post("/",createPStock, async (req, res) => {
     TransactionPrice: transactionInfo.TransactionPrice,
     purchasedStockStockTickerId: transactionInfo.purchasedStockStockTickerId,
     brokerageCost: transactionInfo.brokerageCost,
-    costPrice : costPrice,
+    costPrice: costPrice,
 
   }).catch((e) => {
     console.log(e.message);
   });
 
 
-if(!TransactionDetail){
-  console.log("Err");
-}
+  if (!TransactionDetail) {
+    console.log("Err");
+  }
 
-res.json(TransactionDetail);
+  res.json(TransactionDetail);
 
 });
 
@@ -94,17 +110,17 @@ router.put("/", async (req, res) => {
 
 
   //get current portfoio's purchasedStockStockTickerId's totalQuantity and avgValue
-  const transactionInfo = req.body; 
+  const transactionInfo = req.body;
   let currentStockInfo = await purchasedStock.findOne({
-    where: {
-      portfolioId: transactionInfo.portfolioId,
-      stockTickerId :transactionInfo.purchasedStockStockTickerId
-    },
-    attributes:['stockTickerId','portfolioId','costPrice','totalQuantity','avgPurchasePriceUsd']
-  })
-  .catch((e) => {
-    console.log(e.message);
-  });
+      where: {
+        portfolioId: transactionInfo.portfolioId,
+        stockTickerId: transactionInfo.purchasedStockStockTickerId
+      },
+      attributes: ['stockTickerId', 'portfolioId', 'costPrice', 'totalQuantity', 'avgPurchasePriceUsd']
+    })
+    .catch((e) => {
+      console.log(e.message);
+    });
   if (!currentStockInfo) {
     res.json("no current stock");
     return;
@@ -113,44 +129,57 @@ router.put("/", async (req, res) => {
   const currentStockInfoJson = JSON.parse(JSON.stringify(currentStockInfo));
   const currentTotalQuantityValue = parseInt(currentStockInfoJson['totalQuantity']);
   const currentAvgPurchasePriceUsdValue = parseInt(currentStockInfoJson['avgPurchasePriceUsd']);
-  
+
   //update  
   if (transactionInfo.transactionType == 'Buy') {
 
     //update total quantity
     changeInQuantity = parseInt(transactionInfo.changeInQuantity);
-    const updatedTotalQuantityValue = currentTotalQuantityValue+changeInQuantity;
-    
+    const updatedTotalQuantityValue = currentTotalQuantityValue + changeInQuantity;
+
     //update avg price
-    updatedAverageValue = ((currentTotalQuantityValue * currentAvgPurchasePriceUsdValue ) + (changeInQuantity * transactionInfo.TransactionPrice)) / (currentTotalQuantityValue+changeInQuantity);
+    updatedAverageValue = ((currentTotalQuantityValue * currentAvgPurchasePriceUsdValue) + (changeInQuantity * transactionInfo.TransactionPrice)) / (currentTotalQuantityValue + changeInQuantity);
 
     //make the update
-    currentStockInfo.totalQuantity = updatedTotalQuantityValue;
     currentStockInfo.avgPurchasePriceUsd = updatedAverageValue;
-    currentStockInfo.costPrice = updatedTotalQuantityValue*updatedAverageValue;
+    currentStockInfo.totalQuantity = updatedTotalQuantityValue;
+    currentStockInfo.costPrice = updatedTotalQuantityValue * updatedAverageValue;
+    
+    //exception handling
+    if (currentStockInfo.totalQuantity ==0){
+      currentStockInfo.destroy();
+      res.json({"message":"portfolio deleted as quantity is 0"});
+    }
     await currentStockInfo.save();
     res.json(currentStockInfo);
     return;
-  }
-  else if (transactionInfo.transactionType == 'Sell'){
+  } else if (transactionInfo.transactionType == 'Sell') {
 
     //update total quantity
     changeInQuantity = -1 * parseInt(transactionInfo.changeInQuantity);
-    const updatedTotalQuantityValue = currentTotalQuantityValue+changeInQuantity;
+    const updatedTotalQuantityValue = currentTotalQuantityValue + changeInQuantity;
+    updatedAverageValue = ((currentTotalQuantityValue * currentAvgPurchasePriceUsdValue) + (changeInQuantity * transactionInfo.TransactionPrice)) / (currentTotalQuantityValue + changeInQuantity);
 
     //make the update
     currentStockInfo.totalQuantity = updatedTotalQuantityValue;
-    currentStockInfo.costPrice = updatedTotalQuantityValue*updatedAverageValue;
+    currentStockInfo.costPrice = updatedTotalQuantityValue * updatedAverageValue;
+
+    //exception handling
+    if (currentStockInfo.totalQuantity ==0){
+      currentStockInfo.destroy();
+      res.json({"message":"portfolio deleted as quantity is 0"});
+      return;
+    }
+
     await currentStockInfo.save();
     res.json(currentStockInfo);
     return;
 
-  }
-  else{
+  } else {
     res.json("invalid transaction type, only Buy or Sell");
     return;
   }
-        
+
 });
 
 
