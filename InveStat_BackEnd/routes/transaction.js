@@ -9,7 +9,6 @@ var createPStock = require("../middleware/createStock");
 
 
 
-//get
 router.get("/", async (req, res) => {
   const purchasedStockId = req.header('purchasedStockId');
 

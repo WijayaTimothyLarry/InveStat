@@ -57,5 +57,6 @@ async function createPStock (req,res,next){
   }
     next()
   }
+  
 
   module.exports = createPStock;
