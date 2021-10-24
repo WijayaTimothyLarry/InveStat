@@ -10,21 +10,36 @@ var createPStock = require("../middleware/createStock");
 
 
 //get //need to debug
+// router.get("/", async (req, res) => {
+
+//   const currentPurchasedStock = req.header('purchasedStockId');
+
+//   let listOfTransactions = await transaction.findAll({
+//       where: {
+//         purchasedStockId: "07f6b290-6e3c-45ea-84fc-aae0a034d21f"
+//       }
+//     })
+//     .catch((e) => {
+//       console.log(e.message);
+//     });
+//   if (!listOfTransactions) {
+//     res.json(listOfTransactions);
+//   };
+// });
+
 router.get("/", async (req, res) => {
+  const purchasedStockId = req.header('purchasedStockId');
 
-  const currentPurchasedStock = req.header('purchasedStockId');
-
-  let listOfTransactions = await transaction.findAll({
+  let currentTransaction = await transaction
+    .findAll({
       where: {
-        purchasedStockId: currentPurchasedStock
+        purchasedStockId:purchasedStockId
       }
     })
     .catch((e) => {
       console.log(e.message);
     });
-  if (!listOfTransactions) {
-    res.json(listOfTransactions);
-  };
+    res.json(currentTransaction);
 });
 
 
