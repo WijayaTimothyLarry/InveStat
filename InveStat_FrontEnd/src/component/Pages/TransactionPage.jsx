@@ -1,5 +1,6 @@
 import React from "react";
 import Joi from "joi-browser";
+import _ from "lodash";
 import DateSelect from "../common/selectDate";
 import Form from "./../common/form";
 import portfolioService from "../../services/portfolioService";
@@ -7,7 +8,6 @@ import auth from "../../services/authService";
 import { getStockList } from "../../services/watchlistService";
 import transactionService from "../../services/transactionService";
 import CustomSelect from "./../common/customSelect";
-import { join } from "lodash";
 class TransactionPage extends Form {
   state = {
     data: {
@@ -25,27 +25,6 @@ class TransactionPage extends Form {
     errors: {},
   };
 
-  async componentDidMount() {
-    const stockList = getStockList().map((s) => {
-      return { value: s.Code, label: s.Code + "   |   " + s.Name };
-    });
-
-    const { data: portfolios } = await portfolioService.getPortfolioList(
-      auth.getJwt()
-    );
-    const portfolioList = portfolios.map((p) => {
-      return { id: p.id, name: p.portfolioName };
-    });
-
-    const { data } = this.state;
-    data["rawdate"] = new Date();
-    this.setState({
-      portfolioList,
-      stockList,
-      data,
-    });
-  }
-
   schema = {
     id: Joi.string().required().label("Portfolio"),
     rawdate: Joi.label("rawDate"),
@@ -56,6 +35,32 @@ class TransactionPage extends Form {
     TransactionPrice: Joi.number().min(0).required().label("Price"),
     brokerageCost: Joi.number().min(0).required().label("Brocker Cost"),
   };
+
+  async componentDidMount() {
+    const rawStockList = await getStockList();
+    const stockList = rawStockList.map((s) => {
+      return { value: s.symbol, label: s.symbol + "   |   " + s.name };
+    });
+
+    const { data: portfolios } = await portfolioService.getPortfolioList(
+      auth.getJwt()
+    );
+    const portfolioList = portfolios.map((p) => {
+      return { id: p.id, name: p.portfolioName };
+    });
+
+    const date = new Date();
+    const { data } = this.state;
+    data["rawdate"] = date;
+    data["transactionDate"] = `${(date.getYear() % 100) + 2000}-${
+      date.getMonth() + 1
+    }-${date.getDate()}`;
+    this.setState({
+      portfolioList,
+      stockList,
+      data,
+    });
+  }
 
   async doSubmit() {
     const { data } = this.state;
