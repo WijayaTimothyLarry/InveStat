@@ -1,6 +1,5 @@
 import React from "react";
 import Joi from "joi-browser";
-import _ from "lodash";
 import DateSelect from "../common/selectDate";
 import Form from "./../common/form";
 import portfolioService from "../../services/portfolioService";
@@ -63,9 +62,14 @@ class TransactionPage extends Form {
   }
 
   async doSubmit() {
-    const { data } = this.state;
-    const res = await transactionService.addTransaction(data);
-    window.location = "/";
+    try {
+      const { data } = this.state;
+      await transactionService.addTransaction(data);
+
+      window.location = "/";
+    } catch (ex) {
+      console.log(ex);
+    }
   }
 
   handleDateChange = (date) => {

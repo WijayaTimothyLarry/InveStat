@@ -4,6 +4,8 @@ import _ from "lodash";
 import PortfolioTable from "../Tables/PortfolioTable";
 import portfolioService from "../../services/portfolioService";
 import auth from "../../services/authService";
+import MainGraph from "../common/maingraph";
+
 
 class MainPage extends Component {
   state = {
@@ -46,7 +48,7 @@ class MainPage extends Component {
   };
 
   render() {
-    const count = this.state.portfolioList.length;
+    //const count = this.state.portfolioList.length;
     const { sortColumn } = this.state;
     const user = auth.getCurrentUser();
     //f (count === 0)
@@ -72,6 +74,7 @@ class MainPage extends Component {
       <React.Fragment>
         <main className="container">
           <h1 className="welcome-message mb-4">Welcome Back {user}</h1>
+          <MainGraph/>
           {totalCount ? (
             <p>
               Showing {totalCount} portfolio in the database

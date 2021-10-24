@@ -1,5 +1,4 @@
 import http from "./httpService";
-import { stocDailykApi, apiKey } from "../config.json";
 
 export async function getDailyStockData(tickerId) {
   const apiEndpoint =
