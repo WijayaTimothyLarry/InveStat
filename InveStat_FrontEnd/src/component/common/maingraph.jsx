@@ -34,16 +34,6 @@ const data = {
       pointBorderWidth: 3,
       tension: 0.2,
     },
-    {
-      label: "My Goal",
-      data: [6000, 7000, 8500, 10000, 12000, 14500],
-      fill: false,
-      borderColor: "rgb(0, 0, 0)",
-      pointBorderColor: "rgb(255, 255, 255)",
-      pointHitRadius: 5,
-      pointBorderWidth: 3,
-      tension: 0.2,
-    },
   ],
 };
 
