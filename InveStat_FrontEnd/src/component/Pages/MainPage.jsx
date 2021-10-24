@@ -46,7 +46,7 @@ class MainPage extends Component {
   };
 
   render() {
-    const count = this.state.portfolioList.length;
+    //const count = this.state.portfolioList.length;
     const { sortColumn } = this.state;
     const user = auth.getCurrentUser();
     //f (count === 0)
