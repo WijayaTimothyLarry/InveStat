@@ -1,26 +1,22 @@
-var request = require("request");
+import http from "./httpService";
 
-// replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
-var url =
-  "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=IBM&apikey=demo";
-
-export async function getData() {
-  request.get(
-    {
-      url: url,
-      json: true,
-      headers: { "User-Agent": "request" },
-    },
-    (err, res, data) => {
-      if (err) {
-        console.log("Error:", err);
-      } else if (res.statusCode !== 200) {
-        console.log("Status:", res.statusCode);
-      } else {
-        // data is successfully parsed as a JSON object:
-        console.log(data);
-        return data;
-      }
-    }
-  );
+export async function getDailyStockData(tickerId) {
+  const apiEndpoint =
+    "https://financialmodelingprep.com/api/v3/quote/" +
+    tickerId +
+    "?apikey=7aa87da7ef549544cc1ed7281de197b0";
+  const { data } = await http.get(apiEndpoint);
+  return data[0];
 }
+
+export async function getStockHistoricalData(tickerId) {
+  const apiEndpoint =
+    "https://financialmodelingprep.com/api/v3/historical-price-full/" +
+    tickerId +
+    "?serietype=line&apikey=7aa87da7ef549544cc1ed7281de197b0";
+  const { data } = await http.get(apiEndpoint);
+  const date = data.historical.slice(0, 30).map((s) => s.date);
+  const price = data.historical.slice(0, 30).map((s) => s.close.toFixed(2));
+  return { date: date, price: price, symbol: data.symbol };
+}
+export default { getDailyStockData };

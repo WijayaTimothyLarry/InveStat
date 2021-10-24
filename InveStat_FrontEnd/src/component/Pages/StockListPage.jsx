@@ -1,31 +1,52 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import _ from "lodash";
 import { paginate } from "./../utils/paginate";
 import SearchBox from "../common/searchBox";
 import Pagination from "../common/pagination";
-import { getStockList } from "../../services/watchlistService";
 import StockListTable from "./../Tables/StockListTable";
+import watchlistService from "../../services/watchlistService";
+import auth from "../../services/authService";
 
 class StockListPage extends Component {
   state = {
     stockList: [],
-    pageSize: 1000,
+    pageSize: 50,
     currentPage: 1,
     searchQuery: "",
-    sortColumn: { path: "Code", order: "asc" },
+    sortColumn: { path: "symbol", order: "asc" },
   };
 
-  componentDidMount() {
-    this.setState({ stockList: getStockList() });
+  async componentDidMount() {
+    const stockList = await watchlistService.getStockList();
+    const watchlisted = await watchlistService.getUserWatchList(auth.getJwt());
+    for (const stock of watchlisted) {
+      const wStock = stockList.findIndex((s) => s.symbol === stock.stockID);
+      stockList[wStock].liked = true;
+      stockList[wStock].id = stock.id;
+    }
+    this.setState({ stockList });
   }
 
-  handleLike = (stock) => {
+  handleLike = async (stock) => {
     const stockList = [...this.state.stockList];
     const index = stockList.indexOf(stock);
     stockList[index] = { ...stockList[index] };
-    stockList[index].liked = !stockList[index].liked;
-    this.setState({ stockList });
+    const { id } = stockList[index];
+    if (stockList[index].liked) {
+      stockList[index].id = stockList[index].symbol;
+      stockList[index].liked = !stockList[index].liked;
+      this.setState({ stockList });
+      watchlistService.deleteUserWatchList(id);
+    } else {
+      stockList[index].liked = !stockList[index].liked;
+      this.setState({ stockList });
+      const res = await watchlistService.addUserWatchList(
+        stockList[index].symbol,
+        auth.getCurrentUserEmail()
+      );
+      const { id: newId } = res;
+      stockList[index].id = newId;
+    }
   };
 
   handlePageChange = (page) => {
@@ -48,8 +69,8 @@ class StockListPage extends Component {
     if (searchQuery)
       filtered = stockList.filter(
         (s) =>
-          s.Name.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
-          s.Code.toLowerCase().startsWith(searchQuery.toLowerCase())
+          s.name.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
+          s.symbol.toLowerCase().startsWith(searchQuery.toLowerCase())
       );
 
     const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
@@ -58,16 +79,14 @@ class StockListPage extends Component {
     return { totalCount: filtered.length, data: stocks };
   };
   render() {
-    const count = this.state.stockList.length;
     const { pageSize, currentPage, sortColumn } = this.state;
-
-    if (count === 0) return <h1>Your Watchlist is empty</h1>;
 
     const { totalCount, data } = this.getPagedData();
     return (
-      <div className="row">
-        <div className="col">
-          <p>Showing {totalCount} stocks in the watchlist </p>
+      <React.Fragment>
+        <main className="container">
+          <h1 className="watchlist-title mb-4">List of Stock</h1>
+          <p>Showing {totalCount} stocks in the stocklist </p>
           <SearchBox
             onChange={this.handleSearch}
             value={this.state.searchQuery}
@@ -84,8 +103,8 @@ class StockListPage extends Component {
             currentPage={currentPage}
             onPageChange={this.handlePageChange}
           />
-        </div>
-      </div>
+        </main>
+      </React.Fragment>
     );
   }
 }

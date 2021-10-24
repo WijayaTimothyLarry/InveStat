@@ -11,10 +11,26 @@ class WatchListTable extends Component {
         <Link to={`/stock/${stock.stockID}`}>{stock.stockID}</Link>
       ),
     },
-    { path: "price", label: "Price" },
-    { path: "lastClose", label: "Last Close" },
-    { path: "lastOpen", label: "Last Open" },
-    { path: "dayChange", label: "Day Change" },
+    {
+      path: "price",
+      label: "Price",
+      content: (stock) => <p>$ {stock.price}</p>,
+    },
+    {
+      path: "lastClose",
+      label: "Last Close",
+      content: (stock) => <p>$ {stock.lastClose}</p>,
+    },
+    {
+      path: "lastOpen",
+      label: "Open",
+      content: (stock) => <p>$ {stock.lastOpen}</p>,
+    },
+    {
+      path: "dayChange",
+      label: "Day Change",
+      content: (stock) => <p>{stock.dayChange}%</p>,
+    },
     {
       key: "like",
       content: (stock) => (

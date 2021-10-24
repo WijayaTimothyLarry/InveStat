@@ -19,7 +19,6 @@ router.get("/", auth, async (req, res) => {
 });
 
 
-
 router.post("/", async (req, res) => {
   const portfolioInfo = req.body;
   await portfolio.create(portfolioInfo);

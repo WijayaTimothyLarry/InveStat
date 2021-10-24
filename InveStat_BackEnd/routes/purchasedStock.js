@@ -6,6 +6,7 @@ const {
 var auth = require("../middleware/auth");
 
 
+
 router.get("/", async (req, res) => {
   const portfolioId = req.header('portfolioId');
 
@@ -36,6 +37,7 @@ router.get("/all", auth, async (req, res) => {
   } else {
     res.json(listOfStocks);
   }
+
 });
 
 
@@ -68,3 +70,4 @@ router.delete("/delete", async function (req, res) {
 });
 
 module.exports = router;
+

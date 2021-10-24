@@ -35,9 +35,6 @@ const NavBar = () => {
           <NavLink className="nav-item nav-link" to="/customers">
             Profile
           </NavLink>
-          <NavLink className="nav-item nav-link" to="/stock-page">
-            Stock Page
-          </NavLink>
         </div>
       </div>
       <Link className="btn btn-danger float-right mr-2" to="/logout">
