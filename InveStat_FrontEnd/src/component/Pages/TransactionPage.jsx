@@ -18,6 +18,7 @@ class TransactionPage extends Form {
       changeInQuantity: 0,
       TransactionPrice: 0,
       brokerageCost: 0,
+      userEmail: "",
     },
     portfolioList: [],
     stockList: [],
@@ -33,6 +34,7 @@ class TransactionPage extends Form {
     changeInQuantity: Joi.number().max(100).min(1).required().label("Quantity"),
     TransactionPrice: Joi.number().min(0).required().label("Price"),
     brokerageCost: Joi.number().min(0).required().label("Brocker Cost"),
+    userEmail: Joi.string(),
   };
 
   async componentDidMount() {
@@ -54,10 +56,13 @@ class TransactionPage extends Form {
     data["transactionDate"] = `${(date.getYear() % 100) + 2000}-${
       date.getMonth() + 1
     }-${date.getDate()}`;
+
+    const userEmail = auth.getCurrentUserEmail;
     this.setState({
       portfolioList,
       stockList,
       data,
+      userEmail,
     });
   }
 
