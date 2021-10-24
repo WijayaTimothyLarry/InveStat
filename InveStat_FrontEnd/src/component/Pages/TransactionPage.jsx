@@ -126,8 +126,8 @@ class TransactionPage extends Form {
         <form onSubmit={this.handleSubmit}>
           {this.renderDateSelect("rawdate", "transactionDate", "Date")}
           {this.renderSelect("transactionType", "Transaction Type", [
-            { id: "buy", name: "Buy" },
-            { id: "sell", name: "Sell" },
+            { id: "Buy", name: "Buy" },
+            { id: "Sell", name: "Sell" },
           ])}
           {this.renderSelect("id", "Portfolio", this.state.portfolioList)}
           {this.renderCustomSelect(
