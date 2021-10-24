@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {purchasedStock} = require("../models");
-
+const { purchasedStock } = require("../models");
 
 //get
 router.get("/", async (req, res) => {
@@ -10,13 +9,15 @@ router.get("/", async (req, res) => {
   let currentPurchasedStock = await purchasedStock
     .findAll({
       where: {
-        portfolioId: portfolioId
-      }
+        portfolioId: portfolioId,
+      },
     })
     .catch((e) => {
       console.log(e.message);
     });
+  
     res.json(currentPurchasedStock);
+
 });
 
 //create
@@ -26,7 +27,6 @@ router.post("/", async (req, res) => {
   await purchasedStock.create(purchasedStockInfo);
   res.json(purchasedStockInfo);
 });
-
 
 //delete
 router.delete("/delete", async function (req, res) {
@@ -49,9 +49,4 @@ router.delete("/delete", async function (req, res) {
   res.json("deleted");
 });
 
-
-
 module.exports = router;
-
-
-

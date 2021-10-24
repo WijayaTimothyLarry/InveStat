@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Link from "react-router-dom/Link";
 import _ from "lodash";
 import StockTable from "../Tables/StockTable";
-import { getStockList } from "../../controller class/PortfolioPageController";
+import purchasedStockService from "../../services/purchasedStockService";
 
 class IndividualPortfolioPage extends Component {
   state = {
@@ -10,8 +10,11 @@ class IndividualPortfolioPage extends Component {
     sortColumn: { path: "stockID", order: "asc" },
   };
 
-  componentDidMount() {
-    this.setState({ stockList: getStockList() });
+  async componentDidMount() {
+    const portfolioId = this.props.match.params.id;
+    const { data: stockList } =
+      await purchasedStockService.getPurchasedStockList(portfolioId);
+    this.setState({ stockList });
   }
 
   handleDelete = (stock) => {
@@ -40,8 +43,16 @@ class IndividualPortfolioPage extends Component {
       return (
         <React.Fragment>
           <main className="container">
-            <h1 className="portfolio-name"></h1>
+            <h1 className="portfolio-name">
+              {this.props.match.params.portfolioname}
+            </h1>
             <p>There are no stock in the database.</p>
+            <Link
+              className="btn btn-primary float-right  "
+              to="/transaction/new"
+            >
+              Add Transaction
+            </Link>
           </main>
         </React.Fragment>
       );
@@ -60,7 +71,7 @@ class IndividualPortfolioPage extends Component {
               className="btn btn-primary float-right  "
               to="/transaction/new"
             >
-              Add Stock
+              Add Transaction
             </Link>
           </p>
           <StockTable

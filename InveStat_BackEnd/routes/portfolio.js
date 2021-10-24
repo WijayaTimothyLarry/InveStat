@@ -9,7 +9,7 @@ var Sequelize = require('sequelize');
 router.get("/", auth, async (req, res) => {
   const userEmail = req.user.email;
   const listOfPortfolio = await portfolio.findAll({
-    where: { userEmail: userEmail},
+    where: { userEmail: userEmail },
   });
   if (listOfPortfolio === null) {
     console.log("Not found!");
@@ -19,14 +19,12 @@ router.get("/", auth, async (req, res) => {
 });
 
 
-
 //set
 router.post("/", async (req, res) => {
   const portfolioInfo = req.body;
   await portfolio.create(portfolioInfo);
   res.json(portfolioInfo);
 });
-
 
 
 //delete

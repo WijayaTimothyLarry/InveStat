@@ -1,3 +1,5 @@
 {
-  "apiUrl": "http://localhost:3001"
+  "apiUrl": "http://localhost:3001",
+  "stocDailykApi": " https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=",
+  "apiKey": "X215NLEHVTCEFB7E"
 }
