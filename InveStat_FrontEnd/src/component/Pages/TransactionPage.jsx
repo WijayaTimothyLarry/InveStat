@@ -65,6 +65,7 @@ class TransactionPage extends Form {
     try {
       const { data } = this.state;
       await transactionService.addTransaction(data);
+
       window.location = "/";
     } catch (ex) {
       console.log(ex);
