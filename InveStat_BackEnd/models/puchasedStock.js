@@ -17,9 +17,11 @@ module.exports = (sequelize, DataTypes) => {
 
       totalQuantity:  {
         type: DataTypes.INTEGER,
+        defaultValue:0
       },
       avgPurchasePriceUsd:  {
         type: DataTypes.FLOAT,
+        defaultValue:0
       },
       portfolioId:{
         type : Sequelize.UUID,

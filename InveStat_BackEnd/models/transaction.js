@@ -3,7 +3,7 @@ var Sequelize = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
     const transaction = sequelize.define("transaction", {
-      transactionId: {
+      id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
         allowNull: false,
@@ -28,6 +28,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.FLOAT,
         allowNull: false,
       },
+      totalValue :{
+        type: DataTypes.FLOAT,
+            allowNull: false,
+      },
     purchasedStockId:{
       type : Sequelize.UUID,
       references:{
@@ -38,6 +42,17 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'CASCADE',
       unique : false,
   },
+  
+  portfolioId:{
+    type : Sequelize.UUID,
+    references:{
+        model:"portfolios",
+        key:"id",
+    },
+    primaryKey: true,
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE',
+}
 
     });
     return transaction;
