@@ -1,0 +1,293 @@
+#bg-pic-goalSetting {  
+    background-image: url(../Images/bg2.png);
+    background-size: cover;
+    position:absolute; 
+    min-width:100%;
+    min-height:100%;
+    left:0px;
+    right:0px;
+    top:80px;
+
+ }
+
+ #bg-goalSetting {  
+    background: #DAEFFF;    
+    background-size: cover;
+    position:absolute; 
+    min-width:100%;
+    min-height:100%;
+    left:0px;
+    right:0px;
+    top:0px;
+    opacity: 0.70;
+}
+
+#container-goalSetting{
+    /* background-color: aqua; */
+    width:70%;
+    padding-top: 5%;
+    text-align: left;
+    align-items: center;
+
+    margin: auto;
+}
+
+.welcome-msg {
+    position: center;    
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 60px;
+    color: rgb(49, 49, 85);
+
+    padding-left: 10%;
+    padding-right: 10%;
+ }
+
+
+ .welcome-msg-2{
+    position: center;    
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    color: rgb(116, 127, 156);
+
+    padding-left: 15%;
+    padding-right: 15%;
+    padding-top: 20px;
+ }
+
+ .welcome-msg-3{
+
+    position: center;    
+    font-family: Roboto;
+    font-style: italic;
+    font-weight: normal;
+    font-size: 18px;
+    color: rgb(116, 127, 156);
+
+
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 10px;
+ }
+.set-goal-form-header{
+    position: center;    
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 40px;
+    color: rgb(49, 49, 85);
+
+    padding-bottom: 30px;
+    text-align: center;
+
+}
+#submitButton-GoalSettingPage{
+    display: block;
+    position: center;
+    align-items: center;
+    align-self: center;
+    width: 200px;
+    height: 38px;
+    background:#7092AD;
+    border: none;
+    border-radius: 0%;
+    opacity: 1;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    margin: auto;
+ }
+
+ #submitButton-GoalSettingPage:hover{
+    background-color: #2d6492;
+    color: white;
+ }
+ 
+ #initialValue{
+    
+    border: none;
+    border-radius: 0%;
+    border-bottom: 1.5px solid black;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
+    width:50%;
+    align-self: center;
+    /* display:inline-block; */
+    /* text-align: left; */
+    text-indent: 50%;
+    margin: auto;
+    outline: none;
+    display: block;
+}
+
+label{
+    display: block; 
+    padding-left:45%;
+}
+
+#initialValue :focus{
+    border: none;
+    border-radius: 0%;
+    border-bottom: 1.5px solid black;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
+    width:35%;
+    text-align: left;
+    padding: var(--field-padding);
+    outline: none;
+}
+
+#duration{
+    border: none;
+    border-radius: 0%;
+    border-bottom: 1.5px solid black;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
+    width:50%;
+    align-self: center;
+    /* display:inline-block; */
+    text-align: left;
+    padding: var(--field-padding);
+    outline: none;
+    margin: auto;
+    display: block;
+}
+
+#duration :focus{
+    border: none;
+    border-radius: 0%;
+    border-bottom: 1.5px solid black;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
+    width:35%;
+    /* display:inline-block; */
+    text-align: left;
+    padding: var(--field-padding);
+    outline: none;
+}
+
+
+
+#additionalContribution{
+    border: none;
+    border-radius: 0%;
+    border-bottom: 1.5px solid black;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
+    width:50%;
+    align-self: center;
+    /* display:inline-block; */
+    text-align: left;
+    padding: var(--field-padding);
+    outline: none;
+    margin: auto;
+    display: block;
+}
+
+#additionalContribution :focus{
+    border: none;
+    border-radius: 0%;
+    border-bottom: 1.5px solid black;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
+    width:35%;
+    /* display:inline-block; */
+    text-align: left;
+    padding: var(--field-padding);
+    outline: none;
+}
+
+#overallTarget{
+    border: none;
+    border-radius: 0%;
+    border-bottom: 1.5px solid black;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
+    width:50%;
+    align-self: center;
+    /* display:inline-block; */
+    text-align: left;
+    padding: var(--field-padding);
+    outline: none;
+    margin: auto;
+    display: block;
+}
+
+#overallTarget :focus{
+    border: none;
+    border-radius: 0%;
+    border-bottom: 1.5px solid black;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
+    width:35%;
+    /* display:inline-block; */
+    text-align: left;
+    padding: var(--field-padding);
+    outline: none;
+}
+
+#expectedReturnPerYear{
+    border: none;
+    border-radius: 0%;
+    border-bottom: 1.5px solid black;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
+    width:50%;
+    align-self: center;
+    /* display:inline-block; */
+    text-align: left;
+    padding: var(--field-padding);
+    outline: none;
+    margin: auto;
+    display: block;
+}
+
+#expectedReturnPerYear :focus{
+    border: none;
+    border-radius: 0%;
+    border-bottom: 1.5px solid black;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
+    width:35%;
+    /* display:inline-block; */
+    text-align: left;
+    padding: var(--field-padding);
+    outline: none;
+}
+
+
+
+
+
+

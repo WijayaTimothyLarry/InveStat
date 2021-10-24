@@ -8,11 +8,11 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false,
           unique:true,
         },
-        yearlyTarget: {
-          type: DataTypes.FLOAT,
-          allowNull: false,
-        },
-        OveralTarget:  {
+        // yearlyTarget: {
+        //   type: DataTypes.FLOAT,
+        //   allowNull: false,
+        // },
+        overallTarget:  {
           type: DataTypes.FLOAT,
           allowNull: false,
         },
@@ -23,6 +23,14 @@ module.exports = (sequelize, DataTypes) => {
             type : DataTypes.FLOAT,
         },
         totalValueOverYearlyTarget:{
+            type : DataTypes.FLOAT,
+        },
+        //initial value
+        initialValue:{
+            type : DataTypes.FLOAT,
+        },
+        //invest per month value
+        additionalContribution:{
             type : DataTypes.FLOAT,
         },
         totalValueOverOverallTarget:{

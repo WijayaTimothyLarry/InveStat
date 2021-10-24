@@ -1,10 +1,13 @@
+
+var Sequelize = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
     const transaction = sequelize.define("transaction", {
       transactionId: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement:true,
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
         allowNull: false,
+        primaryKey: true,
       },
       transactionType: {
         type: DataTypes.STRING,
@@ -21,24 +24,32 @@ module.exports = (sequelize, DataTypes) => {
       transactionDate:  {
         type: DataTypes.DATE,
       },
-      portfolioPortfolioId:{
-        type : DataTypes.INTEGER,
-        references:{
-            model:"portfolio",
-            key:"portfolioId",
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-    },
-    purchasedStockStockTickerId:{
-        type : DataTypes.INTEGER,
-        references:{
-            model:"purchasedStock",
-            key:"StockTickerId",
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-    }
+      brokerageCost:{
+        type: DataTypes.FLOAT,
+        allowNull: false,
+      },
+    purchasedStockId:{
+      type : Sequelize.UUID,
+      references:{
+          model:"purchasedStocks",
+          key:"id",
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE',
+      unique : false,
+  },
+
     });
     return transaction;
   };
+
+
+//   portfolioId:{
+//     type : Sequelize.UUID,
+//     references:{
+//         model:"portfolios",
+//         key:"id",
+//     },
+//     onUpdate: 'CASCADE',
+//     onDelete: 'CASCADE',
+// },

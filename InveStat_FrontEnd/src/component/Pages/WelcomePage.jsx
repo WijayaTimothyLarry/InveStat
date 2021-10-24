@@ -12,24 +12,29 @@ class WelcomePage extends Component {
   render() {
     return (
       // <React.Fragment>
-        <div className = "bg-pic">
-          <div className = "bg">
-            <main className="container">
-              <div class="pricing-header px-3 py-3 pt-md-10 pb-md-4 mx-auto text-center">
+        <div id="bg-pic-welcomePage">
+          <div  id="bg-welcomePage">
+            <div id="container-welcomePage">
+              <div class="msgWrapper">
                 <h1 class="welcome-msg">Welcome to</h1>
-                  <img src = {logo} className="logo"></img>
-                  <div className = "text">
-                    InveStat is equipped with goal setting feature that will help you
-                    staying on track to your financial goals.
-                  </div>
-
-                  <div>
-                    <button className="login"><a href="/login"> Login</a></button>
-                    <button className="signup"><a href="/signup">Sign Up</a></button>
-                  </div>
+                <img src = {logo} className="logo"></img>
+                  <p className="msg-text">InveStat is equipped with goal setting feature that will help you
+                  staying on track to your financial goals.
+                  </p>
+              </div>
+              <div className="buttonWrapper">
+                <button className="login"><a href="/login"> Login</a></button>
+                <button className="signup"><a href="/signup">Sign Up</a></button>
 
               </div>
-            </main>
+             
+
+                  {/* <div>
+                    
+                  </div> */}
+
+            
+            </div>
 
           </div>
         </div>

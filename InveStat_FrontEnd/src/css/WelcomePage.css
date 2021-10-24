@@ -1,37 +1,6 @@
-/* version 1 */
-/* .bg {  
-    background: #F5F5F5;
-    background-size: 100% 100%;
-    position: absolute;
-    top: 0px;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    opacity:0.7;
-}
-
- .bg-pic {  
-    background-image: url(../Images/bg3.png);
-    position: absolute;
-    top: 0px;
-    left: 0;
-    bottom: 0;
-    right: 0;
- } */
-
-
 /* original */
-.bg {  
-    background: #DAEFFF;    
-    background-size: cover;
-    position:absolute; 
-    width:100%;
-    height:100%;
-    left:0px;
-    opacity: 0.70;
-}
-
- .bg-pic {  
+#bg-pic-welcomePage {  
+   /* background-color: bisque; */
     background-image: url(../Images/bg2.png);
     /* background: #DAEFFF; */
     /* background-size: auto; */
@@ -41,8 +10,11 @@
     background-size: cover;
     position:absolute; 
     width:100%;
-    height:100%;
+    min-height:100%;
     left:0px;
+    /* margin-top:0% !important; */
+    margin-top: -100px;
+    /* margin-bottom:0px; */
     /* position: no-repeat center center fixed; */
     /* width: 1440px;
     height: 892px;
@@ -50,32 +22,65 @@
     top: 0px; */
  }
 
- /* text */
+#bg-welcomePage {  
+    background: #DAEFFF;    
+    background-size: cover;
+    position:relative; 
+    width:100%;
+    height: 100%;
+    /* height:115%; */
+    left:0px;
+    opacity: 0.70;
+    margin-top:-100px;
+    /* margin-bottom: 100px; */
+}
+
+
+ #container-welcomePage{
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    /* background-color: aqua; */
+ }
+
+ .msgWrapper{
+    /* background-color: bisque; */
+    width:90%;
+    text-align: center;
+
+    margin:auto;
+    padding-top: 13%;
+    padding-bottom: 3%;
+    position:relative;
+ }
+
+ .buttonWrapper{
+   /* background-color: rgb(196, 255, 211); */
+   width:90%;
+   text-align: center;
+
+   margin:auto;
+   padding-bottom: 13%;
+   position:relative;
+ }
+ 
  .welcome-msg {
     position: center;    
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
     font-size: 95px;
-    line-height: 112px;
  }
 
  .logo {
     position: center;
-    width: 250px;
-    height: 140px;
-    top: 180px;
+    width: 15%;
+    height: 15%;
  }
 
- .text{
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 15px;
-    line-height: 40px;
-    position: center;
-    width: 100%;
- }
+.msg-text{
+   padding-top: 3%;
+}
 
  .login{
     position: center;
@@ -83,7 +88,10 @@
     height: 38px;
     background:#7092AD;
     border: none;
+    border-radius: 0%;
     margin-right: 20px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
  }
  .signup{
     position: center;
@@ -91,9 +99,28 @@
     height: 38px;
     background:#7092AD;
     border: none ;
+    border-radius: 0%;
     margin-left: 20px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
  }
 
+ /* background-color:#7092AD ;
+ border:none;
+ box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+ border-radius:0 !important;
+ text-align: center;
+ width: 35%;
+ padding: 10px 10px;
+ margin-top:30px; */
+.login:hover{
+   background-color: #2d6492;
+   color: white;
+}
+.signup:hover{
+   background-color: #2d6492;
+   color: white;
+}
  .login a{
      color: white
  }
@@ -103,6 +130,20 @@
 }
 
 
+
+
  
+/* 
+ .text{
+    font-family: Roboto;
+    font-size: 20px;
+    line-height: 200%%;
+    /* font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 40px;
+    
+    width: 70%;
+    text-align: center; */
 
  
