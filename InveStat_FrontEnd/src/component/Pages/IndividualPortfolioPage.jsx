@@ -43,7 +43,9 @@ class IndividualPortfolioPage extends Component {
       return (
         <React.Fragment>
           <main className="container">
-            <h1 className="portfolio-name"></h1>
+            <h1 className="portfolio-name">
+              {this.props.match.params.portfolioname}
+            </h1>
             <p>There are no stock in the database.</p>
             <Link
               className="btn btn-primary float-right  "
