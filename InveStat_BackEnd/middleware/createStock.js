@@ -43,7 +43,8 @@ async function createPStock (req,res,next){
       else{
       new_stock = await purchasedStock.create({
       "stockTickerId" :stockTickerId,
-      "portfolioId" : portfolioId
+      "portfolioId" : portfolioId,
+      "userEmail" : purchasedStockInfo.userEmail
     })
     };
   

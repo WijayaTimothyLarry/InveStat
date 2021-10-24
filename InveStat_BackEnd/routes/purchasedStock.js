@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {purchasedStock} = require("../models");
-
+var auth = require("../middleware/auth");
 
 //get
 router.get("/", async (req, res) => {
@@ -17,6 +17,19 @@ router.get("/", async (req, res) => {
       console.log(e.message);
     });
     res.json(currentPurchasedStock);
+});
+
+
+router.get("/all", auth, async (req, res) => {
+  const userEmail = req.user.email;
+  const listOfStocks = await purchasedStock.findAll({
+    where: { userEmail: userEmail},
+  });
+  if (listOfStocks === null) {
+    console.log("Not found!");
+  } else {
+    res.json(listOfStocks);
+  }
 });
 
 //create

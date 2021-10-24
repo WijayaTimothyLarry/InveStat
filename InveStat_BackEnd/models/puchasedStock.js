@@ -30,7 +30,15 @@ module.exports = (sequelize, DataTypes) => {
     totalValue: {
       type: DataTypes.FLOAT,
       defaultValue: 0
-    },
+    },userEmail:{
+      type : DataTypes.STRING,
+      references:{
+          model:"users",
+          key:"email",
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE',
+  },
     portfolioId: {
       type: Sequelize.UUID,
       references: {
