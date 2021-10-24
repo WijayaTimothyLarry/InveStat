@@ -21,7 +21,7 @@ class WatchListPage extends Component {
   async componentDidMount() {
     const stockList = await watchlistService.getUserWatchList(auth.getJwt());
     for (const stock of stockList) {
-      const stockData = await stockDataService.getDailyStockData(stock.stockID);
+      const stockData = await stockDataService.getStockQuote(stock.stockID);
       console.log(stockData);
       stock.price = stockData.price;
       stock.lastClose = stockData.previousClose;

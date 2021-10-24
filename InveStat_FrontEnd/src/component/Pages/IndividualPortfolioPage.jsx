@@ -3,6 +3,7 @@ import Link from "react-router-dom/Link";
 import _ from "lodash";
 import StockTable from "../Tables/StockTable";
 import purchasedStockService from "../../services/purchasedStockService";
+import stockDataService from "../../services/stockDataService";
 
 class IndividualPortfolioPage extends Component {
   state = {
@@ -14,6 +15,20 @@ class IndividualPortfolioPage extends Component {
     const portfolioId = this.props.match.params.id;
     const { data: stockList } =
       await purchasedStockService.getPurchasedStockList(portfolioId);
+    for (const stock of stockList) {
+      stock.avgPurchasePriceUsd = stock.avgPurchasePriceUsd;
+      const ticker = stock.stockTickerId;
+      const data = await stockDataService.getStockQuote(ticker);
+      stock.costPrice = (
+        stock.avgPurchasePriceUsd * stock.totalQuantity
+      ).toFixed(2);
+      stock.value = (data.price * stock.totalQuantity).toFixed(2);
+      stock.capitalGains = (
+        stock.value -
+        stock.totalQuantity * stock.avgPurchasePriceUsd
+      ).toFixed(2);
+      stock.return = stock.capitalGains / stock.costPrice;
+    }
     this.setState({ stockList });
   }
 

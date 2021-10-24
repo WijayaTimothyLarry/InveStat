@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getStockHistoricalData } from "../../services/stockDataService";
+import stockDataService from "../../services/stockDataService";
 import StockGraph from "../common/stockgraph";
 
 class IndividualStockPage extends Component {
@@ -9,7 +9,7 @@ class IndividualStockPage extends Component {
 
   async componentDidMount() {
     const tickerID = this.props.match.params.ticker;
-    const stockData = await getStockHistoricalData(tickerID);
+    const stockData = await stockDataService.getStockHistoricalData(tickerID);
     this.setState({ stockData });
   }
 
