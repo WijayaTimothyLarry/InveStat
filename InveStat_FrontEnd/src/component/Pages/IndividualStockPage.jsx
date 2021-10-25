@@ -1,19 +1,27 @@
 import React, { Component } from "react";
-import http from "../../services/httpService";
-import stockData from "../../US Ticker List/stockTest.json";
-import { getData } from "./../../services/stockDataService";
+import stockDataService from "../../services/stockDataService";
+import StockGraph from "../common/stockgraph";
+
 class IndividualStockPage extends Component {
   state = {
-    stockData: stockData,
+    stockData: {},
   };
 
-  componentDidMount() {
-    const data = getData();
-    console.log(data);
+  async componentDidMount() {
+    const tickerID = this.props.match.params.ticker;
+    const stockData = await stockDataService.getStockHistoricalData(tickerID);
+    this.setState({ stockData });
   }
 
   render() {
-    return <div> test </div>;
+    const { stockData } = this.state;
+    console.log(stockData);
+    return (
+      <React.Fragment>
+        <h1>{this.props.match.params.ticker}</h1>
+        <StockGraph stockData={stockData} />
+      </React.Fragment>
+    );
   }
 }
 

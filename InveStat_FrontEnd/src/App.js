@@ -1,24 +1,22 @@
 import React, { Component } from "react";
-import {
-  Route,
-  Redirect,
-  Switch,
-} from "react-router-dom/cjs/react-router-dom.min";
+import { Route, Redirect, Switch } from "react-router-dom";
 import NavBar from "./component/Navigation Bars/NavBar";
 import MainPage from "./component/Pages/MainPage";
 import IndividualPortfolioPage from "./component/Pages/IndividualPortfolioPage";
 import WelcomePage from "./component/Pages/WelcomePage";
 import LoginForm from "./component/common/loginForm";
 import SignUpForm from "./component/common/signUpForm";
-import "./App.css";
 import NotLoggedInNavBar from "./component/Navigation Bars/LoginSignUpNavBar";
 import Logout from "./component/common/logout";
 import NewPortfolioForm from "./component/common/newPortfolioForm";
 import WatchListPage from "./component/Pages/WatchListPage";
 import StockListPage from "./component/Pages/StockListPage";
 import TransactionPage from "./component/Pages/TransactionPage";
-import auth from "./services/authService";
 import IndividualStockPage from "./component/Pages/IndividualStockPage";
+import GoalProgressPage from "./component/Pages/GoalProgressPage";
+import GoalSettingPage from "./component/Pages/GoalSettingPage";
+import auth from "./services/authService";
+import "./App.css";
 
 class App extends Component {
   state = {};
@@ -32,7 +30,6 @@ class App extends Component {
     }
   }
   render() {
-    console.log(this.state);
     return (
       <React.Fragment>
         {this.state.user ? <NavBar /> : <NotLoggedInNavBar />}
@@ -49,7 +46,15 @@ class App extends Component {
               <Route path="/transaction/new" component={TransactionPage} />
               <Route path="/watchlist" component={WatchListPage} />
               <Route path="/stocklist" component={StockListPage} />
-              <Route path="/stock-page" component={IndividualStockPage} />
+              <Route
+                path="/stock-page/:ticker"
+                component={IndividualStockPage}
+              />
+              <Route
+                path="/goal-setting/set-goal"
+                component={GoalSettingPage}
+              />
+              <Route path="/goal-setting" component={GoalProgressPage} />
 
               <Redirect from="/" exact to="/main-page" />
               <Redirect to="/main-page" />

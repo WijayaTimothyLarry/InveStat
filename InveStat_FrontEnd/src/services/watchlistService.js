@@ -4,7 +4,7 @@ import http from "./httpService";
 
 const apiEndpoint = apiUrl + "/watchlist";
 const stockApi =
-  "https://financialmodelingprep.com/api/v3/available-traded/list?apikey=41ac00e73c382ba2d01d302571413eb1";
+  "https://financialmodelingprep.com/api/v3/available-traded/list?apikey=7aa87da7ef549544cc1ed7281de197b0";
 
 export async function getStockList() {
   const { data } = await http.get(stockApi);

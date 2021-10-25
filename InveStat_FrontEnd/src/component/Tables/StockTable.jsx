@@ -5,19 +5,20 @@ import Table from "../common/table";
 class StockTable extends Component {
   columns = [
     {
-      path: "stockID",
+      path: "stockTickerId",
       label: "Stock",
       content: (stock) => (
-        <Link to={`/stock/${stock.stockID}`}>{stock.stockID}</Link>
+        <Link to={`/stock-page/${stock.stockTickerId}`}>
+          {stock.stockTickerId}
+        </Link>
       ),
     },
-    { path: "price", label: "Price" },
-    { path: "quantity", label: "Quantity" },
-    { path: "value", label: "Value" },
+    { path: "avgPurchasePriceUsd", label: "Avg Cost Price" },
+    { path: "totalQuantity", label: "Quantity" },
+    { path: "costPrice", label: "Total Cost Price" },
+    { path: "value", label: "Current total Value" },
     { path: "capitalGains", label: "Capital Gains" },
-    { path: "dividends", label: "Dividends" },
-    { path: "currency", label: "Currency" },
-    { path: "return", label: "Return" },
+    { path: "return", label: "% Return" },
     {
       key: "delete",
       content: (portfolio) => (
