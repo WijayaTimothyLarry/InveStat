@@ -5,7 +5,7 @@ var auth = require("../middleware/auth");
 const { parse: uuidParse } = require("uuid");
 var Sequelize = require('sequelize');
 
-//get
+
 router.get("/", auth, async (req, res) => {
   const userEmail = req.user.email;
   const listOfPortfolio = await portfolio.findAll({
@@ -19,7 +19,6 @@ router.get("/", auth, async (req, res) => {
 });
 
 
-//set
 router.post("/", async (req, res) => {
   const portfolioInfo = req.body;
   await portfolio.create(portfolioInfo);
@@ -27,7 +26,7 @@ router.post("/", async (req, res) => {
 });
 
 
-//delete
+
 router.delete("/delete", auth, async function (req, res) {
   const reqBody = req.body;
   console.log(reqBody);

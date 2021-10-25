@@ -1,8 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const { purchasedStock } = require("../models");
+const {
+  purchasedStock
+} = require("../models");
+var auth = require("../middleware/auth");
 
-//get
+
+
 router.get("/", async (req, res) => {
   const portfolioId = req.header('portfolioId');
 
@@ -15,12 +19,28 @@ router.get("/", async (req, res) => {
     .catch((e) => {
       console.log(e.message);
     });
-  
-    res.json(currentPurchasedStock);
+
+  res.json(currentPurchasedStock);
 
 });
 
-//create
+
+router.get("/all", auth, async (req, res) => {
+  const userEmail = req.user.email;
+  const listOfStocks = await purchasedStock.findAll({
+    where: {
+      userEmail: userEmail
+    },
+  });
+  if (listOfStocks === null) {
+    console.log("Not found!");
+  } else {
+    res.json(listOfStocks);
+  }
+
+});
+
+
 router.post("/", async (req, res) => {
   const purchasedStockInfo = req.body;
 
@@ -28,7 +48,7 @@ router.post("/", async (req, res) => {
   res.json(purchasedStockInfo);
 });
 
-//delete
+
 router.delete("/delete", async function (req, res) {
   const reqBody = req.body;
   console.log(reqBody);
@@ -50,3 +70,4 @@ router.delete("/delete", async function (req, res) {
 });
 
 module.exports = router;
+
