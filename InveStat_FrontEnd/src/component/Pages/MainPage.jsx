@@ -23,6 +23,8 @@ class MainPage extends Component {
     const portfolioList = this.state.portfolioList.filter(
       (p) => p.id !== portfolio.id
     );
+    const { id } = portfolio;
+    console.log(id);
     this.setState({ portfolioList });
 
     const res = await portfolioService.deletePortfolio(
