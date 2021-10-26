@@ -27,6 +27,11 @@ export async function getPortfolioList(token) {
     }
     portfolio.totalValue = portfolio.totalValue.toFixed(2);
     portfolio.PnL = (portfolio.totalValue - portfolio.costPrice).toFixed(2);
+    if (portfolio.costPrice != 0)
+      portfolio.return = ((portfolio.PnL / portfolio.costPrice) * 100).toFixed(
+        2
+      );
+    else portfolio.return = 0;
   }
   return portfolioList;
 }
