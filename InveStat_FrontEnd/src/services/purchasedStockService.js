@@ -6,4 +6,8 @@ export async function getPurchasedStockList(portfolioId) {
   return http.get(apiEndpoint, { headers: { portfolioId: portfolioId } });
 }
 
-export default { getPurchasedStockList };
+export async function deletePurchasedStock(id) {
+  const deleteEndPoint = apiEndpoint + "/delete";
+  return await http.delete(deleteEndPoint, { data: { id } });
+}
+export default { getPurchasedStockList, deletePurchasedStock };

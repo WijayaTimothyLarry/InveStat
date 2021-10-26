@@ -4,25 +4,15 @@ import { apiUrl } from "../config.json";
 const apiEndpoint = apiUrl + "/transaction";
 
 export async function addTransaction(data) {
-  const {
-    transactionType,
-    TransactionPrice,
-    changeInQuantity,
-    transactionDate,
-    id: portfolioId,
-    purchasedStockStockTickerId,
-    brokerageCost,
-  } = data;
+  const submitData = {
+    ...data,
+    portfolioId: data.id,
+  };
+  delete submitData.id;
+  console.log(submitData);
+  await http.post(apiEndpoint, submitData);
 
-  await http.post(apiEndpoint, {
-    transactionType,
-    TransactionPrice,
-    changeInQuantity,
-    transactionDate,
-    portfolioId,
-    purchasedStockStockTickerId,
-    brokerageCost,
-  });
+  await http.put(apiEndpoint, submitData);
 }
 
 export default { addTransaction };

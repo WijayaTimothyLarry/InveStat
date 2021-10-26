@@ -16,7 +16,6 @@ class IndividualPortfolioPage extends Component {
     const { data: stockList } =
       await purchasedStockService.getPurchasedStockList(portfolioId);
     for (const stock of stockList) {
-      stock.avgPurchasePriceUsd = stock.avgPurchasePriceUsd;
       const ticker = stock.stockTickerId;
       const data = await stockDataService.getStockQuote(ticker);
       stock.costPrice = (
@@ -27,14 +26,19 @@ class IndividualPortfolioPage extends Component {
         stock.value -
         stock.totalQuantity * stock.avgPurchasePriceUsd
       ).toFixed(2);
-      stock.return = stock.capitalGains / stock.costPrice;
+      stock.return = ((stock.capitalGains / stock.costPrice) * 100).toFixed(2);
     }
+    console.log(stockList);
     this.setState({ stockList });
   }
 
-  handleDelete = (stock) => {
+  handleDelete = async (stock) => {
+    console.log(stock.id);
     const stockList = this.state.stockList.filter((s) => s.id !== stock.id);
     this.setState({ stockList });
+
+    const res = await purchasedStockService.deletePurchasedStock(stock.id);
+    console.log(res);
   };
 
   handleSort = (sortColumn) => {

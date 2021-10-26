@@ -21,9 +21,9 @@ class StockTable extends Component {
     { path: "return", label: "% Return" },
     {
       key: "delete",
-      content: (portfolio) => (
+      content: (stock) => (
         <button
-          onClick={() => this.props.onDelete(portfolio)}
+          onClick={() => this.props.onDelete(stock)}
           className="btn btn-danger btn-sm"
         >
           Delete

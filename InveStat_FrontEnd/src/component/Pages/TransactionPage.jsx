@@ -57,19 +57,20 @@ class TransactionPage extends Form {
       date.getMonth() + 1
     }-${date.getDate()}`;
 
-    const userEmail = auth.getCurrentUserEmail;
+    data.userEmail = auth.getCurrentUserEmail();
     this.setState({
       portfolioList,
       stockList,
       data,
-      userEmail,
     });
+    console.log(this.state);
   }
 
   async doSubmit() {
     try {
       const { data } = this.state;
       await transactionService.addTransaction(data);
+      await portfolioService.updatePortfolio(data.id);
 
       window.location = "/";
     } catch (ex) {
@@ -79,6 +80,7 @@ class TransactionPage extends Form {
 
   handleDateChange = (date) => {
     const data = { ...this.state.data };
+    console.log(this.validate());
     data["rawdate"] = date;
     if (date) {
       data["transactionDate"] = `${(date.getYear() % 100) + 2000}-${
