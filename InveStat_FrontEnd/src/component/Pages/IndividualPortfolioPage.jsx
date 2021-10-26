@@ -3,6 +3,7 @@ import Link from "react-router-dom/Link";
 import _ from "lodash";
 import StockTable from "../Tables/StockTable";
 import purchasedStockService from "../../services/purchasedStockService";
+import stockDataService from "../../services/stockDataService";
 
 class IndividualPortfolioPage extends Component {
   state = {
@@ -14,12 +15,30 @@ class IndividualPortfolioPage extends Component {
     const portfolioId = this.props.match.params.id;
     const { data: stockList } =
       await purchasedStockService.getPurchasedStockList(portfolioId);
+    for (const stock of stockList) {
+      const ticker = stock.stockTickerId;
+      const data = await stockDataService.getStockQuote(ticker);
+      stock.costPrice = (
+        stock.avgPurchasePriceUsd * stock.totalQuantity
+      ).toFixed(2);
+      stock.value = (data.price * stock.totalQuantity).toFixed(2);
+      stock.capitalGains = (
+        stock.value -
+        stock.totalQuantity * stock.avgPurchasePriceUsd
+      ).toFixed(2);
+      stock.return = ((stock.capitalGains / stock.costPrice) * 100).toFixed(2);
+    }
+    console.log(stockList);
     this.setState({ stockList });
   }
 
-  handleDelete = (stock) => {
+  handleDelete = async (stock) => {
+    console.log(stock.id);
     const stockList = this.state.stockList.filter((s) => s.id !== stock.id);
     this.setState({ stockList });
+
+    const res = await purchasedStockService.deletePurchasedStock(stock.id);
+    console.log(res);
   };
 
   handleSort = (sortColumn) => {
@@ -43,7 +62,9 @@ class IndividualPortfolioPage extends Component {
       return (
         <React.Fragment>
           <main className="container">
-            <h1 className="portfolio-name"></h1>
+            <h1 className="portfolio-name">
+              {this.props.match.params.portfolioname}
+            </h1>
             <p>There are no stock in the database.</p>
             <Link
               className="btn btn-primary float-right  "

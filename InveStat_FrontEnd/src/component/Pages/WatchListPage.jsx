@@ -7,6 +7,7 @@ import SearchBox from "../common/searchBox";
 import Pagination from "../common/pagination";
 import watchlistService from "../../services/watchlistService";
 import auth from "../../services/authService";
+import stockDataService from "../../services/stockDataService";
 
 class WatchListPage extends Component {
   state = {
@@ -19,6 +20,14 @@ class WatchListPage extends Component {
 
   async componentDidMount() {
     const stockList = await watchlistService.getUserWatchList(auth.getJwt());
+    for (const stock of stockList) {
+      const stockData = await stockDataService.getStockQuote(stock.stockID);
+      console.log(stockData);
+      stock.price = stockData.price;
+      stock.lastClose = stockData.previousClose;
+      stock.lastOpen = stockData.open;
+      stock.dayChange = stockData.changesPercentage.toFixed(3);
+    }
     this.setState({ stockList });
   }
 

@@ -13,17 +13,14 @@ class StockListPage extends Component {
     pageSize: 50,
     currentPage: 1,
     searchQuery: "",
-    sortColumn: { path: "Code", order: "asc" },
+    sortColumn: { path: "symbol", order: "asc" },
   };
 
   async componentDidMount() {
-    const stockList = watchlistService.getStockList().map((s) => {
-      return { ...s, liked: false };
-    });
+    const stockList = await watchlistService.getStockList();
     const watchlisted = await watchlistService.getUserWatchList(auth.getJwt());
     for (const stock of watchlisted) {
-      console.log(stock);
-      const wStock = stockList.findIndex((s) => s.Code === stock.stockID);
+      const wStock = stockList.findIndex((s) => s.symbol === stock.stockID);
       stockList[wStock].liked = true;
       stockList[wStock].id = stock.id;
     }
@@ -36,7 +33,7 @@ class StockListPage extends Component {
     stockList[index] = { ...stockList[index] };
     const { id } = stockList[index];
     if (stockList[index].liked) {
-      stockList[index].id = stockList[index].Code;
+      stockList[index].id = stockList[index].symbol;
       stockList[index].liked = !stockList[index].liked;
       this.setState({ stockList });
       watchlistService.deleteUserWatchList(id);
@@ -44,7 +41,7 @@ class StockListPage extends Component {
       stockList[index].liked = !stockList[index].liked;
       this.setState({ stockList });
       const res = await watchlistService.addUserWatchList(
-        stockList[index].Code,
+        stockList[index].symbol,
         auth.getCurrentUserEmail()
       );
       const { id: newId } = res;
@@ -72,8 +69,8 @@ class StockListPage extends Component {
     if (searchQuery)
       filtered = stockList.filter(
         (s) =>
-          s.Name.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
-          s.Code.toLowerCase().startsWith(searchQuery.toLowerCase())
+          s.name.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
+          s.symbol.toLowerCase().startsWith(searchQuery.toLowerCase())
       );
 
     const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);

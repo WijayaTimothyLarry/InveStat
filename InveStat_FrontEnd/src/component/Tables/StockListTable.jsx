@@ -5,18 +5,22 @@ import Like from "../common/like";
 class StockListTable extends Component {
   columns = [
     {
-      path: "Code",
+      path: "symbol",
       label: "Ticker",
       content: (stock) => (
-        <Link to={`/stock-page/${stock.Code}`}>{stock.Code}</Link>
+        <Link to={`/stock-page/${stock.symbol}`}>{stock.symbol}</Link>
       ),
     },
     {
-      path: "Name",
+      path: "name",
       label: "Name",
     },
-    { path: "Exchange", label: "Exchange" },
-
+    {
+      path: "price",
+      label: "Price",
+      content: (stock) => <p>$ {stock.price}</p>,
+    },
+    { path: "exchangeShortName", label: "Exchange" },
     {
       key: "like",
       content: (stock) => (

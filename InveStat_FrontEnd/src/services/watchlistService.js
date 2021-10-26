@@ -1,18 +1,25 @@
-import stockList from "../US Ticker List/USTickerList.json";
+import _ from "lodash";
 import { apiUrl } from "../config.json";
 import http from "./httpService";
 
 const apiEndpoint = apiUrl + "/watchlist";
-export function getStockList() {
-  const StockList = stockList.filter((s) => {
+const stockApi =
+  "https://financialmodelingprep.com/api/v3/available-traded/list?apikey=7aa87da7ef549544cc1ed7281de197b0";
+
+export async function getStockList() {
+  const { data } = await http.get(stockApi);
+  const filtered = data.filter((s) => {
     if (
-      (s.Exchange === "NASDAQ" || s.Exchange === "NYSE") &&
-      !s.Name.includes("%")
+      (s.exchangeShortName === "NASDAQ" || s.exchangeShortName === "NYSE") &&
+      (!s.name.includes("%") || !s.name.includes("&")) &&
+      s.price !== 0
     ) {
-      s.id = s.Code;
+      s.id = s.symbol;
+      s.liked = false;
       return s;
     }
   });
+  const StockList = _.orderBy(filtered, "symbol", "asc");
   return StockList;
 }
 
@@ -20,6 +27,7 @@ export async function getUserWatchList(token) {
   const { data } = await http.get(apiEndpoint, {
     headers: { "x-access-token": token },
   });
+  console.log(data);
   const stockList = data.map((w) => {
     return { id: w.id, stockID: w.wStockTickerId, liked: true };
   });
@@ -46,4 +54,5 @@ export default {
   getUserWatchList,
   addUserWatchList,
   deleteUserWatchList,
+  //getStockList2,
 };

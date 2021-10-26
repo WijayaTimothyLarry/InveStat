@@ -7,7 +7,6 @@ import auth from "../../services/authService";
 import { getStockList } from "../../services/watchlistService";
 import transactionService from "../../services/transactionService";
 import CustomSelect from "./../common/customSelect";
-import { join } from "lodash";
 class TransactionPage extends Form {
   state = {
     data: {
@@ -19,32 +18,12 @@ class TransactionPage extends Form {
       changeInQuantity: 0,
       TransactionPrice: 0,
       brokerageCost: 0,
+      userEmail: "",
     },
     portfolioList: [],
     stockList: [],
     errors: {},
   };
-
-  async componentDidMount() {
-    const stockList = getStockList().map((s) => {
-      return { value: s.Code, label: s.Code + "   |   " + s.Name };
-    });
-
-    const { data: portfolios } = await portfolioService.getPortfolioList(
-      auth.getJwt()
-    );
-    const portfolioList = portfolios.map((p) => {
-      return { id: p.id, name: p.portfolioName };
-    });
-
-    const { data } = this.state;
-    data["rawdate"] = new Date();
-    this.setState({
-      portfolioList,
-      stockList,
-      data,
-    });
-  }
 
   schema = {
     id: Joi.string().required().label("Portfolio"),
@@ -55,16 +34,53 @@ class TransactionPage extends Form {
     changeInQuantity: Joi.number().max(100).min(1).required().label("Quantity"),
     TransactionPrice: Joi.number().min(0).required().label("Price"),
     brokerageCost: Joi.number().min(0).required().label("Brocker Cost"),
+    userEmail: Joi.string(),
   };
 
-  async doSubmit() {
+  async componentDidMount() {
+    const rawStockList = await getStockList();
+    const stockList = rawStockList.map((s) => {
+      return { value: s.symbol, label: s.symbol + "   |   " + s.name };
+    });
+
+    const { data: portfolios } = await portfolioService.getPortfolioList(
+      auth.getJwt()
+    );
+    const portfolioList = portfolios.map((p) => {
+      return { id: p.id, name: p.portfolioName };
+    });
+
+    const date = new Date();
     const { data } = this.state;
-    const res = await transactionService.addTransaction(data);
-    window.location = "/";
+    data["rawdate"] = date;
+    data["transactionDate"] = `${(date.getYear() % 100) + 2000}-${
+      date.getMonth() + 1
+    }-${date.getDate()}`;
+
+    data.userEmail = auth.getCurrentUserEmail();
+    this.setState({
+      portfolioList,
+      stockList,
+      data,
+    });
+    console.log(this.state);
+  }
+
+  async doSubmit() {
+    try {
+      const { data } = this.state;
+      await transactionService.addTransaction(data);
+      await portfolioService.updatePortfolio(data.id);
+
+      window.location = "/";
+    } catch (ex) {
+      console.log(ex);
+    }
   }
 
   handleDateChange = (date) => {
     const data = { ...this.state.data };
+    console.log(this.validate());
     data["rawdate"] = date;
     if (date) {
       data["transactionDate"] = `${(date.getYear() % 100) + 2000}-${
@@ -117,8 +133,8 @@ class TransactionPage extends Form {
         <form onSubmit={this.handleSubmit}>
           {this.renderDateSelect("rawdate", "transactionDate", "Date")}
           {this.renderSelect("transactionType", "Transaction Type", [
-            { id: "buy", name: "Buy" },
-            { id: "sell", name: "Sell" },
+            { id: "Buy", name: "Buy" },
+            { id: "Sell", name: "Sell" },
           ])}
           {this.renderSelect("id", "Portfolio", this.state.portfolioList)}
           {this.renderCustomSelect(

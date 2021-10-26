@@ -1,9 +1,27 @@
 import http from "./httpService";
-import { stocDailykApi, apiKey } from "../config.json";
 
-export function getDailyStockData(tickerId) {
-  const apiEndpoint = stocDailykApi + tickerId + "&apikey=" + apiKey;
-  return http.get(apiEndpoint);
+const apiKey = "7aa87da7ef549544cc1ed7281de197b0";
+//const apiKey = "cf3953c4e866acf8a208e15e1f835bc1";
+
+export async function getStockQuote(tickerId) {
+  const apiEndpoint =
+    "https://financialmodelingprep.com/api/v3/quote/" +
+    tickerId +
+    "?apikey=" +
+    apiKey;
+  const { data } = await http.get(apiEndpoint);
+  return data[0];
 }
 
-export default { getDailyStockData };
+export async function getStockHistoricalData(tickerId) {
+  const apiEndpoint =
+    "https://financialmodelingprep.com/api/v3/historical-price-full/" +
+    tickerId +
+    "?serietype=line&apikey=" +
+    apiKey;
+  const { data } = await http.get(apiEndpoint);
+  const date = data.historical.slice(0, 30).map((s) => s.date);
+  const price = data.historical.slice(0, 30).map((s) => s.close.toFixed(2));
+  return { date: date, price: price, symbol: data.symbol };
+}
+export default { getStockHistoricalData, getStockQuote };

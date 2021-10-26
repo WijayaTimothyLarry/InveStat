@@ -4,6 +4,7 @@ import _ from "lodash";
 import PortfolioTable from "../Tables/PortfolioTable";
 import portfolioService from "../../services/portfolioService";
 import auth from "../../services/authService";
+import MainGraph from "../common/maingraph";
 
 class MainPage extends Component {
   state = {
@@ -12,7 +13,7 @@ class MainPage extends Component {
   };
 
   async componentDidMount() {
-    const { data } = await portfolioService.getPortfolioList(auth.getJwt());
+    const data = await portfolioService.getPortfolioList(auth.getJwt());
     this.setState({
       portfolioList: data,
     });
@@ -48,32 +49,16 @@ class MainPage extends Component {
   };
 
   render() {
-    const count = this.state.portfolioList.length;
+    //const count = this.state.portfolioList.length;
     const { sortColumn } = this.state;
     const user = auth.getCurrentUser();
-    //f (count === 0)
-    // return (
-    //   <React.Fragment>
-    //     <main className="container">
-    //       <h1 className="welcome-message mb-5">Welcome Back {user}</h1>
-    //       <p>
-    //         There are no portfolio in the database.
-    //         <Link
-    //           className="btn btn-primary float-right  "
-    //           to="/portfolio/new"
-    //         >
-    //           New Portfolio
-    //         </Link>
-    //       </p>
-    //     </main>
-    //   </React.Fragment>
-    // );
 
     const { totalCount, data } = this.getPagedData();
     return (
       <React.Fragment>
         <main className="container">
           <h1 className="welcome-message mb-4">Welcome Back {user}</h1>
+          <MainGraph />
           {totalCount ? (
             <p>
               Showing {totalCount} portfolio in the database

@@ -13,18 +13,17 @@ class StockTable extends Component {
         </Link>
       ),
     },
-    { path: "avgPurchasePriceUsd", label: "Price" },
+    { path: "avgPurchasePriceUsd", label: "Avg Cost Price" },
     { path: "totalQuantity", label: "Quantity" },
-    { path: "value", label: "Value" },
+    { path: "costPrice", label: "Total Cost Price" },
+    { path: "value", label: "Current total Value" },
     { path: "capitalGains", label: "Capital Gains" },
-    { path: "dividends", label: "Dividends" },
-    { path: "currency", label: "Currency" },
-    { path: "return", label: "Return" },
+    { path: "return", label: "% Return" },
     {
       key: "delete",
-      content: (portfolio) => (
+      content: (stock) => (
         <button
-          onClick={() => this.props.onDelete(portfolio)}
+          onClick={() => this.props.onDelete(stock)}
           className="btn btn-danger btn-sm"
         >
           Delete

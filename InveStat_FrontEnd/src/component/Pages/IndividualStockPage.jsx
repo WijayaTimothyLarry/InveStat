@@ -1,26 +1,25 @@
 import React, { Component } from "react";
-import stockDataService from "./../../services/stockDataService";
+import stockDataService from "../../services/stockDataService";
+import StockGraph from "../common/stockgraph";
 
 class IndividualStockPage extends Component {
   state = {
-    stockData: [],
+    stockData: {},
   };
 
   async componentDidMount() {
     const tickerID = this.props.match.params.ticker;
-    const { data } = await stockDataService.getDailyStockData(tickerID);
-    const dailyData = data["Time Series (Daily)"];
-    const stockData = Object.entries(dailyData).map(([k, v]) => {
-      return { date: k, price: v["5. adjusted close"] };
-    });
-    console.log(stockData);
+    const stockData = await stockDataService.getStockHistoricalData(tickerID);
     this.setState({ stockData });
   }
 
   render() {
+    const { stockData } = this.state;
+    console.log(stockData);
     return (
       <React.Fragment>
         <h1>{this.props.match.params.ticker}</h1>
+        <StockGraph stockData={stockData} />
       </React.Fragment>
     );
   }
