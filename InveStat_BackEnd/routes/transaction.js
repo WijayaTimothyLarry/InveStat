@@ -126,7 +126,7 @@ router.put("/", async (req, res) => {
   const currentStockInfoJson = JSON.parse(JSON.stringify(currentStockInfo));
   const currentTotalQuantityValue = parseInt(currentStockInfoJson['totalQuantity']);
   const currentAvgPurchasePriceUsdValue = parseInt(currentStockInfoJson['avgPurchasePriceUsd']);
-
+  const brokerageCost = parseInt(transactionInfo.brokerageCost);
   //update  
   if (transactionInfo.transactionType == 'Buy') {
 
@@ -135,7 +135,7 @@ router.put("/", async (req, res) => {
     const updatedTotalQuantityValue = currentTotalQuantityValue + changeInQuantity;
 
     //update avg price
-    updatedAverageValue = ((currentTotalQuantityValue * currentAvgPurchasePriceUsdValue) + (changeInQuantity * transactionInfo.TransactionPrice + transactionInfo.brokerageCost)) / (currentTotalQuantityValue + changeInQuantity);
+    updatedAverageValue = ((currentTotalQuantityValue * currentAvgPurchasePriceUsdValue) + (changeInQuantity * transactionInfo.TransactionPrice + brokerageCost)) / (currentTotalQuantityValue + changeInQuantity);
 
     //make the update
     currentStockInfo.avgPurchasePriceUsd = updatedAverageValue;
