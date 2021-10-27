@@ -10,12 +10,23 @@ class MainPage extends Component {
   state = {
     portfolioList: [],
     sortColumn: { path: "portfolioName", order: "asc" },
+    portfolioGraphData: { portfolioTotalValue: [], date: [] },
   };
 
   async componentDidMount() {
-    const data = await portfolioService.getPortfolioList(auth.getJwt());
+    const portfolioList = await portfolioService.getCompletePortfolioList(
+      auth.getJwt()
+    );
     this.setState({
-      portfolioList: data,
+      portfolioList,
+    });
+    const portfolioGraphData = await portfolioService.getGraphData(
+      auth.getJwt()
+    );
+    console.log(portfolioGraphData);
+    console.log(portfolioGraphData.date);
+    this.setState({
+      portfolioGraphData,
     });
   }
 
@@ -58,7 +69,7 @@ class MainPage extends Component {
       <React.Fragment>
         <main className="container">
           <h1 className="welcome-message mb-4">Welcome Back {user}</h1>
-          <MainGraph />
+          <MainGraph portfolioGraphData={this.state.portfolioGraphData} />
           {totalCount ? (
             <p>
               Showing {totalCount} portfolio in the database

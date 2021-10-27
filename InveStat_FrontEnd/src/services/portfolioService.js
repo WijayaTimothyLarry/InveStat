@@ -6,11 +6,16 @@ import stockDataService from "./stockDataService";
 const apiEndpoint = apiUrl + "/portfolio";
 
 export async function getPortfolioList(token) {
+  const { data } = await http.get(apiEndpoint, {
+    headers: { "x-access-token": token },
+  });
+  console.log(data);
+  return data;
+}
+export async function getCompletePortfolioList(token) {
   const { data: portfolioList } = await http.get(apiEndpoint, {
     headers: { "x-access-token": token },
   });
-
-  console.log(portfolioList);
   for (const portfolio of portfolioList) {
     portfolio.totalValue = 0;
     portfolio.costPrice = 0;
@@ -34,6 +39,48 @@ export async function getPortfolioList(token) {
     else portfolio.return = 0;
   }
   return portfolioList;
+}
+
+export async function getHistoricalData(portfolioId) {
+  const { data: stockList } = await purchasedStockService.getPurchasedStockList(
+    portfolioId
+  );
+  console.log(stockList);
+  let totalValue = Array(30).fill(0);
+
+  for (const stock of stockList) {
+    const priceList = await stockDataService.getStockHistoricalPrice(
+      stock.stockTickerId
+    );
+    totalValue = totalValue.map((p, index) => {
+      return (
+        parseFloat(p) +
+        parseFloat(priceList[index]) * stock.totalQuantity
+      ).toFixed(2);
+    });
+  }
+
+  return { totalValue };
+}
+
+export async function getGraphData(token) {
+  const { data: portfolioList } = await http.get(apiEndpoint, {
+    headers: { "x-access-token": token },
+  });
+
+  const portfolioTotalValue = [];
+
+  const { date } = await stockDataService.getStockHistoricalData("AAPL");
+
+  for (const portfolio of portfolioList) {
+    const { totalValue } = await getHistoricalData(portfolio.id);
+    portfolioTotalValue.push({
+      portfolioHistoricalValue: totalValue,
+      portfolioName: portfolio.portfolioName,
+    });
+  }
+
+  return { portfolioTotalValue, date };
 }
 
 export async function addNewPortfolio(userEmail, portfolioName) {
@@ -61,7 +108,10 @@ export async function updatePortfolio(token, portfolioId) {
 
 export default {
   getPortfolioList,
+  getCompletePortfolioList,
+  getHistoricalData,
   addNewPortfolio,
   deletePortfolio,
   updatePortfolio,
+  getGraphData,
 };

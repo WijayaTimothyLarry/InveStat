@@ -43,9 +43,9 @@ class TransactionPage extends Form {
       return { value: s.symbol, label: s.symbol + "   |   " + s.name };
     });
 
-    const { data: portfolios } = await portfolioService.getPortfolioList(
-      auth.getJwt()
-    );
+    const portfolios = await portfolioService.getPortfolioList(auth.getJwt());
+
+    console.log(portfolios);
     const portfolioList = portfolios.map((p) => {
       return { id: p.id, name: p.portfolioName };
     });
