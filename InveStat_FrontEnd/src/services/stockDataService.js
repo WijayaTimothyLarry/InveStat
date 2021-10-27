@@ -1,7 +1,7 @@
 import http from "./httpService";
 
-const apiKey = "7aa87da7ef549544cc1ed7281de197b0";
-//const apiKey = "cf3953c4e866acf8a208e15e1f835bc1";
+//const apiKey = "7aa87da7ef549544cc1ed7281de197b0";
+const apiKey = "cf3953c4e866acf8a208e15e1f835bc1";
 
 export async function getStockQuote(tickerId) {
   const apiEndpoint =
@@ -24,4 +24,19 @@ export async function getStockHistoricalData(tickerId) {
   const price = data.historical.slice(0, 30).map((s) => s.close.toFixed(2));
   return { date: date, price: price, symbol: data.symbol };
 }
-export default { getStockHistoricalData, getStockQuote };
+
+export async function getStockHistoricalPrice(tickerId) {
+  const apiEndpoint =
+    "https://financialmodelingprep.com/api/v3/historical-price-full/" +
+    tickerId +
+    "?serietype=line&apikey=" +
+    apiKey;
+  const { data } = await http.get(apiEndpoint);
+  const price = data.historical.slice(0, 30).map((s) => s.close.toFixed(2));
+  return price;
+}
+export default {
+  getStockHistoricalData,
+  getStockQuote,
+  getStockHistoricalPrice,
+};
