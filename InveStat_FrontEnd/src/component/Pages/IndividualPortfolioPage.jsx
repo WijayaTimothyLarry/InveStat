@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import Link from "react-router-dom/Link";
 import _ from "lodash";
-import StockTable from "../Tables/StockTable";
 import purchasedStockService from "../../services/purchasedStockService";
 import stockDataService from "../../services/stockDataService";
-
+import auth from "../../services/authService";
+import StockTable from "../Tables/StockTable";
 class IndividualPortfolioPage extends Component {
   state = {
     stockList: [],
@@ -12,6 +12,7 @@ class IndividualPortfolioPage extends Component {
   };
 
   async componentDidMount() {
+    auth.checkExpiry();
     const portfolioId = this.props.match.params.id;
     const { data: stockList } =
       await purchasedStockService.getPurchasedStockList(portfolioId);

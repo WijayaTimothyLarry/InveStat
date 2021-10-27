@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import _ from "lodash";
+import { Link } from "react-router-dom";
+import auth from "../../services/authService";
 import stockDataService from "../../services/stockDataService";
+import transactionService from "../../services/transactionService";
 import StockGraph from "../common/stockgraph";
 import TransactionTable from "../Tables/TransactionTable";
-import { Link } from "react-router-dom";
-import transactionService from "../../services/transactionService";
-
 class IndividualStockPage extends Component {
   state = {
     stockData: {},
@@ -14,6 +14,7 @@ class IndividualStockPage extends Component {
   };
 
   async componentDidMount() {
+    auth.checkExpiry();
     const tickerID = this.props.match.params.ticker;
     const stockData = await stockDataService.getStockHistoricalData(tickerID);
     this.setState({ stockData });

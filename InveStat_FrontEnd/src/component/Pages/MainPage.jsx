@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Link from "react-router-dom/Link";
 import _ from "lodash";
-import PortfolioTable from "../Tables/PortfolioTable";
-import portfolioService from "../../services/portfolioService";
 import auth from "../../services/authService";
+import portfolioService from "../../services/portfolioService";
+import PortfolioTable from "../Tables/PortfolioTable";
 import MainGraph from "../common/maingraph";
 
 class MainPage extends Component {
@@ -14,35 +14,52 @@ class MainPage extends Component {
   };
 
   async componentDidMount() {
-    const portfolioList = await portfolioService.getCompletePortfolioList(
-      auth.getJwt()
-    );
-    this.setState({
-      portfolioList,
-    });
-    const portfolioGraphData = await portfolioService.getGraphData(
-      auth.getJwt()
-    );
-    console.log(portfolioGraphData);
-    console.log(portfolioGraphData.date);
-    this.setState({
-      portfolioGraphData,
-    });
+    auth.checkExpiry();
+    try {
+      const portfolioList = await portfolioService.getCompletePortfolioList(
+        auth.getJwt()
+      );
+      this.setState({
+        portfolioList,
+      });
+      const portfolioGraphData = await portfolioService.getGraphData(
+        auth.getJwt()
+      );
+      console.log(portfolioGraphData);
+      console.log(portfolioGraphData.date);
+      this.setState({
+        portfolioGraphData,
+      });
+    } catch (ex) {
+      console.log(ex);
+    }
   }
 
   handleDelete = async (portfolio) => {
-    const portfolioList = this.state.portfolioList.filter(
-      (p) => p.id !== portfolio.id
-    );
-    const { id } = portfolio;
-    console.log(id);
-    this.setState({ portfolioList });
+    try {
+      const portfolioList = this.state.portfolioList.filter(
+        (p) => p.id !== portfolio.id
+      );
+      const { id } = portfolio;
+      console.log(id);
+      this.setState({ portfolioList });
 
-    const res = await portfolioService.deletePortfolio(
-      auth.getJwt(),
-      portfolio.id
-    );
-    console.log(res);
+      const res = await portfolioService.deletePortfolio(
+        auth.getJwt(),
+        portfolio.id
+      );
+      console.log(res);
+      const portfolioGraphData = await portfolioService.getGraphData(
+        auth.getJwt()
+      );
+      console.log(portfolioGraphData);
+      console.log(portfolioGraphData.date);
+      this.setState({
+        portfolioGraphData,
+      });
+    } catch (ex) {
+      console.log(ex);
+    }
   };
 
   handleSort = (sortColumn) => {

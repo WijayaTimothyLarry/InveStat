@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import _ from "lodash";
+import auth from "../../services/authService";
+import watchlistService from "../../services/watchlistService";
+import stockDataService from "../../services/stockDataService";
 import WatchListTable from "../Tables/WatchListTable";
 import { paginate } from "./../utils/paginate";
 import SearchBox from "../common/searchBox";
 import Pagination from "../common/pagination";
-import watchlistService from "../../services/watchlistService";
-import auth from "../../services/authService";
-import stockDataService from "../../services/stockDataService";
 
 class WatchListPage extends Component {
   state = {
@@ -19,16 +19,21 @@ class WatchListPage extends Component {
   };
 
   async componentDidMount() {
-    const stockList = await watchlistService.getUserWatchList(auth.getJwt());
-    for (const stock of stockList) {
-      const stockData = await stockDataService.getStockQuote(stock.stockID);
-      console.log(stockData);
-      stock.price = stockData.price;
-      stock.lastClose = stockData.previousClose;
-      stock.lastOpen = stockData.open;
-      stock.dayChange = stockData.changesPercentage.toFixed(3);
+    auth.checkExpiry();
+    try {
+      const stockList = await watchlistService.getUserWatchList(auth.getJwt());
+      for (const stock of stockList) {
+        const stockData = await stockDataService.getStockQuote(stock.stockID);
+        console.log(stockData);
+        stock.price = stockData.price;
+        stock.lastClose = stockData.previousClose;
+        stock.lastOpen = stockData.open;
+        stock.dayChange = stockData.changesPercentage.toFixed(3);
+      }
+      this.setState({ stockList });
+    } catch (ex) {
+      console.log(ex);
     }
-    this.setState({ stockList });
   }
 
   handleLike = (stock) => {

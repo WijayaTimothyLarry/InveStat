@@ -1,12 +1,12 @@
 import React from "react";
 import Joi from "joi-browser";
-import DateSelect from "../common/selectDate";
-import Form from "./../common/form";
-import portfolioService from "../../services/portfolioService";
 import auth from "../../services/authService";
+import portfolioService from "../../services/portfolioService";
 import { getStockList } from "../../services/watchlistService";
 import transactionService from "../../services/transactionService";
 import CustomSelect from "./../common/customSelect";
+import DateSelect from "../common/selectDate";
+import Form from "./../common/form";
 class TransactionPage extends Form {
   state = {
     data: {
@@ -38,6 +38,7 @@ class TransactionPage extends Form {
   };
 
   async componentDidMount() {
+    auth.checkExpiry();
     const rawStockList = await getStockList();
     const stockList = rawStockList.map((s) => {
       return { value: s.symbol, label: s.symbol + "   |   " + s.name };

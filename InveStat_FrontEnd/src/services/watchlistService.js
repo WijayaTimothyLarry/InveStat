@@ -3,8 +3,8 @@ import { apiUrl } from "../config.json";
 import http from "./httpService";
 
 const apiEndpoint = apiUrl + "/watchlist";
-//const apiKey = "7aa87da7ef549544cc1ed7281de197b0";
-const apiKey = "cf3953c4e866acf8a208e15e1f835bc1";
+const apiKey = "7aa87da7ef549544cc1ed7281de197b0";
+//const apiKey = "cf3953c4e866acf8a208e15e1f835bc1";
 const stockApi =
   "https://financialmodelingprep.com/api/v3/available-traded/list?apikey=" +
   apiKey;
@@ -27,14 +27,19 @@ export async function getStockList() {
 }
 
 export async function getUserWatchList(token) {
-  const { data } = await http.get(apiEndpoint, {
-    headers: { "x-access-token": token },
-  });
-  console.log(data);
-  const stockList = data.map((w) => {
-    return { id: w.id, stockID: w.wStockTickerId, liked: true };
-  });
-  return stockList;
+  try {
+    const { data } = await http.get(apiEndpoint, {
+      headers: { "x-access-token": token },
+    });
+    console.log(data);
+    const stockList = data.map((w) => {
+      return { id: w.id, stockID: w.wStockTickerId, liked: true };
+    });
+    return stockList;
+  } catch (ex) {
+    console.log(ex);
+    return ex;
+  }
 }
 
 export async function addUserWatchList(wStockTickerId, userEmail) {

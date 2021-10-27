@@ -18,15 +18,20 @@ export async function addTransaction(data) {
 }
 
 export async function getTransactionList(ticker) {
-  const purchasedStockList =
-    await purchasedStockService.getAllPurchasedStockList(auth.getJwt());
-  const { id } = purchasedStockList.find((s) => {
-    return s.stockTickerId === ticker;
-  });
+  try {
+    const purchasedStockList =
+      await purchasedStockService.getAllPurchasedStockList(auth.getJwt());
+    const { id } = purchasedStockList.find((s) => {
+      return s.stockTickerId === ticker;
+    });
 
-  const { data } = await http.get(apiEndpoint, {
-    headers: { purchasedStockId: id },
-  });
-  return data;
+    const { data } = await http.get(apiEndpoint, {
+      headers: { purchasedStockId: id },
+    });
+    return data;
+  } catch (ex) {
+    console.log(ex);
+    return ex;
+  }
 }
 export default { addTransaction, getTransactionList };

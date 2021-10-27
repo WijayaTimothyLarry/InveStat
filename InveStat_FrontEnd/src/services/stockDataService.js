@@ -1,7 +1,7 @@
 import http from "./httpService";
 
-//const apiKey = "7aa87da7ef549544cc1ed7281de197b0";
-const apiKey = "cf3953c4e866acf8a208e15e1f835bc1";
+const apiKey = "7aa87da7ef549544cc1ed7281de197b0";
+//const apiKey = "cf3953c4e866acf8a208e15e1f835bc1";
 
 export async function getStockQuote(tickerId) {
   const apiEndpoint =

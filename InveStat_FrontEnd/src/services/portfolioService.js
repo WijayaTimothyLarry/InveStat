@@ -64,23 +64,27 @@ export async function getHistoricalData(portfolioId) {
 }
 
 export async function getGraphData(token) {
-  const { data: portfolioList } = await http.get(apiEndpoint, {
-    headers: { "x-access-token": token },
-  });
-
-  const portfolioTotalValue = [];
-
-  const { date } = await stockDataService.getStockHistoricalData("AAPL");
-
-  for (const portfolio of portfolioList) {
-    const { totalValue } = await getHistoricalData(portfolio.id);
-    portfolioTotalValue.push({
-      portfolioHistoricalValue: totalValue,
-      portfolioName: portfolio.portfolioName,
+  try {
+    const { data: portfolioList } = await http.get(apiEndpoint, {
+      headers: { "x-access-token": token },
     });
-  }
+    const portfolioTotalValue = [];
 
-  return { portfolioTotalValue, date };
+    const { date } = await stockDataService.getStockHistoricalData("AAPL");
+
+    for (const portfolio of portfolioList) {
+      const { totalValue } = await getHistoricalData(portfolio.id);
+      portfolioTotalValue.push({
+        portfolioHistoricalValue: totalValue,
+        portfolioName: portfolio.portfolioName,
+      });
+    }
+
+    return { portfolioTotalValue, date };
+  } catch (ex) {
+    console.log(ex);
+    return ex;
+  }
 }
 
 export async function addNewPortfolio(userEmail, portfolioName) {
