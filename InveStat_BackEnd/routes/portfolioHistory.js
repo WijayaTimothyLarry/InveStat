@@ -22,6 +22,24 @@ router.get("/", async (req, res) => {
   }
 });
 
+//get portfolioHistory by portfolioId
+router.get("/latest", async (req, res) => {
+  const currentUserEmail = req.body.userEmail;
+
+  const currentPortfolioHistory = await portfolioHistory.findAll({
+    where: {
+      userEmail: currentUserEmail
+    },
+    order: [ [ 'createdAt', 'DESC' ]]
+  });
+  if (currentPortfolioHistory === null) {
+    console.log("Not found!");
+  } else {
+    res.json(currentPortfolioHistory[0]);
+  }
+});
+
+
 
 //create
 router.post("/", async (req, res) => {
@@ -47,14 +65,13 @@ router.put("/", async function (req, res) {
   //get current total value
   const portfolioHistoryInfo = req.body;
 
-  // console.log(portfolioInfo.portfolioId);
   let currentPortfolioHistory = await portfolioHistory.findOne({
       where: {
         date: portfolioHistoryInfo.date,
         portfolioId: portfolioHistoryInfo.portfolioId,
-        userEmail: portfolioHistory.userEmail
+        userEmail: portfolioHistoryInfo.userEmail
       },
-      attributes: ['id', 'totalValue']
+      attributes: ['id', 'date','portfolioId', 'totalValue']
     })
     .catch((e) => {
       console.log(e.message);
@@ -63,7 +80,6 @@ router.put("/", async function (req, res) {
     res.json("no current portfolio history");
     return;
   };
-
   //update total Value with req's total value
   const updatedTotalValue = portfolioHistoryInfo.totalValue;
   currentPortfolioHistory.totalValue = updatedTotalValue;
