@@ -24,7 +24,7 @@ router.get("/", async (req, res) => {
 
 //get portfolioHistory by portfolioId
 router.get("/latest", async (req, res) => {
-  const currentUserEmail = req.body.userEmail;
+  const currentUserEmail = req.header.userEmail;
 
   const currentPortfolioHistory = await portfolioHistory.findAll({
     where: {
