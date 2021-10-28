@@ -43,7 +43,7 @@ class TransactionTable extends Component {
       path: "transactionDate",
       label: "Transaction Date",
       content: (transaction) => (
-        <p>$ {transaction.transactionDate.slice(0, 10)}</p>
+        <p>{transaction.transactionDate.slice(0, 10)}</p>
       ),
     },
     {

@@ -34,8 +34,10 @@ export function checkExpiry() {
   try {
     const jwt = localStorage.getItem(tokenKey);
     const token = jwtDecode(jwt);
-    if (token.exp * 1000 < Date.now()) logout();
-    else console.log("still login");
+    if (token.exp * 1000 < Date.now()) {
+      logout();
+      window.location = "/";
+    } else console.log("still login");
   } catch (ex) {
     return null;
   }

@@ -41,7 +41,7 @@ class SignUpForm extends Form {
       <div>
         <h1>Sign Up</h1>
         <form onSubmit={this.handleSubmit}>
-          {this.renderInput("username", "Email")}
+          {this.renderInput("username", "Username")}
           {this.renderInput("password", "Password", "password")}
           {this.renderInput("confirmPass", "Confirm Password", "password")}
           {this.renderInput("name", "Name")}
