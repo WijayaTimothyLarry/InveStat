@@ -24,20 +24,27 @@ router.get("/", async (req, res) => {
 
 //get portfolioHistory by portfolioId
 router.get("/latest", async (req, res) => {
-  const currentUserEmail = req.header.userEmail;
-
+  try {const currentUserEmail = req.header('userEmail');
   const currentPortfolioHistory = await portfolioHistory.findAll({
     where: {
       userEmail: currentUserEmail
     },
-    order: [ [ 'createdAt', 'DESC' ]]
+    order: [[ 'createdAt', 'DESC' ]]
+  }) .catch((e) => {
+    console.log(e.message);
   });
   if (currentPortfolioHistory === null) {
     console.log("Not found!");
   } else {
     res.json(currentPortfolioHistory[0]);
   }
-});
+}catch{
+    console.log("undefined email value");
+    res.json({"message":"undefined email value"});
+  }
+
+})
+;
 
 
 
