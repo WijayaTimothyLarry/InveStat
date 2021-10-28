@@ -47,14 +47,13 @@ router.put("/", async function (req, res) {
   //get current total value
   const portfolioHistoryInfo = req.body;
 
-  // console.log(portfolioInfo.portfolioId);
   let currentPortfolioHistory = await portfolioHistory.findOne({
       where: {
         date: portfolioHistoryInfo.date,
         portfolioId: portfolioHistoryInfo.portfolioId,
-        userEmail: portfolioHistory.userEmail
+        userEmail: portfolioHistoryInfo.userEmail
       },
-      attributes: ['id', 'totalValue']
+      attributes: ['id', 'date','portfolioId', 'totalValue']
     })
     .catch((e) => {
       console.log(e.message);
