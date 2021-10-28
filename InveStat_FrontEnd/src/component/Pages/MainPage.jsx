@@ -25,11 +25,10 @@ class MainPage extends Component {
       const portfolioGraphData = await portfolioService.getGraphData(
         auth.getJwt()
       );
-      console.log(portfolioGraphData);
-      console.log(portfolioGraphData.date);
       this.setState({
         portfolioGraphData,
       });
+      console.log(portfolioGraphData.portfolioTotalValue[0]);
     } catch (ex) {
       console.log(ex);
     }

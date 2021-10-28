@@ -1,40 +1,39 @@
 const express = require("express");
 const router = express.Router();
-const {goalSetting} = require("../models");
+const { goalSetting } = require("../models");
 var auth = require("../middleware/auth");
 
 //get
 router.get("/", auth, async (req, res) => {
-    const userEmail = req.user.email;
-    const goal = await goalSetting.findAll({
-        where: {
-            userEmail: userEmail
-        },
-    });
-    if (goal === null) {
-        console.log("Not found!");
-    } else {
-        res.json(goal);
-    }
+  const userEmail = req.user.email;
+  const goal = await goalSetting.findAll({
+    where: {
+      userEmail: userEmail,
+    },
+  });
+  if (goal === null) {
+    console.log("Not found!");
+  } else {
+    res.json(goal[0]);
+  }
 });
-
 
 //set
 router.post("/", auth, async (req, res) => {
-    const goal = req.body;
-    // console.log(req.user.email);
-    // console.log(currentGoal);
-    currentGoal = await goalSetting.create({
-        initialValue : goal.initialValue,
-        duration : goal.duration,
-        additionalContribution : goal.additionalContribution,
-        overallTarget : goal.overallTarget,
-        expectedReturnPerYear : goal.expectedReturnPerYear,
-        userEmail : req.user.email,
-      });
-    res.json(currentGoal);
+  const goal = req.body;
+  console.log(req.user.email);
+  console.log("goal", goal);
+  // console.log(currentGoal);
+  const currentGoal = await goalSetting.create({
+    initialValue: goal.initialValue,
+    duration: goal.duration,
+    additionalContribution: goal.additionalContribution,
+    overallTarget: goal.overallTarget,
+    expectedReturnPerYear: goal.expectedReturnPerYear,
+    userEmail: req.user.email,
+  });
+  res.json(currentGoal);
 });
-
 
 //delete
 // router.get("/delete", auth, async function (req, res) {
@@ -56,7 +55,6 @@ router.post("/", auth, async (req, res) => {
 //   console.log("deleted");
 //   res.json("deleted");
 // });
-
 
 //change portfolioname
 

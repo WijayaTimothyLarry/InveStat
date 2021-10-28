@@ -3,11 +3,11 @@ import { Line } from "react-chartjs-2";
 
 const StockGraph = ({ stockData }) => {
   const dataStock = {
-    labels: stockData.date,
+    labels: stockData.date.reverse(),
     datasets: [
       {
         label: stockData.symbol,
-        data: stockData.price,
+        data: stockData.price.reverse(),
         fill: true,
         backgroundColor: "rgba(115, 184, 246, 0.4)",
         borderColor: "rgba(115, 184, 246, 0.6)",

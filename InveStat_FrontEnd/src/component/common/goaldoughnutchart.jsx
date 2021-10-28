@@ -1,13 +1,15 @@
 import React from "react";
 import { Doughnut } from "react-chartjs-2";
 
-const DoughnutChart = () => {
-  const achievedgoal = 50;
-  const goalchange = 10;
-  const remaininggoal = 40;
-
-  const chartdata = [achievedgoal, goalchange, remaininggoal];
-  const showchangepercentage = chartdata[1] + "%";
+const DoughnutChart = ({ goalData, currentInvestmentValue }) => {
+  const achievedgoal = currentInvestmentValue.totalValue;
+  const remaininggoal = goalData.overallTarget - achievedgoal;
+  const completion = (
+    (parseFloat(achievedgoal) / parseFloat(goalData.overallTarget)) *
+    100
+  ).toFixed(2);
+  const showCompletionPercentage = completion;
+  console.log(completion);
 
   const options = {
     responsive: true,
@@ -26,17 +28,13 @@ const DoughnutChart = () => {
   };
 
   const data = {
-    labels: ["Remaining", "Change", "Goal Achieved"],
+    labels: ["Goal Achieved", "Remaining"],
     datasets: [
       {
         label: "Goal Progress",
-        text: showchangepercentage,
-        data: [remaininggoal, goalchange, achievedgoal],
-        backgroundColor: [
-          "rgb(255, 99, 132)",
-          "rgb(54, 162, 235)",
-          "rgb(255, 205, 86)",
-        ],
+        text: showCompletionPercentage,
+        data: [achievedgoal, remaininggoal],
+        backgroundColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"],
         hoverOffset: 10,
       },
     ],
@@ -45,14 +43,14 @@ const DoughnutChart = () => {
   const plugins = [
     {
       beforeDraw: function (chart) {
-        var width = chart.width,
+        const width = chart.width,
           height = chart.height,
           ctx = chart.ctx;
         ctx.restore();
-        var fontSize = (height / 160).toFixed(2);
+        const fontSize = (height / 160).toFixed(2);
         ctx.font = fontSize + "em sans-serif";
         ctx.textBaseline = "top";
-        var text = showchangepercentage,
+        const text = showCompletionPercentage,
           textX = Math.round((width - ctx.measureText(text).width) / 2),
           textY = height / 2;
         ctx.fillText(text, textX, textY);
