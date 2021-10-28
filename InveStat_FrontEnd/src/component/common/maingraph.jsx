@@ -19,43 +19,15 @@ const MainGraph = ({ portfolioGraphData }) => {
   const data = {
     labels: date,
     datasets: datasets,
-    //
-    // {
-    //   label:
-    //     portfolioTotalValue.length !== 0
-    //       ? portfolioTotalValue[0].portfolioName
-    //       : "",
-    //   data: portfolioTotalValue
-    //     ? portfolioTotalValue[0].portfolioHistoricalValue
-    //     : [],
-    //   fill: true,
-    //   backgroundColor: "rgba(255, 99, 132, 0.4)",
-    //   borderColor: "rgba(255, 99, 132, 0.2)",
-    //   pointBorderColor: "rgb(255, 255, 255)",
-    //   pointHitRadius: 5,
-    //   pointBorderWidth: 3,
-    //   tension: 0.2,
-    // },
-    //{
-    //  label: "Portfolio 2",
-    //  data: [3000, 3018, 4790, 5000, 6273, 7777],
-    //  fill: true,
-    //  backgroundColor: "rgba(255, 99, 0, 0.4)",
-    //  borderColor: "rgba(255, 99, 0, 0.2)",
-    //  pointBorderColor: "rgb(255, 255, 255)",
-    //  pointHitRadius: 5,
-    //  pointBorderWidth: 3,
-    //  tension: 0.2,
-    //},
-    //],
   };
 
   const options = {
     plugins: { legend: { display: true } },
-    layout: { padding: { bottom: 100, top: 100 } },
+    layout: { padding: { bottom: 50, top: 50 } },
     scales: {
       y: {
         stacked: true,
+        beginAtZero: true,
         ticks: {
           color: "black",
           font: {
@@ -75,9 +47,9 @@ const MainGraph = ({ portfolioGraphData }) => {
   };
 
   return (
-    <div className="MainGraph">
+    <main className="MainGraph">
       <Line data={data} options={options} />
-    </div>
+    </main>
   );
 };
 
