@@ -103,6 +103,12 @@
     background-color: #2d6492;
     color: white;
  }
+
+ #form_container-goalSetting{
+     /* background-color: beige; */
+     margin:auto;
+     width: 60%;
+ }
  
  #initialValue{
     
@@ -114,20 +120,20 @@
     -moz-appearance: none;
     appearance: none;
     background: transparent;
-    width:50%;
+    width:100%;
     align-self: center;
     /* display:inline-block; */
-    /* text-align: left; */
-    text-indent: 50%;
-    margin: auto;
+    text-align: left;
+    padding: var(--field-padding);
     outline: none;
+    margin: auto;
     display: block;
 }
-
-label{
+/* 
+@label{
     display: block; 
-    padding-left:45%;
-}
+    padding-left:0%;
+} */
 
 #initialValue :focus{
     border: none;
@@ -153,7 +159,7 @@ label{
     -moz-appearance: none;
     appearance: none;
     background: transparent;
-    width:50%;
+    width:100%;
     align-self: center;
     /* display:inline-block; */
     text-align: left;
@@ -190,7 +196,7 @@ label{
     -moz-appearance: none;
     appearance: none;
     background: transparent;
-    width:50%;
+    width:100%;
     align-self: center;
     /* display:inline-block; */
     text-align: left;
@@ -225,7 +231,7 @@ label{
     -moz-appearance: none;
     appearance: none;
     background: transparent;
-    width:50%;
+    width:100%;
     align-self: center;
     /* display:inline-block; */
     text-align: left;
@@ -260,7 +266,7 @@ label{
     -moz-appearance: none;
     appearance: none;
     background: transparent;
-    width:50%;
+    width:100%;
     align-self: center;
     /* display:inline-block; */
     text-align: left;

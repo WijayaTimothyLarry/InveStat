@@ -189,6 +189,24 @@
 
     width:35%;
 }
+/* label{
+    text-align: left !important;
+    margin-left: -50%;
+    text-indent: -15px;
+} */
+
+
+#signUpButton{
+    background-color:#7092AD ;
+    border:none;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius:0 !important;
+    text-align: center;
+    width: 35%;
+    padding: 10px 10px;
+    margin-top:10px;
+    
+}
 
 /* #username :focus{
     border: none;
@@ -331,24 +349,7 @@
     outline: none;
 } */
 
-label{
-    text-align: left !important;
-    margin-left: -50%;
-    text-indent: -15px;
-}
 
-
-#signUpButton{
-    background-color:#7092AD ;
-    border:none;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    border-radius:0 !important;
-    text-align: center;
-    width: 35%;
-    padding: 10px 10px;
-    margin-top:10px;
-    
-}
 
 #signUpButton:hover{
     background-color: #2d6492;

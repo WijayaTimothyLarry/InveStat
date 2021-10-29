@@ -135,6 +135,7 @@ class MainPage extends Component {
                 New Portfolio
               </Link>
             </p>
+<<<<<<< HEAD
           ) : (
             <p>
               You have no portfolio right now.
@@ -145,6 +146,8 @@ class MainPage extends Component {
                 New Portfolio
               </Link>
             </p>
+=======
+>>>>>>> main
           )}
 
           <PortfolioTable
