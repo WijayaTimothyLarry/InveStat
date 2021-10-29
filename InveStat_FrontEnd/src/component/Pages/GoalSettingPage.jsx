@@ -28,6 +28,7 @@ class GoalSettingPage extends Form {
     const { data } = this.state;
     const res = await goalsettingService.setGoal(data);
     console.log(res);
+    this.props.history.push("/goal-setting");
   }
 
   calcFV() {
