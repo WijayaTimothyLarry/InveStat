@@ -9,7 +9,6 @@ class GoalProgressPage extends Component {
   state = { goalData: {}, currentInvestmentValue: "", completion: "" };
   async componentDidMount() {
     const goalData = await goalsettingService.getGoal();
-    console.log(goalData);
     this.setState({ goalData });
     const currentInvestmentValue =
       await portfolioHistoryService.getLatestPortfolioValue();

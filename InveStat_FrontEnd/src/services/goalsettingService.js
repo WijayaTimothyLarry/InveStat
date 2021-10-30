@@ -6,14 +6,11 @@ const apiEndPoint = apiUrl + "/goalsetting";
 export async function setGoal(data) {
   try {
     const token = auth.getJwt();
-    console.log(token);
-    console.log(data);
     const res = await http.post(apiEndPoint, data, {
       headers: {
         "x-access-token": token,
       },
     });
-    console.log(res);
     return res;
   } catch (ex) {
     console.log(ex);
