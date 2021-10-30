@@ -10,7 +10,7 @@ import "../../css/IndividualPortfolioPage.css";
 
 class IndividualStockPage extends Component {
   state = {
-    stockData: {},
+    stockData: { date: [], price: [], symbol: "" },
     transactionList: [],
     sortColumn: { path: "stockID", order: "asc" },
   };
@@ -19,17 +19,16 @@ class IndividualStockPage extends Component {
     auth.checkExpiry();
     const tickerID = this.props.match.params.ticker;
     const stockData = await stockDataService.getStockHistoricalData(tickerID);
+    console.log("test", stockData);
     this.setState({ stockData });
 
     const transactionList = await transactionService.getTransactionList(
       tickerID
     );
-    console.log(transactionList);
     this.setState({ transactionList });
   }
 
   handleDelete = async (transaction) => {
-    console.log(transaction.id);
     const transactionList = this.state.transactionList.filter(
       (t) => t.id !== transaction.id
     );
@@ -49,39 +48,42 @@ class IndividualStockPage extends Component {
     );
     return { totalCount: transactionList.length, data: transactionList };
   };
-
+  //<StockGraph stockData={stockData} />
   render() {
     const { stockData } = this.state;
     const { totalCount, data } = this.getPagedData();
-    console.log(data);
+    console.log(stockData);
     const { sortColumn } = this.state;
     return (
       <React.Fragment>
-
-        <div  id = "bg-IndivStockPage" >
+        <div id="bg-IndivStockPage">
           <div className="container" id="container-IndivStockPage">
-          <p id="stockName">{this.props.match.params.ticker}</p>
+            <p id="stockName">{this.props.match.params.ticker}</p>
 
-          {/* placeholder for graph */}
+            {/* placeholder for graph */}
             <div id="indivStockGraphWrapper">
-              placeholder for individual stock graph
+              <StockGraph stockData={stockData} />
             </div>
-            
-            <p id="IndivStockPage-msg">Showing {totalCount} transaction for this stock in the database:
-              <Link className="btn btn-primary" id = "IndivStockPage-add-button"to="/transaction/new">
-                  + Add New Transaction for this Stock
+
+            <p id="IndivStockPage-msg">
+              Showing {totalCount} transaction for this stock in the database:
+              <Link
+                className="btn btn-primary"
+                id="IndivStockPage-add-button"
+                to="/transaction/new"
+              >
+                + Add New Transaction for this Stock
               </Link>
             </p>
 
             <div id="IndivStockTableWraper">
-            <TransactionTable
-              stockList={data}
-              onDelete={this.handleDelete}
-              onSort={this.handleSort}
-              sortColumn={sortColumn}
-            />
+              <TransactionTable
+                stockList={data}
+                onDelete={this.handleDelete}
+                onSort={this.handleSort}
+                sortColumn={sortColumn}
+              />
             </div>
-
           </div>
         </div>
 

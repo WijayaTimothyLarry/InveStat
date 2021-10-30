@@ -23,7 +23,7 @@ const MainGraph = ({ portfolioGraphData }) => {
 
   const options = {
     plugins: { legend: { display: true } },
-    layout: { padding: { bottom: 100, top: 0 } },
+    layout: { padding: { bottom: 100, top: 0, right: 20, left: 20 } },
     scales: {
       y: {
         stacked: true,
