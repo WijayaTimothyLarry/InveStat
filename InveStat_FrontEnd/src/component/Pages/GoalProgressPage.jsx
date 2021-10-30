@@ -77,10 +77,10 @@ class GoalProgressPage extends Component {
 
                 <div id="currentGoal-right">
                   <p id="goalProgress-content">
-                    {this.state.goalData.overallTarget}
+                    ${this.state.goalData.overallTarget}
                   </p>
                   <p id="goalProgress-content">
-                    {this.state.currentInvestmentValue.totalValue}
+                    ${this.state.currentInvestmentValue.totalValue}
                   </p>
                   <p id="goalProgress-content"> {this.state.completion} %</p>
                 </div>
