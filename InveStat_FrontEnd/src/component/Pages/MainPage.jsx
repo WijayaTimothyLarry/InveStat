@@ -23,16 +23,11 @@ class MainPage extends Component {
       const portfolioList = await portfolioService.getCompletePortfolioList(
         auth.getJwt()
       );
-      this.setState({
-        portfolioList,
-      });
+      this.setState({ portfolioList });
       const portfolioGraphData = await portfolioService.getGraphData(
         auth.getJwt()
       );
-      this.setState({
-        portfolioGraphData,
-      });
-      console.log(portfolioGraphData.portfolioTotalValue[0]);
+      this.setState({ portfolioGraphData });
     } catch (ex) {
       console.log(ex);
     }
@@ -44,7 +39,6 @@ class MainPage extends Component {
         (p) => p.id !== portfolio.id
       );
       const { id } = portfolio;
-      console.log(id);
       this.setState({ portfolioList });
 
       const res = await portfolioService.deletePortfolio(
@@ -55,11 +49,7 @@ class MainPage extends Component {
       const portfolioGraphData = await portfolioService.getGraphData(
         auth.getJwt()
       );
-      console.log(portfolioGraphData);
-      console.log(portfolioGraphData.date);
-      this.setState({
-        portfolioGraphData,
-      });
+      this.setState({ portfolioGraphData });
     } catch (ex) {
       console.log(ex);
     }
@@ -89,7 +79,8 @@ class MainPage extends Component {
       <React.Fragment>
         <div id="container-mainPage">
           <div id="container-mainPage-left">
-            <p id="welcomeBack-msg">Welcome Back, my name. </p>
+
+            <p id="welcomeBack-msg">Welcome Back, {user}. </p>
 
             <div class="group" id="goalProgressBlock-mainPage">
               <p id="goalProgress-title"> Current Progress</p>
@@ -119,7 +110,7 @@ class MainPage extends Component {
               {totalCount ? (
                 <div>
                   <div id="mainPage-msg-1">
-                    {" "}
+
                     Showing {totalCount} portfolio in the database:
                   </div>
                   <div>
@@ -135,7 +126,7 @@ class MainPage extends Component {
               ) : (
                 <div>
                   <div id="mainPage-msg-2">
-                    {" "}
+
                     You have no portfolio right now.
                   </div>
                   <div>
@@ -169,62 +160,5 @@ class MainPage extends Component {
   }
 }
 
-{
-  /* /* <main className="container">
-          <h1 className="welcome-message mb-4">Welcome Back {user}</h1>
-<<<<<<< HEAD
-          
-=======
-          <MainGraph portfolioGraphData={this.state.portfolioGraphData} />
->>>>>>> main
-          {totalCount ? (
-            
-            <p>
-              Showing {totalCount} portfolio in the database
-              <Link
-                className="btn btn-outline-primary float-right"
-                to="/portfolio/new"
-              >
-                New Portfolio
-              </Link>
-            </p>
-<<<<<<< HEAD
-          ) : (
-            <p>
-              You have no portfolio right now.
-              <Link
-                className="btn btn-outline-primary float-right"
-                to="/portfolio/new"
-              >
-                New Portfolio
-              </Link>
-            </p>
-=======
->>>>>>> main
-          )}
-
-          <PortfolioTable
-            portfolioList={data}
-            onDelete={this.handleDelete}
-            onSort={this.handleSort}
-            sortColumn={sortColumn}
-          />
-        </main>
-        <div className="col"></div> */
-}
-
-{
-  /* ///////
-
-  // const Wrapper = styled.div`
-  //   background-image: url(${bg1.png});
-  //   background-position: center;
-  //   background-size: cover;
-  //   background-repeat: no-repeat;
-  //   width: 100%;
-  //   height: 100%;
-  //   display: flex;
-  // `; */
-}
 
 export default MainPage;
