@@ -16,7 +16,7 @@
 
 
 #container-IndivStockPage{
-    background-color: aqua;
+    /* background-color: aqua; */
     position: relative;
 
     /* align-items: center; */
@@ -61,6 +61,8 @@
 
     align-items: center;
     text-align: center;
+
+    padding-top: 5px;
 }
 
 #IndivStockTableWraper{
