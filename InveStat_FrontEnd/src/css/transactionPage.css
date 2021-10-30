@@ -1,0 +1,243 @@
+#container-transactionPage{
+    height: 100%;
+    background: #DAEFFF;    
+
+    background-size: cover;
+    position:absolute; 
+    min-width:100%;
+    min-height:100%;
+    left:0px;
+    right:0px;
+    top:80px;
+    
+    /* margin-left: 0px; */
+    /* margin-right:0; */
+    align-items: left;
+ }
+
+ #newTranctWrapper{
+    background-color: rgb(255, 255, 255);
+
+    opacity: 0.7;
+    width: 50%;
+    height: 585px;
+
+    position: relative;
+
+    margin-top: 30px;
+    margin-left: 25%;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
+}
+
+ #newTranct-msg{
+     text-align: center;
+     padding-top: 30px;
+     font-family: Roboto;
+     font-weight: normal;
+     font-size: 40px;
+ }
+
+ #newTranctFormWrapper{
+    /* background-color: aqua; */
+    width: 70%;
+    height: 80%;
+    margin: auto;
+    padding-top: 10px;
+    display: block;
+    /* align-items: left; */
+}
+#dateWrapper-Tranct{
+    /* background-color: beige; */
+    width: 330px;
+    height: 30px;
+
+    margin: auto;
+}
+
+#dateWrapper-TranctLeft{
+    /* background-color: rgb(211, 146, 67); */
+    width: 30%;
+    float:left;
+
+    text-align: left;
+}
+
+#dateWrapper-TranctRight{
+    /* background-color: rgb(19, 97, 165); */
+    width: 70%;
+    float:right;
+}
+
+ #doneButton-newTranct{
+    background-color:#7092AD ;
+    border:none;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius:0 !important;
+    text-align: center;
+    width: 200px;
+    padding: 10px 10px;
+    margin: auto;
+    margin-top:30px;
+
+    display: block;
+}
+
+#doneButton-newTranct:hover{
+    background-color: #2d6492;
+}
+
+
+
+
+
+#changeInQuantity{
+
+    width: 200px;
+    border:none;
+    border-bottom: 1.5px solid black;
+    border-radius: 0;
+
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;  
+
+    display: inline-block;
+    align-items: center;
+
+    margin-inline-start: 73px;
+    text-indent:5px;
+}
+
+
+#TransactionPrice{
+
+    width: 200px;
+    border:none;
+    border-bottom: 1.5px solid black;
+    border-radius: 0;
+
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;  
+
+    display: inline-block;
+    align-items: center;
+
+    margin-inline-start: 88px;
+    text-indent:5px;
+}
+
+#brokerageCost{
+
+    width: 200px;
+    border:none;
+    border-bottom: 1.5px solid black;
+    border-radius: 0;
+
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;  
+
+    display: inline-block;
+    align-items: center;
+
+    margin-inline-start: 40px;
+    text-indent:5px;
+}
+/* .datePicker{
+    display: none;
+    background-color: antiquewhite;
+    
+} */
+
+#rawdate{
+
+    width: 200px;
+    border:none;
+    border-bottom: 1.5px solid black;
+    border-radius: 0;
+
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;  
+
+    display: inline;
+    align-items: center;
+
+    margin-inline-start: 30px;
+    text-indent:5px;
+}
+
+
+#transactionType{
+
+    width: 200px;
+    border:none;
+    border-bottom: 1.5px solid black;
+    border-radius: 0;
+
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;  
+
+    display: inline-block;
+    align-items: center;  
+    
+    margin-top: 10px;
+    margin-inline-start: 10px;
+    text-indent: 5px;
+}
+
+#id{
+
+    width: 200px;
+    border:none;
+    border-bottom: 1.5px solid black;
+    border-radius: 0;
+
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;  
+
+    display: inline-block;
+    align-items: center;
+
+    margin-inline-start: 68px;
+    text-indent:5px;
+    
+}
+
+#purchasedStockStockTickerId{
+
+    width: 200px;
+    border:none;
+    border-bottom: 1.5px solid black;
+    border-radius: 0;
+
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;  
+
+    display: inline-block;
+    align-items: center;
+
+    margin-inline-start: 89px;
+    text-indent:5px;
+}
+
+
