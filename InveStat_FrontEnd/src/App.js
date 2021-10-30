@@ -32,7 +32,7 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-        {this.state.user ? <NavBar /> : null}
+        {this.state.user ? <NavBar /> : <NotLoggedInNavBar />}
         <main className="container">
           {this.state.user ? (
             <Switch>

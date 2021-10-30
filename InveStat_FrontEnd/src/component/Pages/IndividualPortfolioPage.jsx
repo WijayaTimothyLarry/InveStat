@@ -5,9 +5,6 @@ import purchasedStockService from "../../services/purchasedStockService";
 import stockDataService from "../../services/stockDataService";
 import auth from "../../services/authService";
 import StockTable from "../Tables/StockTable";
-import "../../css/IndividualPortfolioPage.css";
-
-
 class IndividualPortfolioPage extends Component {
   state = {
     stockList: [],
@@ -65,54 +62,25 @@ class IndividualPortfolioPage extends Component {
     if (count === 0)
       return (
         <React.Fragment>
-          <div  id = "bg-IndivPortPage">
-            <div className="container" id="container-IndivPortPage">
-              <p id="portName">{this.props.match.params.portfolioname}</p>
-              <p id="IndivPortPage-msg">There are no stock in the database.
-                <Link className="btn btn-primary" id = "IndivPortPage-add-button"to="/transaction/new">
-                    + Add New Transaction to my Portfolio
-                </Link>
-              </p>
-
-            </div>
-          </div>
-
-
+          <main className="container">
+            <h1 className="portfolio-name">
+              {this.props.match.params.portfolioname}
+            </h1>
+            <p>There are no stock in the database.</p>
+            <Link
+              className="btn btn-primary float-right  "
+              to="/transaction/new"
+            >
+              Add Transaction
+            </Link>
+          </main>
         </React.Fragment>
       );
 
     const { totalCount, data } = this.getPagedData();
     return (
       <React.Fragment>
-          <div  id = "bg-IndivPortPage">
-            <div className="container" id="container-IndivPortPage">
-            <p id="portName">{this.props.match.params.portfolioname}</p>
-
-            {/* placeholder for graph */}
-              <div id="indivPortGraphWrapper">
-                placeholder for individual portfolio graph
-              </div>
-              
-              <p id="IndivPortPage-msg">Showing {totalCount} stocks in the database:
-                <Link className="btn btn-primary" id = "IndivPortPage-add-button"to="/transaction/new">
-                    + Add New Transaction to my Portfolio
-                </Link>
-              </p>
-
-              <div id="IndivPortTableWraper">
-                <StockTable
-                  stockList={data}
-                  onDelete={this.handleDelete}
-                  onSort={this.handleSort}
-                  sortColumn={sortColumn}
-                />
-              </div>
-
- 
-            </div>
-          </div>
-
-        {/* <main className="container">
+        <main className="container">
           <h1 className="portfolio-name">
             {this.props.match.params.portfolioname}
           </h1>
@@ -133,37 +101,10 @@ class IndividualPortfolioPage extends Component {
             sortColumn={sortColumn}
           />
         </main>
-        <div className="col"></div> */}
+        <div className="col"></div>
       </React.Fragment>
     );
   }
 }
 
 export default IndividualPortfolioPage;
-
-
-          {/* <main className="container">
-            <h1 className="portfolio-name">
-              {this.props.match.params.portfolioname}
-            </h1>
-            <p>There are no stock in the database.</p>
-            <Link
-              className="btn btn-primary float-right  "
-              to="/transaction/new"
-            >
-              Add Transaction
-            </Link>
-          </main> */}
-
-
-          
-              
-
-              {/* <div id="IndivPortTableWraper">
-                <StockTable
-                  stockList={data}
-                  onDelete={this.handleDelete}
-                  onSort={this.handleSort}
-                  sortColumn={sortColumn}
-                />
-              </div> */}
