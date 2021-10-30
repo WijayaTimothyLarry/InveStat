@@ -96,6 +96,7 @@ class GoalProgressPage extends Component {
                 <DoughnutChart
                   goalData={this.state.goalData}
                   currentInvestmentValue={this.state.currentInvestmentValue}
+                  completion={this.state.completion}
                 />
               </div>
             </div>

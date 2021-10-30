@@ -1,16 +1,11 @@
 import React from "react";
 import { Doughnut } from "react-chartjs-2";
 
-const DoughnutChart = ({ goalData, currentInvestmentValue }) => {
+const DoughnutChart = ({ goalData, currentInvestmentValue, completion }) => {
   const achievedgoal = currentInvestmentValue.totalValue;
   const remaininggoal = goalData.overallTarget - achievedgoal;
-  const completion = (
-    (parseFloat(achievedgoal) / parseFloat(goalData.overallTarget)) *
-    100
-  ).toFixed(2);
-  const showCompletionPercentage = completion;
-  console.log(completion);
-
+  const completionPercentage = String(completion) + "%";
+  console.log(completionPercentage);
   const options = {
     responsive: true,
     maintainAspectRatio: false,
@@ -32,7 +27,7 @@ const DoughnutChart = ({ goalData, currentInvestmentValue }) => {
     datasets: [
       {
         label: "Goal Progress",
-        text: showCompletionPercentage,
+        text: completion,
         data: [achievedgoal, remaininggoal],
         backgroundColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"],
         hoverOffset: 10,
@@ -50,7 +45,7 @@ const DoughnutChart = ({ goalData, currentInvestmentValue }) => {
         const fontSize = (height / 160).toFixed(2);
         ctx.font = fontSize + "em sans-serif";
         ctx.textBaseline = "top";
-        const text = "Test",
+        const text = completionPercentage,
           textX = Math.round((width - ctx.measureText(text).width) / 2),
           textY = height / 2;
         ctx.fillText(text, textX, textY);
