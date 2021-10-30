@@ -13,13 +13,13 @@ const DoughnutChart = ({ goalData, currentInvestmentValue }) => {
 
   const options = {
     responsive: true,
-    maintainAspectRatio: true,
+    maintainAspectRatio: false,
     title: { display: true, text: "Goal Progress", fontSize: 20 },
     legend: {
       display: true,
       position: "right",
     },
-    layout: { padding: { bottom: 40, left: 100, right: 100, top: 120 } },
+    layout: { padding: { bottom: 0, left: 50, right: 50, top: 0 } },
     elements: {
       arc: {
         borderWidth: 2,
@@ -50,7 +50,7 @@ const DoughnutChart = ({ goalData, currentInvestmentValue }) => {
         const fontSize = (height / 160).toFixed(2);
         ctx.font = fontSize + "em sans-serif";
         ctx.textBaseline = "top";
-        const text = showCompletionPercentage,
+        const text = "Test",
           textX = Math.round((width - ctx.measureText(text).width) / 2),
           textY = height / 2;
         ctx.fillText(text, textX, textY);
