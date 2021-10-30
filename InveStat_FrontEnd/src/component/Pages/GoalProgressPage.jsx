@@ -6,10 +6,15 @@ import goalsettingService from "../../services/goalsettingService";
 import portfolioHistoryService from "../../services/portfolioHistoryService";
 import DoughnutChart from "./../common/goaldoughnutchart";
 class GoalProgressPage extends Component {
-  state = { goalData: {}, currentInvestmentValue: "", completion: "" };
+  state = {
+    goalData: {},
+    currentInvestmentValue: {},
+    completion: "",
+  };
   async componentDidMount() {
     const goalData = await goalsettingService.getGoal();
     this.setState({ goalData });
+    console.log(goalData);
     const currentInvestmentValue =
       await portfolioHistoryService.getLatestPortfolioValue();
     this.setState({ currentInvestmentValue });
@@ -65,21 +70,19 @@ class GoalProgressPage extends Component {
                   </Link>
                 </p>
                 <div id="currentGoal-left">
-                  <p id="goalProgress-col"> Starting Cash:</p>
-                  <p id="goalProgress-col"> Target Return:</p>
-                  <p id="goalProgress-col"> Current Return:</p>
-                  <p id="goalProgress-col">
-                    <b>%Progress:</b>
-                  </p>
+                  <p id="goalProgress-col"> Target:</p>
+                  <p id="goalProgress-col"> Current progress:</p>
+                  <p id="goalProgress-col">%Progress:</p>
                 </div>
 
                 <div id="currentGoal-right">
-                  <p id="goalProgress-content"> 123</p>
-                  <p id="goalProgress-content"> 123</p>
-                  <p id="goalProgress-content"> 123</p>
                   <p id="goalProgress-content">
-                    <b>123</b>
+                    {this.state.goalData.overallTarget}
                   </p>
+                  <p id="goalProgress-content">
+                    {this.state.currentInvestmentValue.totalValue}
+                  </p>
+                  <p id="goalProgress-content"> {this.state.completion} %</p>
                 </div>
               </div>
 
