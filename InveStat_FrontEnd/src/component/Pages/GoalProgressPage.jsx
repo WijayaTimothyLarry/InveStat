@@ -66,7 +66,7 @@ class GoalProgressPage extends Component {
                     id="setGoal-button-v2"
                     to="/goal-setting/set-goal"
                   >
-                    Set Goal
+                    Change Goal
                   </Link>
                 </p>
                 <div id="currentGoal-left">

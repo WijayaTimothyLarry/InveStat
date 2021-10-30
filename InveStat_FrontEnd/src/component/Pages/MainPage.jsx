@@ -102,6 +102,7 @@ class MainPage extends Component {
           {/*Graph*/}
           <div id="container-mainPage-right">
             <div id="mainPage-graph">
+              <p id="graph-title"> Overall Investment Performance</p>
               <MainGraph portfolioGraphData={this.state.portfolioGraphData} />
             </div>
 
