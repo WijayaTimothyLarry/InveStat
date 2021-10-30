@@ -23,7 +23,7 @@ const MainGraph = ({ portfolioGraphData }) => {
 
   const options = {
     plugins: { legend: { display: true } },
-    layout: { padding: { bottom: 50, top: 50 } },
+    layout: { padding: { bottom: 100, top: 0 } },
     scales: {
       y: {
         stacked: true,
@@ -39,7 +39,7 @@ const MainGraph = ({ portfolioGraphData }) => {
         ticks: {
           color: "black",
           font: {
-            size: 18,
+            size: 10,
           },
         },
       },

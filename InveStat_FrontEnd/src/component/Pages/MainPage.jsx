@@ -3,7 +3,7 @@ import Link from "react-router-dom/Link";
 import _ from "lodash";
 import auth from "../../services/authService";
 import "../../css/MainPage.css";
-import "../../Images/Profile.png"
+import "../../Images/Profile.png";
 import portfolioService from "../../services/portfolioService";
 import PortfolioTable from "../Tables/PortfolioTable";
 import progressIcon from "../../Images/progress-chart.png";
@@ -87,81 +87,90 @@ class MainPage extends Component {
     const { totalCount, data } = this.getPagedData();
     return (
       <React.Fragment>
-        <div id = "container-mainPage">
-          <div id = "container-mainPage-left">
-
-            <p id = "welcomeBack-msg">Welcome Back, my name. </p>
+        <div id="container-mainPage">
+          <div id="container-mainPage-left">
+            <p id="welcomeBack-msg">Welcome Back, my name. </p>
 
             <div class="group" id="goalProgressBlock-mainPage">
               <p id="goalProgress-title"> Current Progress</p>
-              <Link id = "progress-link" to="/goal-setting">
-                <img id = "progess-icon" src = {progressIcon}></img>
+              <Link id="progress-link" to="/goal-setting">
+                <img id="progess-icon" src={progressIcon}></img>
               </Link>
               <p id="goalProgress-text"> 50%</p>
             </div>
 
             <div class="group" id="daysLeft-mainPage">
               <p id="daysLeft-title"> Days Left</p>
-              <Link id = "progress-link" to="/goal-setting">
-                <img id = "progess-icon"  src = {calendarIcon}></img>
+              <Link id="progress-link" to="/goal-setting">
+                <img id="progess-icon" src={calendarIcon}></img>
               </Link>
               <p id="daysLeft-text"> 230 days</p>
             </div>
-              
           </div>
 
           {/*Graph*/}
-          <div id = "container-mainPage-right">
-            <div id = "mainPage-graph">
-              Placeholder for main page graph 
+          <div id="container-mainPage-right">
+            <div id="mainPage-graph">
+              <MainGraph portfolioGraphData={this.state.portfolioGraphData} />
             </div>
 
             {/* table msg */}
-            <div id = "mainPage-tableWrapper"> 
+            <div id="mainPage-tableWrapper">
               {totalCount ? (
                 <div>
-                  <div id="mainPage-msg-1"> Showing {totalCount} portfolio in the database:</div>
+                  <div id="mainPage-msg-1">
+                    {" "}
+                    Showing {totalCount} portfolio in the database:
+                  </div>
                   <div>
-                    <Link className="btn btn-outline-primary float-right" id="add-new-portfolio-v1-mainPage" to="/portfolio/new">
-                     + New Portfolio
+                    <Link
+                      className="btn btn-outline-primary float-right"
+                      id="add-new-portfolio-v1-mainPage"
+                      to="/portfolio/new"
+                    >
+                      + New Portfolio
                     </Link>
                   </div>
                 </div>
               ) : (
-
                 <div>
-                <div id="mainPage-msg-2"> You have no portfolio right now.</div>
-                <div>
-                  <Link className="btn btn-outline-primary float-right" id="add-new-portfolio-v1-mainPage" to="/portfolio/new">
-                   + New Portfolio
-                  </Link>
+                  <div id="mainPage-msg-2">
+                    {" "}
+                    You have no portfolio right now.
+                  </div>
+                  <div>
+                    <Link
+                      className="btn btn-outline-primary float-right"
+                      id="add-new-portfolio-v1-mainPage"
+                      to="/portfolio/new"
+                    >
+                      + New Portfolio
+                    </Link>
+                  </div>
                 </div>
-              </div>
-
               )}
 
               {/* portfolio table  */}
-              <div id = "tableWrapperInner-MainPage">
-                <PortfolioTable id="portfolio-table-mainPage"
+              <div id="tableWrapperInner-MainPage">
+                <PortfolioTable
+                  id="portfolio-table-mainPage"
                   portfolioList={data}
                   onDelete={this.handleDelete}
                   onSort={this.handleSort}
                   sortColumn={sortColumn}
                 />
               </div>
-
             </div>
             {/* end of tablewrapper */}
           </div>
         </div>
-        
-        
-        
-       </React.Fragment>
+      </React.Fragment>
     );
-  }}
+  }
+}
 
-{/* /* <main className="container">
+{
+  /* /* <main className="container">
           <h1 className="welcome-message mb-4">Welcome Back {user}</h1>
 <<<<<<< HEAD
           
@@ -201,9 +210,11 @@ class MainPage extends Component {
             sortColumn={sortColumn}
           />
         </main>
-        <div className="col"></div> */} 
+        <div className="col"></div> */
+}
 
-  {/* ///////
+{
+  /* ///////
 
   // const Wrapper = styled.div`
   //   background-image: url(${bg1.png});
@@ -213,9 +224,7 @@ class MainPage extends Component {
   //   width: 100%;
   //   height: 100%;
   //   display: flex;
-  // `; */}
-
-
-
+  // `; */
+}
 
 export default MainPage;
