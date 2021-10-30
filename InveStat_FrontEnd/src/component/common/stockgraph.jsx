@@ -2,6 +2,7 @@ import React from "react";
 import { Line } from "react-chartjs-2";
 
 const StockGraph = ({ stockData }) => {
+  console.log("stockdata", stockData);
   const dataStock = {
     labels: stockData.date.reverse(),
     datasets: [

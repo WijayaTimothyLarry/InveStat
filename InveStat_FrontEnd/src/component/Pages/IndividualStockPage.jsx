@@ -19,6 +19,7 @@ class IndividualStockPage extends Component {
     auth.checkExpiry();
     const tickerID = this.props.match.params.ticker;
     const stockData = await stockDataService.getStockHistoricalData(tickerID);
+    console.log("test", stockData);
     this.setState({ stockData });
 
     const transactionList = await transactionService.getTransactionList(
@@ -57,31 +58,34 @@ class IndividualStockPage extends Component {
     const { sortColumn } = this.state;
     return (
       <React.Fragment>
-
-        <div  id = "bg-IndivStockPage" >
+        <div id="bg-IndivStockPage">
           <div className="container" id="container-IndivStockPage">
-          <p id="stockName">{this.props.match.params.ticker}</p>
+            <p id="stockName">{this.props.match.params.ticker}</p>
 
-          {/* placeholder for graph */}
+            {/* placeholder for graph */}
             <div id="indivStockGraphWrapper">
-              placeholder for individual stock graph
+              <StockGraph stockData={stockData} />
             </div>
-            
-            <p id="IndivStockPage-msg">Showing {totalCount} transaction for this stock in the database:
-              <Link className="btn btn-primary" id = "IndivStockPage-add-button"to="/transaction/new">
-                  + Add New Transaction for this Stock
+
+            <p id="IndivStockPage-msg">
+              Showing {totalCount} transaction for this stock in the database:
+              <Link
+                className="btn btn-primary"
+                id="IndivStockPage-add-button"
+                to="/transaction/new"
+              >
+                + Add New Transaction for this Stock
               </Link>
             </p>
 
             <div id="IndivStockTableWraper">
-            <TransactionTable
-              stockList={data}
-              onDelete={this.handleDelete}
-              onSort={this.handleSort}
-              sortColumn={sortColumn}
-            />
+              <TransactionTable
+                stockList={data}
+                onDelete={this.handleDelete}
+                onSort={this.handleSort}
+                sortColumn={sortColumn}
+              />
             </div>
-
           </div>
         </div>
 
