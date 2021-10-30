@@ -34,7 +34,7 @@ const StockGraph = ({ stockData }) => {
         ticks: {
           color: "black",
           font: {
-            size: 18,
+            size: 10,
           },
         },
       },

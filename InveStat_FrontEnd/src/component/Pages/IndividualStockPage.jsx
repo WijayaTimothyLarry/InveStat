@@ -10,7 +10,7 @@ import "../../css/IndividualPortfolioPage.css";
 
 class IndividualStockPage extends Component {
   state = {
-    stockData: {},
+    stockData: { date: [], price: [], symbol: "" },
     transactionList: [],
     sortColumn: { path: "stockID", order: "asc" },
   };
@@ -25,12 +25,10 @@ class IndividualStockPage extends Component {
     const transactionList = await transactionService.getTransactionList(
       tickerID
     );
-    console.log(transactionList);
     this.setState({ transactionList });
   }
 
   handleDelete = async (transaction) => {
-    console.log(transaction.id);
     const transactionList = this.state.transactionList.filter(
       (t) => t.id !== transaction.id
     );
@@ -50,11 +48,11 @@ class IndividualStockPage extends Component {
     );
     return { totalCount: transactionList.length, data: transactionList };
   };
-
+  //<StockGraph stockData={stockData} />
   render() {
     const { stockData } = this.state;
     const { totalCount, data } = this.getPagedData();
-    console.log(data);
+    console.log(stockData);
     const { sortColumn } = this.state;
     return (
       <React.Fragment>
