@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import _ from "lodash";
 import auth from "../../services/authService";
-import "../../css/StockListPage.css";
-
 import watchlistService from "../../services/watchlistService";
 import StockListTable from "./../Tables/StockListTable";
 import Pagination from "../common/pagination";
@@ -93,94 +91,29 @@ class StockListPage extends Component {
     const { totalCount, data } = this.getPagedData();
     return (
       <React.Fragment>
-        <div  id = "bg-stockList">
-          <div className="container" id="container-stockList">
-            <p id="watchlist-msg">
-                Showing {totalCount} stocks in the stocklist
-            </p>
-
-            <div id="watchlist-searchBar"             
-                onChange={this.handleSearch}
-                 value={this.state.searchQuery}
-              > search 
-            </div>
-
-            <div id="watchlistTableWraper">
-                  <StockListTable
-                  stockList={data}
-                  onLike={this.handleLike}
-                  onSort={this.handleSort}
-                  sortColumn={sortColumn}
-                  />
-                  <Pagination
-                    itemsCount={totalCount}
-                    pageSize={pageSize}
-                    currentPage={currentPage}
-                    onPageChange={this.handlePageChange}
-                  />
-      
-            </div>
-
-          </div> 
-        </div>
+        <main className="container">
+          <h1 className="watchlist-title mb-4">List of Stock</h1>
+          <p>Showing {totalCount} stocks in the stocklist </p>
+          <SearchBox
+            onChange={this.handleSearch}
+            value={this.state.searchQuery}
+          />
+          <StockListTable
+            stockList={data}
+            onLike={this.handleLike}
+            onSort={this.handleSort}
+            sortColumn={sortColumn}
+          />
+          <Pagination
+            itemsCount={totalCount}
+            pageSize={pageSize}
+            currentPage={currentPage}
+            onPageChange={this.handlePageChange}
+          />
+        </main>
       </React.Fragment>
     );
   }
 }
 
 export default StockListPage;
-
-// <SearchBox
-//   onChange={this.handleSearch}
-//   value={this.state.searchQuery}
-// />
-
-
-//               <div id="watchlist-searchBar"             
-//                 onChange={this.handleSearch}
-//                  value={this.state.searchQuery}
-//               > search </div>
-
-//               <div id="watchlistTableWraper">
-//                 <div id="watchlistHeader">
-//                   </div>
-
-
-//                 <WatchListTable
-//                   id="watchlistTable"
-//                   stockList={data}
-//                   onLike={this.handleLike}
-//                   onSort={this.handleSort}
-//                   sortColumn={sortColumn}
-//                 />
-
-//                 <Pagination
-//                   itemsCount={totalCount}
-//                   pageSize={pageSize}
-//                   currentPage={currentPage}
-//                   onPageChange={this.handlePageChange}
-//                 />
-//               </div>
-
-
-
-{/* <main className="container">
-<h1 className="watchlist-title mb-4">List of Stock</h1>
-<p>Showing {totalCount} stocks in the stocklist </p>
-<SearchBox
-  onChange={this.handleSearch}
-  value={this.state.searchQuery}
-/>
-<StockListTable
-  stockList={data}
-  onLike={this.handleLike}
-  onSort={this.handleSort}
-  sortColumn={sortColumn}
-/>
-<Pagination
-  itemsCount={totalCount}
-  pageSize={pageSize}
-  currentPage={currentPage}
-  onPageChange={this.handlePageChange}
-/>
-</main> */}

@@ -6,8 +6,6 @@ import stockDataService from "../../services/stockDataService";
 import transactionService from "../../services/transactionService";
 import StockGraph from "../common/stockgraph";
 import TransactionTable from "../Tables/TransactionTable";
-import "../../css/IndividualPortfolioPage.css";
-
 class IndividualStockPage extends Component {
   state = {
     stockData: {},
@@ -57,35 +55,7 @@ class IndividualStockPage extends Component {
     const { sortColumn } = this.state;
     return (
       <React.Fragment>
-
-        <div  id = "bg-IndivStockPage" >
-          <div className="container" id="container-IndivStockPage">
-          <p id="stockName">{this.props.match.params.ticker}</p>
-
-          {/* placeholder for graph */}
-            <div id="indivStockGraphWrapper">
-              placeholder for individual stock graph
-            </div>
-            
-            <p id="IndivStockPage-msg">Showing {totalCount} transaction for this stock in the database:
-              <Link className="btn btn-primary" id = "IndivStockPage-add-button"to="/transaction/new">
-                  + Add New Transaction for this Stock
-              </Link>
-            </p>
-
-            <div id="IndivStockTableWraper">
-            <TransactionTable
-              stockList={data}
-              onDelete={this.handleDelete}
-              onSort={this.handleSort}
-              sortColumn={sortColumn}
-            />
-            </div>
-
-          </div>
-        </div>
-
-        {/* <h1>{this.props.match.params.ticker}</h1>
+        <h1>{this.props.match.params.ticker}</h1>
         <StockGraph stockData={stockData} />
         <h2>Your transaction for this stock</h2>
         <p className="mt-5">
@@ -99,7 +69,7 @@ class IndividualStockPage extends Component {
           onDelete={this.handleDelete}
           onSort={this.handleSort}
           sortColumn={sortColumn}
-        /> */}
+        />
       </React.Fragment>
     );
   }

@@ -3,11 +3,6 @@ import Form from "./form";
 import Joi from "joi-browser";
 import * as userService from "../../services/userService";
 import authService from "../../services/authService";
-
-import "../../css/SignUpPage.css";
-import logo from "../../logo/InveStatLogo2.png";
-
-
 class SignUpForm extends Form {
   state = {
     data: { username: "", password: "", confirmPass: "", name: "" },
@@ -43,61 +38,18 @@ class SignUpForm extends Form {
   };
   render() {
     return (
-
-      <div id="bg-pic-signUpPage">
-      <div  id="bg-signUpPage">
-        
-      {/* CONTENT */}
-        <div id="container-left-signUpPage">
-          <div className="logoWrapper">
-              <img src = {logo} id="logo-signUpPage"></img>
-              <h3 className="branding-msg" > We provide simple, comprehensive and intuitive investment and portfolio solutions for both business and personal use.</h3>
-          </div>
-        </div>
-
-        <div id="container-right-signUpPage">
-        
-          <div  id="signUpFormBorder">
-            <div id="signUpFormInner">
-              {/* delete border laterfor login form wrapper, not in use */}
-              {/* <div className="signUpFormWrapper"> */}
-                  <form clas onSubmit={this.handleSubmit}>
-                    {this.renderInput("username", "Username")}
-                    {this.renderInput("password", "Password", "password")}
-                    {this.renderInput("confirmPass", "Confirm Password", "password")}
-                    {this.renderInput("name", "Name")}
-                    {this.renderButton("Sign Up","signUpButton")}
-                  </form> 
-                  <div className="alt-msg">
-                    Already have an account? <a href="/login">Log in</a> here.
-                  </div>
-
-            </div>
-              {/* </div> */}
-          </div>
-
-        </div>
-
+      <div>
+        <h1>Sign Up</h1>
+        <form onSubmit={this.handleSubmit}>
+          {this.renderInput("username", "Username")}
+          {this.renderInput("password", "Password", "password")}
+          {this.renderInput("confirmPass", "Confirm Password", "password")}
+          {this.renderInput("name", "Name")}
+          {this.renderButton("Sign Up")}
+        </form>
       </div>
-    </div>
-
-
-
-  
     );
   }
 }
 
 export default SignUpForm;
-
-
-{/* <div>
-<h1>Sign Up</h1>
-<form onSubmit={this.handleSubmit}>
-  {this.renderInput("username", "Username")}
-  {this.renderInput("password", "Password", "password")}
-  {this.renderInput("confirmPass", "Confirm Password", "password")}
-  {this.renderInput("name", "Name")}
-  {this.renderButton("Sign Up")}
-</form>
-</div> */}
