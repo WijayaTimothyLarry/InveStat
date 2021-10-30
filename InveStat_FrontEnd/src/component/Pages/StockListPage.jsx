@@ -99,11 +99,11 @@ class StockListPage extends Component {
                 Showing {totalCount} stocks in the stocklist
             </p>
 
-            <div id="watchlist-searchBar"             
+            <SearchBox id="watchlist-searchBar"             
                 onChange={this.handleSearch}
                  value={this.state.searchQuery}
               > search 
-            </div>
+            </SearchBox>
 
             <div id="watchlistTableWraper">
                   <StockListTable

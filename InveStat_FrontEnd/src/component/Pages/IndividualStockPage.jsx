@@ -63,16 +63,19 @@ class IndividualStockPage extends Component {
               <StockGraph stockData={stockData} />
             </div>
 
-            <p id="IndivStockPage-msg">
-              Showing {totalCount} transaction for this stock in the database:
-              <Link
-                className="btn btn-primary"
-                id="IndivStockPage-add-button"
-                to="/transaction/new"
-              >
-                + Add New Transaction for this Stock
-              </Link>
-            </p>
+            <div >
+
+              <p id="IndivStockPage-msg">
+                Showing {totalCount} transaction for this stock in the database:
+                <Link
+                  className="float-right"
+                  id="IndivStockPage-add-button"
+                  to="/transaction/new"
+                >
+                  + Add New Transaction for this Stock
+                </Link>
+              </p>
+            </div>
 
             <div id="IndivStockTableWraper">
               <TransactionTable

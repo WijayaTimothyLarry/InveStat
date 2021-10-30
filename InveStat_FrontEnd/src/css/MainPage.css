@@ -163,12 +163,13 @@
   border-color: rgb(216, 214, 212);
 
   width: 100%;
-  height: 500px;
+  height: auto;
 
   align-items: center;
   text-align: center;
 
-  padding-top: 10px;
+  padding-top: 20px;
+  padding-bottom: 10px;
 }
 
 #mainPage-tableWrapper {

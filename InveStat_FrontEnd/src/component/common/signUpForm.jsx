@@ -68,7 +68,7 @@ class SignUpForm extends Form {
                     {this.renderInput("name", "Name")}
                     {this.renderButton("Sign Up","signUpButton")}
                   </form> 
-                  <div className="alt-msg">
+                  <div className="alt-msg-SignUp">
                     Already have an account? <a href="/login">Log in</a> here.
                   </div>
 

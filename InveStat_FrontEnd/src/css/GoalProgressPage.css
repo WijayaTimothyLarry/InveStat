@@ -27,9 +27,9 @@
 .container{
     /* background-color: aqua; */
     width:90%;
-    padding-top: 100px;
-    text-align: center;
-    align-items: center;
+    /* padding-top: 100px; */
+    /* text-align: center; */
+    /* align-items: center; */
 }
 
 .welcome-msg {
