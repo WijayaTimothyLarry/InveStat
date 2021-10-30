@@ -3,6 +3,9 @@ import Form from "../common/form";
 import Joi from "joi-browser";
 import portfolioService from "../../services/portfolioService";
 import authService from "../../services/authService";
+import "../../css/newPortfolioForm.css";
+
+
 class NewPortfolioForm extends Form {
   state = {
     data: { portfolioName: "" },
@@ -33,15 +36,48 @@ class NewPortfolioForm extends Form {
   };
   render() {
     return (
-      <div>
-        <h1>New Portfolio</h1>
-        <form onSubmit={this.handleSubmit}>
-          {this.renderInput("portfolioName", "Portfolio Name")}
-          {this.renderButton("Done")}
-        </form>
+      <div id = "container-newPortfolioForm">
+        <div id="newPortWrapper">
+          <p id="newPort-msg">New Portfolio</p>
+
+          <div id="newPortFormWrapper">
+             <form onSubmit={this.handleSubmit}>
+              {this.renderInput("portfolioName", "Portfolio Name")}
+              {this.renderButton("Done", "doneButton-newPort")}
+            </form>
+          </div>
+        </div>
+
+
+
+
+
+
+        {/* <p id="newPort-msg">
+          New Portfolio
+        </p> */}
+        {/* <div id = "newPortWrapper"> */}
+          {/* <form onSubmit={this.handleSubmit}>
+            {this.renderInput("portfolioName", "Portfolio Name")}
+            {this.renderButton("Done", "doneButton-newPort")}
+          </form> */}
+        {/* </div> */}
+
+
       </div>
+
     );
   }
 }
 
 export default NewPortfolioForm;
+
+
+
+{/* <div>
+<h1>New Portfolio</h1>
+<form onSubmit={this.handleSubmit}>
+  {this.renderInput("portfolioName", "Portfolio Name")}
+  {this.renderButton("Done")}
+</form>
+</div> */}

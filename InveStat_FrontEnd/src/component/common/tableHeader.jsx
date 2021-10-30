@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import "../../css/tableHeader.css";
+
 
 class TableHeader extends Component {
   raiseSort = (path) => {
