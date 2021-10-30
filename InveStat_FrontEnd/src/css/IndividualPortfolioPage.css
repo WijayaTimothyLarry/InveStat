@@ -1,0 +1,102 @@
+#bg-IndivPortPage{  
+    /* background: #DAEFFF;     */
+    background-size: cover;
+    position:absolute; 
+    min-width:100%;
+    min-height:100%;
+    left:0px;
+    right:0px;
+    top:0px;
+    margin-top: 80px;
+    opacity: 0.70;
+    /* padding-top: 0%; */
+
+    color:black;
+}
+
+
+#container-IndivPortPage{
+    /* background-color: aqua; */
+
+    /* align-items: center; */
+    position: center;
+    width: 100%;
+    min-height: 100%;
+    
+    padding-top: 50px;
+    padding-left: 60px;
+    padding-right: 60px;
+
+
+}
+
+#portName{
+    font-family: Roboto;
+    font-weight: bold;
+    font-size: 30px;
+    text-align: left;
+}
+
+#IndivPortPage-msg{
+    font-family: Roboto;
+    font-style: italic;
+    font-weight: normal;
+    font-size: 16px;
+
+    /* text-indent: 5px; */
+
+    margin-left: 0px;
+    text-align: left;
+    color: black;
+    padding-top: 25px;
+
+    text-indent: 15px;
+}
+
+#indivPortGraphWrapper{
+    border-width:1.5px;
+    border-style:solid;
+    border-color:transparent;  
+    border-color: rgb(216, 214, 212);  
+
+    width: 100%;
+    height: 350px;
+    margin-top: 15px;
+
+    align-items: center;
+    text-align: center;
+
+    padding-top: 20px;
+}
+
+#IndivPortTableWraper{
+    padding-top: 15px;
+}
+
+#IndivPortPage-add-button{
+    /* background-color: blueviolet; */
+    background:transparent;
+    
+    border: none;
+    border-bottom: 1px solid black;
+    border-radius: 0%;
+
+    width: 300px;
+    color:black;
+    float: right;
+    
+    margin-right: 5px;
+    align-items: center;
+    text-indent: 0%;
+
+    float: right;
+
+}
+
+#IndivPortPage-add-button:hover{
+    font-weight: bold;
+    border-bottom: 2px solid black;
+    width: 300px;
+    align-items: center;
+}
+

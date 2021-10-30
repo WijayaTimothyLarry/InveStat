@@ -1,0 +1,46 @@
+.navbar-nav :hover{
+    font-weight:bold;
+}
+
+.navbar-nav :active{
+    font-weight:bold;
+}
+
+.navbar-nav :focus{
+    font-weight:bold;
+}
+
+#NavBarLogout{
+    background-color:#5382a8 ;
+    border:none;
+    /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); */
+    border-radius:0 !important;
+    text-align: center;
+    width: 100px;
+    margin-right: 10px;
+    /* padding: 10px 10px; */
+    /* margin-top:30px; */
+}
+
+#NavBarLogout:hover{
+    background-color: #2d6492;
+}
+
+.profile-pic{
+    height:63px;
+    width: 63px;
+    right: 23px;
+    top:8px;
+    border-radius: 0px;
+    padding: 10px;
+}
+
+.navbar-logo{
+    height:45px;
+    width: 80px;
+    left: 30px;
+    top:8px;
+    border-radius: 0px;
+    /* padding: 10px; */
+    
+}
