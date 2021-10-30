@@ -1,36 +1,68 @@
 import React, { Component } from "react";
 import Link from "react-router-dom/Link";
 import _ from "lodash";
-import PortfolioTable from "../Tables/PortfolioTable";
-import portfolioService from "../../services/portfolioService";
 import auth from "../../services/authService";
 import "../../css/MainPage.css";
 import "../../Images/Profile.png"
+import portfolioService from "../../services/portfolioService";
+import PortfolioTable from "../Tables/PortfolioTable";
+import progressIcon from "../../Images/progress-chart.png";
+import calendarIcon from "../../Images/schedule.png";
+import MainGraph from "../common/maingraph";
 
 class MainPage extends Component {
   state = {
     portfolioList: [],
     sortColumn: { path: "portfolioName", order: "asc" },
+    portfolioGraphData: { portfolioTotalValue: [], date: [] },
   };
 
   async componentDidMount() {
-    const { data } = await portfolioService.getPortfolioList(auth.getJwt());
-    this.setState({
-      portfolioList: data,
-    });
+    auth.checkExpiry();
+    try {
+      const portfolioList = await portfolioService.getCompletePortfolioList(
+        auth.getJwt()
+      );
+      this.setState({
+        portfolioList,
+      });
+      const portfolioGraphData = await portfolioService.getGraphData(
+        auth.getJwt()
+      );
+      this.setState({
+        portfolioGraphData,
+      });
+      console.log(portfolioGraphData.portfolioTotalValue[0]);
+    } catch (ex) {
+      console.log(ex);
+    }
   }
 
   handleDelete = async (portfolio) => {
-    const portfolioList = this.state.portfolioList.filter(
-      (p) => p.id !== portfolio.id
-    );
-    this.setState({ portfolioList });
+    try {
+      const portfolioList = this.state.portfolioList.filter(
+        (p) => p.id !== portfolio.id
+      );
+      const { id } = portfolio;
+      console.log(id);
+      this.setState({ portfolioList });
 
-    const res = await portfolioService.deletePortfolio(
-      auth.getJwt(),
-      portfolio.id
-    );
-    console.log(res);
+      const res = await portfolioService.deletePortfolio(
+        auth.getJwt(),
+        portfolio.id
+      );
+      console.log(res);
+      const portfolioGraphData = await portfolioService.getGraphData(
+        auth.getJwt()
+      );
+      console.log(portfolioGraphData);
+      console.log(portfolioGraphData.date);
+      this.setState({
+        portfolioGraphData,
+      });
+    } catch (ex) {
+      console.log(ex);
+    }
   };
 
   handleSort = (sortColumn) => {
@@ -48,82 +80,94 @@ class MainPage extends Component {
   };
 
   render() {
-    const count = this.state.portfolioList.length;
+    //const count = this.state.portfolioList.length;
     const { sortColumn } = this.state;
     const user = auth.getCurrentUser();
-    //f (count === 0)
-    // return (
-    //   <React.Fragment>
-    //     <main className="container">
-    //       <h1 className="welcome-message mb-5">Welcome Back {user}</h1>
-    //       <p>
-    //         There are no portfolio in the database.
-    //         <Link
-    //           className="btn btn-primary float-right  "
-    //           to="/portfolio/new"
-    //         >
-    //           New Portfolio
-    //         </Link>
-    //       </p>
-    //     </main>
-    //   </React.Fragment>
-    // );
 
     const { totalCount, data } = this.getPagedData();
     return (
-      // <React.Fragment>
+      <React.Fragment>
         <div id = "container-mainPage">
           <div id = "container-mainPage-left">
-            welcome back
 
+            <p id = "welcomeBack-msg">Welcome Back, my name. </p>
+
+            <div class="group" id="goalProgressBlock-mainPage">
+              <p id="goalProgress-title"> Current Progress</p>
+              <Link id = "progress-link" to="/goal-setting">
+                <img id = "progess-icon" src = {progressIcon}></img>
+              </Link>
+              <p id="goalProgress-text"> 50%</p>
+            </div>
+
+            <div class="group" id="daysLeft-mainPage">
+              <p id="daysLeft-title"> Days Left</p>
+              <Link id = "progress-link" to="/goal-setting">
+                <img id = "progess-icon"  src = {calendarIcon}></img>
+              </Link>
+              <p id="daysLeft-text"> 230 days</p>
+            </div>
+              
           </div>
 
+          {/*Graph*/}
           <div id = "container-mainPage-right">
             <div id = "mainPage-graph">
               Placeholder for main page graph 
             </div>
 
+            {/* table msg */}
             <div id = "mainPage-tableWrapper"> 
               {totalCount ? (
                 <div>
-                  <div id="mainPage-msg-1"> Showing {totalCount} portfolio in the database</div>
-                  <div><Link
-                    className="btn btn-outline-primary float-right"
-                    to="/portfolio/new"
-                  >
-                    New Portfolio
-                  </Link></div>
+                  <div id="mainPage-msg-1"> Showing {totalCount} portfolio in the database:</div>
+                  <div>
+                    <Link className="btn btn-outline-primary float-right" id="add-new-portfolio-v1-mainPage" to="/portfolio/new">
+                     + New Portfolio
+                    </Link>
+                  </div>
                 </div>
               ) : (
-                <p id="mainPage-msg-2">
-                  You have no portfolio right now.
-                  <Link
-                    className="btn btn-primary" id="add-new-portfolio-v1-mainPage"
-                    to="/portfolio/new"
-                  >+ New Portfolio 
+
+                <div>
+                <div id="mainPage-msg-2"> You have no portfolio right now.</div>
+                <div>
+                  <Link className="btn btn-outline-primary float-right" id="add-new-portfolio-v1-mainPage" to="/portfolio/new">
+                   + New Portfolio
                   </Link>
-                </p>
+                </div>
+              </div>
+
               )}
-              <PortfolioTable id="portfolio-table-mainPage"
-                portfolioList={data}
-                onDelete={this.handleDelete}
-                onSort={this.handleSort}
-                sortColumn={sortColumn}
-              />
+
+              {/* portfolio table  */}
+              <div id = "tableWrapperInner-MainPage">
+                <PortfolioTable id="portfolio-table-mainPage"
+                  portfolioList={data}
+                  onDelete={this.handleDelete}
+                  onSort={this.handleSort}
+                  sortColumn={sortColumn}
+                />
+              </div>
 
             </div>
+            {/* end of tablewrapper */}
           </div>
         </div>
         
         
         
-      // {/* </React.Fragment> */}
+       </React.Fragment>
     );
   }}
 
 {/* /* <main className="container">
           <h1 className="welcome-message mb-4">Welcome Back {user}</h1>
+<<<<<<< HEAD
           
+=======
+          <MainGraph portfolioGraphData={this.state.portfolioGraphData} />
+>>>>>>> main
           {totalCount ? (
             
             <p>

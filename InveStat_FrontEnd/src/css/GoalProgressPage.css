@@ -99,3 +99,223 @@
     background-color: #2d6492;
     /* color: white; */
  }
+
+
+
+ #container-goalProgress{
+   background: #DAEFFF;    
+   background-size: cover;
+   position:absolute; 
+   min-width:100%;
+   min-height:100%;
+   left:0px;
+   right:0px;
+   top:80px;
+   
+   margin-left: 0;
+   margin-right:0;
+ }
+
+ #container-goalProgress-left{
+   /* background-color: rgb(138, 138, 214); */
+   width: 35%;
+   min-height: 1000px;
+   float: left;
+
+   padding-top: 40px;
+   /* padding-left: 100px; */
+   /* padding-right: 10px; */
+
+   align-items: center;
+   position: relative;
+}
+
+#container-goalProgress-right{
+
+   /* background-color: rgb(115, 219, 167); */
+   width: 65%;
+   min-height: 1000px;
+   float: right;
+
+   padding-top: 30px;
+   padding-left: 15px;
+   padding-right: 80px;
+
+   align-items: center;
+
+}
+
+
+#currentGoal-title{
+   font-weight: bold;
+   /* width: px; */
+   align-items: left;
+   text-align: left;
+   font-size: 30px;
+   float: left;
+
+
+}
+
+#setGoal-button-v2{
+   display: block;
+   
+   width: 150px;
+   height: 38px;
+   background:#7092AD;
+   border: none;
+   border-radius: 0%;
+   opacity: 1;
+   /* box-shadow: 0 8px 30px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); */
+   float:right;
+   /* margin-left: 80%; */
+   margin-left: 110px;
+   margin-top: 5px;
+   align-items: right;
+
+
+}
+#setGoal-button-v2:hover{
+   background-color: #2d6492;
+}
+
+
+
+#goalProgressBlock-goalProgressPage{
+
+   box-shadow: 3px 5px 10px 0 rgba(177, 175, 175, 0.2), 0 6px 20px 0 rgba(87, 85, 85, 0.19);
+   background-color: rgba(255, 255, 255, 0.788);
+
+   position: relative;
+   height: 310px;
+   width: 76%;
+   margin-top: 15px;
+   margin-left: 12%;
+
+   padding-bottom: 10px;
+   padding-top: 25px;
+
+   padding-left: 35px;
+   padding-right: 35px;
+
+}
+
+#currentGoal-left{
+   /* background-color: aquamarine; */
+   width: 50%;
+   float: left;
+}
+
+#currentGoal-right{
+   /* background-color: rgb(81, 180, 61); */
+   width: 50%;
+   float:right;
+}
+
+
+#goalProgress-col{
+
+   /* border: 1.5px solid black; */
+ 
+   height: 50px;
+   width: 100%;
+
+   text-align: left;
+   position: relative;
+   align-items: center;
+   font-weight: normal;
+
+   align-items: left;
+   text-align: left;
+   vertical-align: middle;
+   font-size: 20px;
+   margin-bottom: 0;
+   padding-top: 8px;
+}
+
+#goalProgress-content{
+
+   /* border: 1.5px solid black; */
+ 
+   height: 50px;
+   width: 100%;
+
+   text-align: left;
+   position: relative;
+   align-items: center;
+   font-weight: normal;
+
+   align-items: right;
+   text-align: right;
+   font-style: italic;
+   vertical-align: bottom;
+   margin-bottom: 0;
+   font-size: 20px;
+   padding-top: 8px;
+   padding-right: 8px;
+}
+
+
+#goalPage-graph{
+   box-shadow: 3px 5px 10px 0 rgba(177, 175, 175, 0.2), 0 6px 20px 0 rgba(87, 85, 85, 0.19);
+   background-color: rgba(255, 255, 255, 0.63);
+
+   width: 100%;
+   height: 640px;
+   margin-top: 25px;
+
+   align-items: center;
+   text-align: center;
+
+   padding-top: 30px;
+   padding-bottom: 30px;
+   padding-left: 20px;
+   padding-right: 20px;
+   
+}
+
+
+#goalStatsBlock-goalProgressPage{
+
+   box-shadow: 3px 5px 10px 0 rgba(177, 175, 175, 0.2), 0 6px 20px 0 rgba(87, 85, 85, 0.19);
+   background-color: rgba(255, 255, 255, 0.788);
+
+   position: absolute;
+   height: 310px;
+   width: 76%;
+   margin-top:20px;
+   margin-left: 12%;
+
+
+   padding-bottom: 10px;
+   padding-top: 20px;
+   padding-left: 35px;
+   padding-right: 35px;
+
+}
+
+
+#goalStats-title{
+   font-weight: bold;
+   /* width: px; */
+   align-items: left;
+   text-align: left;
+   font-size: 30px;
+  
+}
+
+#performance-chart{
+   background-color: #a8b5c0;
+   position: absolute;
+
+   height: 60%;
+   width: 82%;
+
+   padding: 10px;
+}
+
+
+
+
+
+

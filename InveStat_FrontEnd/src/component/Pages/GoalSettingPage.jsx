@@ -3,6 +3,7 @@ import React from "react";
 import Joi from "joi-browser";
 import "../../Images/bg2.png"
 import "../../css/GoalSettingPage.css";
+import goalsettingService from "../../services/goalsettingService";
 
 class GoalSettingPage extends Form {
   state = {
@@ -24,8 +25,25 @@ class GoalSettingPage extends Form {
     expectedReturnPerYear: Joi.number().required(),
   };
 
-  doSubmit() {
+  async doSubmit() {
     console.log(this.state.data);
+    const { data } = this.state;
+    const res = await goalsettingService.setGoal(data);
+    console.log(res);
+    this.props.history.push("/goal-setting");
+  }
+
+  calcFV() {
+    const { data } = this.state;
+    let FV =
+      data.initialValue *
+        (1 + data.expectedReturnPerYear / 100) ** data.duration +
+      (data.additionalContribution *
+        ((1 + data.expectedReturnPerYear / 100) ** data.duration - 1)) /
+        (data.expectedReturnPerYear / 100);
+
+    if (FV) return FV.toFixed(2);
+    else return 0;
   }
   render() {
     return (
@@ -39,10 +57,10 @@ class GoalSettingPage extends Form {
               {/* <p className = "welcome-msg-3">Click here and set your own investment goal now!</p>   */}
               <h1 className = "set-goal-form-header">Set your Investment Goals</h1>
               <div id = "form_container-goalSetting">
-                <form onSubmit={this.handleSubmit}>
+              <form onSubmit={this.handleSubmit}>
                   {this.renderInput(
                     "initialValue",
-                    "What is your current portfolio Value?"
+                    "What is your current holdings' value?"
                   )}
                   {this.renderInput(
                     "duration",
@@ -50,17 +68,21 @@ class GoalSettingPage extends Form {
                   )}
                   {this.renderInput(
                     "additionalContribution",
-                    "How much can you invest every month?"
+                    "How much can you invest every year?"
+                  )}
+                  {this.renderInput(
+                    "expectedReturnPerYear",
+                    "What is your target % return per year?"
                   )}
                   {this.renderInput(
                     "overallTarget",
                     "How much do you want to have by end of your investment period?"
                   )}
-                  {this.renderInput(
-                    "expectedReturnPerYear",
-                    "What is your target return per year?"
-                  )}
-                  {this.renderButton("Submit","submitButton-GoalSettingPage")}
+                  <h3 className = "goal-calculation-msg">
+                    By our calculation, you will have $<u>{this.calcFV()}</u> by the end of
+                    your investing period.
+                  </h3>
+                 {this.renderButton("Submit","submitButton-GoalSettingPage")}
                 </form>
               </div>
 
@@ -69,6 +91,34 @@ class GoalSettingPage extends Form {
           </div>
         </div>
 
+        {/* <h1>Goal Setting</h1>
+        <form onSubmit={this.handleSubmit}>
+          {this.renderInput(
+            "initialValue",
+            "What is your current holdings' value?"
+          )}
+          {this.renderInput(
+            "duration",
+            "How long will you continue to invest?"
+          )}
+          {this.renderInput(
+            "additionalContribution",
+            "How much can you invest every year?"
+          )}
+          {this.renderInput(
+            "expectedReturnPerYear",
+            "What is your target % return per year?"
+          )}
+          {this.renderInput(
+            "overallTarget",
+            "How much do you want to have by end of your investment period?"
+          )}
+          <h3 className="FV warning mb-100">
+            by our calculation you will have $ {this.calcFV()} by the end of
+            your investing period
+          </h3>
+          {this.renderButton("Submit")}
+        </form> */}
       </React.Fragment>
     );
   }

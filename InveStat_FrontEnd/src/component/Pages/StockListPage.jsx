@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import _ from "lodash";
-import { paginate } from "./../utils/paginate";
-import SearchBox from "../common/searchBox";
-import Pagination from "../common/pagination";
-import StockListTable from "./../Tables/StockListTable";
-import watchlistService from "../../services/watchlistService";
 import auth from "../../services/authService";
 import "../../css/StockListPage.css";
 
+import watchlistService from "../../services/watchlistService";
+import StockListTable from "./../Tables/StockListTable";
+import Pagination from "../common/pagination";
+import SearchBox from "../common/searchBox";
+import { paginate } from "./../utils/paginate";
 
 class StockListPage extends Component {
   state = {
@@ -19,14 +19,21 @@ class StockListPage extends Component {
   };
 
   async componentDidMount() {
-    const stockList = await watchlistService.getStockList();
-    const watchlisted = await watchlistService.getUserWatchList(auth.getJwt());
-    for (const stock of watchlisted) {
-      const wStock = stockList.findIndex((s) => s.symbol === stock.stockID);
-      stockList[wStock].liked = true;
-      stockList[wStock].id = stock.id;
+    auth.checkExpiry();
+    try {
+      const stockList = await watchlistService.getStockList();
+      const watchlisted = await watchlistService.getUserWatchList(
+        auth.getJwt()
+      );
+      for (const stock of watchlisted) {
+        const wStock = stockList.findIndex((s) => s.symbol === stock.stockID);
+        stockList[wStock].liked = true;
+        stockList[wStock].id = stock.id;
+      }
+      this.setState({ stockList });
+    } catch (ex) {
+      console.log(ex);
     }
-    this.setState({ stockList });
   }
 
   handleLike = async (stock) => {

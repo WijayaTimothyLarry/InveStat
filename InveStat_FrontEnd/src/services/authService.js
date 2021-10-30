@@ -30,6 +30,19 @@ export function getCurrentUser() {
   }
 }
 
+export function checkExpiry() {
+  try {
+    const jwt = localStorage.getItem(tokenKey);
+    const token = jwtDecode(jwt);
+    if (token.exp * 1000 < Date.now()) {
+      logout();
+      window.location = "/";
+    } else console.log("still login");
+  } catch (ex) {
+    return null;
+  }
+}
+
 export function getCurrentUserEmail() {
   try {
     const jwt = localStorage.getItem(tokenKey);
@@ -51,4 +64,5 @@ export default {
   getCurrentUser,
   getCurrentUserEmail,
   getJwt,
+  checkExpiry,
 };

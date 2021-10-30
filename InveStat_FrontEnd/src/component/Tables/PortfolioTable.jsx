@@ -13,9 +13,21 @@ class PortfolioTable extends Component {
         </Link>
       ),
     },
-    { path: "totalValue", label: "Total Value" },
-    { path: "PnL", label: "PNL" },
-    { path: "YTD_return", label: "YTD Return" },
+    {
+      path: "totalValue",
+      label: "Total Value",
+      content: (portfolio) => <p>$ {portfolio.totalValue}</p>,
+    },
+    {
+      path: "PnL",
+      label: "PNL",
+      content: (portfolio) => <p>$ {portfolio.PnL}</p>,
+    },
+    {
+      path: "return",
+      label: "Return",
+      content: (portfolio) => <p>{portfolio.return}%</p>,
+    },
     {
       key: "delete",
       content: (portfolio) => (

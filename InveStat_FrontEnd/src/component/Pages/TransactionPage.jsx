@@ -1,13 +1,14 @@
 import React from "react";
 import Joi from "joi-browser";
-import _ from "lodash";
-import DateSelect from "../common/selectDate";
-import Form from "./../common/form";
-import portfolioService from "../../services/portfolioService";
 import auth from "../../services/authService";
+import portfolioService from "../../services/portfolioService";
 import { getStockList } from "../../services/watchlistService";
 import transactionService from "../../services/transactionService";
 import CustomSelect from "./../common/customSelect";
+import DateSelect from "../common/selectDate";
+import Form from "./../common/form";
+import "../../css/transactionPage.css";
+
 class TransactionPage extends Form {
   state = {
     data: {
@@ -19,6 +20,7 @@ class TransactionPage extends Form {
       changeInQuantity: 0,
       TransactionPrice: 0,
       brokerageCost: 0,
+      userEmail: "",
     },
     portfolioList: [],
     stockList: [],
@@ -34,17 +36,19 @@ class TransactionPage extends Form {
     changeInQuantity: Joi.number().max(100).min(1).required().label("Quantity"),
     TransactionPrice: Joi.number().min(0).required().label("Price"),
     brokerageCost: Joi.number().min(0).required().label("Brocker Cost"),
+    userEmail: Joi.string(),
   };
 
   async componentDidMount() {
+    auth.checkExpiry();
     const rawStockList = await getStockList();
     const stockList = rawStockList.map((s) => {
       return { value: s.symbol, label: s.symbol + "   |   " + s.name };
     });
 
-    const { data: portfolios } = await portfolioService.getPortfolioList(
-      auth.getJwt()
-    );
+    const portfolios = await portfolioService.getPortfolioList(auth.getJwt());
+
+    console.log(portfolios);
     const portfolioList = portfolios.map((p) => {
       return { id: p.id, name: p.portfolioName };
     });
@@ -55,21 +59,31 @@ class TransactionPage extends Form {
     data["transactionDate"] = `${(date.getYear() % 100) + 2000}-${
       date.getMonth() + 1
     }-${date.getDate()}`;
+
+    data.userEmail = auth.getCurrentUserEmail();
     this.setState({
       portfolioList,
       stockList,
       data,
     });
+    console.log(this.state);
   }
 
   async doSubmit() {
-    const { data } = this.state;
-    const res = await transactionService.addTransaction(data);
-    window.location = "/";
+    try {
+      const { data } = this.state;
+      await transactionService.addTransaction(data);
+      await portfolioService.updatePortfolio(data.id);
+
+      window.location = "/";
+    } catch (ex) {
+      console.log(ex);
+    }
   }
 
   handleDateChange = (date) => {
     const data = { ...this.state.data };
+    console.log(this.validate());
     data["rawdate"] = date;
     if (date) {
       data["transactionDate"] = `${(date.getYear() % 100) + 2000}-${
@@ -118,27 +132,45 @@ class TransactionPage extends Form {
   render() {
     return (
       <React.Fragment>
-        <h1>Transaction</h1>
-        <form onSubmit={this.handleSubmit}>
-          {this.renderDateSelect("rawdate", "transactionDate", "Date")}
-          {this.renderSelect("transactionType", "Transaction Type", [
-            { id: "buy", name: "Buy" },
-            { id: "sell", name: "Sell" },
-          ])}
-          {this.renderSelect("id", "Portfolio", this.state.portfolioList)}
-          {this.renderCustomSelect(
-            "purchasedStockStockTickerId",
-            "Stock",
-            this.state.stockList
-          )}
-          {this.renderInput("changeInQuantity", "Quatity", "number")}
-          {this.renderInput("TransactionPrice", "Price", "number")}
-          {this.renderInput("brokerageCost", "Broker Cost", "number")}
-          {this.renderButton("Submit")}
-        </form>
+        <div id = "container-transactionPage">
+          <div id="newTranctWrapper">
+            <p id="newTranct-msg">Add Transaction</p>
+
+            <div id="newTranctFormWrapper">
+                <form onSubmit={this.handleSubmit}>
+                <div id = "dateWrapper-Tranct"> 
+                  <div id= "dateWrapper-TranctLeft"> Date
+                  </div>
+                  <div id = "dateWrapper-TranctRight">                 
+                  {this.renderDateSelect("rawdate", "transactionDate", "Date")}
+                  </div>
+                </div>
+                {this.renderSelect("transactionType", "Transaction Type", [
+                  { id: "Buy", name: "Buy" },
+                  { id: "Sell", name: "Sell" },
+                ])}
+                {this.renderSelect("id", "Portfolio", this.state.portfolioList)}
+                {this.renderCustomSelect(
+                  "purchasedStockStockTickerId",
+                  "Stock",
+                  this.state.stockList
+                )}
+                {this.renderInput("changeInQuantity", "Quatity", "number")}
+                {this.renderInput("TransactionPrice", "Price", "number")}
+                {this.renderInput("brokerageCost", "Broker Cost", "number")}
+                {this.renderButton("Submit","doneButton-newTranct")}
+              </form>
+            </div>
+
+        </div>
+        </div>
+        
+        
       </React.Fragment>
     );
   }
 }
 
 export default TransactionPage;
+
+

@@ -1,28 +1,37 @@
 import http from "./httpService";
 import { apiUrl } from "../config.json";
+import purchasedStockService from "./purchasedStockService";
+import auth from "./authService";
 
 const apiEndpoint = apiUrl + "/transaction";
 
 export async function addTransaction(data) {
-  const {
-    transactionType,
-    TransactionPrice,
-    changeInQuantity,
-    transactionDate,
-    id: portfolioId,
-    purchasedStockStockTickerId,
-    brokerageCost,
-  } = data;
+  const submitData = {
+    ...data,
+    portfolioId: data.id,
+  };
+  delete submitData.id;
+  console.log(submitData);
+  await http.post(apiEndpoint, submitData);
 
-  await http.post(apiEndpoint, {
-    transactionType,
-    TransactionPrice,
-    changeInQuantity,
-    transactionDate,
-    portfolioId,
-    purchasedStockStockTickerId,
-    brokerageCost,
-  });
+  await http.put(apiEndpoint, submitData);
 }
 
-export default { addTransaction };
+export async function getTransactionList(ticker) {
+  try {
+    const purchasedStockList =
+      await purchasedStockService.getAllPurchasedStockList(auth.getJwt());
+    const { id } = purchasedStockList.find((s) => {
+      return s.stockTickerId === ticker;
+    });
+
+    const { data } = await http.get(apiEndpoint, {
+      headers: { purchasedStockId: id },
+    });
+    return data;
+  } catch (ex) {
+    console.log(ex);
+    return ex;
+  }
+}
+export default { addTransaction, getTransactionList };

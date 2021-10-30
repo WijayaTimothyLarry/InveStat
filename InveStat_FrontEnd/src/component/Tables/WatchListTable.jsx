@@ -8,7 +8,7 @@ class WatchListTable extends Component {
       path: "stockID",
       label: "Stock",
       content: (stock) => (
-        <Link to={`/stock/${stock.stockID}`}>{stock.stockID}</Link>
+        <Link to={`/stock-page/${stock.stockID}`}>{stock.stockID}</Link>
       ),
     },
     {

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Form from "./form";
 import Joi from "joi-browser";
 import * as userService from "../../services/userService";
@@ -50,7 +50,7 @@ class SignUpForm extends Form {
       {/* CONTENT */}
         <div id="container-left-signUpPage">
           <div className="logoWrapper">
-              <img src = {logo} className="logo"></img>
+              <img src = {logo} id="logo-signUpPage"></img>
               <h3 className="branding-msg" > We provide simple, comprehensive and intuitive investment and portfolio solutions for both business and personal use.</h3>
           </div>
         </div>
@@ -58,6 +58,7 @@ class SignUpForm extends Form {
         <div id="container-right-signUpPage">
         
           <div  id="signUpFormBorder">
+            <div id="signUpFormInner">
               {/* delete border laterfor login form wrapper, not in use */}
               {/* <div className="signUpFormWrapper"> */}
                   <form clas onSubmit={this.handleSubmit}>
@@ -70,6 +71,8 @@ class SignUpForm extends Form {
                   <div className="alt-msg">
                     Already have an account? <a href="/login">Log in</a> here.
                   </div>
+
+            </div>
               {/* </div> */}
           </div>
 

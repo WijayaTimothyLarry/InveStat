@@ -37,7 +37,7 @@
 }
 
 #signUpFormBorder{
-    background-color: rgb(21, 255, 0);
+    /* background-color: rgb(21, 255, 0); */
     height:70%;
 
     margin-top: 15%;
@@ -76,7 +76,10 @@
     height:50%;
     width:50%;
 } */
-
+#logo-signUpPage{
+    width:250px;
+    height:140px;
+}
 .logoWrapper{
     /* background-color: rgb(255, 153, 0); */
     border-right: 1.5px solid black;
@@ -112,11 +115,24 @@
     padding-top: 5%;
 }
 
+
+
+
 .alt-msg{
     font-family: Roboto;
     font-size: 13px;
     padding-top:2%;
 }
+
+#signUpFormInner{
+    /* background-color: aqua; */
+    width:70%;
+    margin:auto;
+
+    align-items: left;
+}
+
+
 
 #username{
     display: inline-block;
@@ -130,10 +146,10 @@
     background: transparent;
     padding: var(--field-padding);
     outline: none;
-    margin-inline-start: 10px;
+    margin-inline-start: 73px;
     text-indent:5px;
 
-    width:35%;
+    width:55%;
 }
 
 #password{
@@ -148,10 +164,10 @@
     background: transparent;
     padding: var(--field-padding);
     outline: none;
-    margin-inline-start: 10px;
+    margin-inline-start: 73px;
     text-indent:5px;
 
-    width:35%;
+    width:55%;
 }
 
 #confirmPass{
@@ -166,10 +182,10 @@
     background: transparent;
     padding: var(--field-padding);
     outline: none;
-    margin-inline-start: 10px;
+    margin-inline-start: 13px;
     text-indent:5px;
 
-    width:35%;
+    width:55%;
 }
 
 #name{
@@ -184,13 +200,13 @@
     background: transparent;
     padding: var(--field-padding);
     outline: none;
-    margin-inline-start: 10px;
+    margin-inline-start: 95px;
     text-indent:5px;
 
-    width:35%;
+    width:55%;
 }
 /* label{
-    text-align: left !important;
+    text-align: left !important;z
     margin-left: -50%;
     text-indent: -15px;
 } */
