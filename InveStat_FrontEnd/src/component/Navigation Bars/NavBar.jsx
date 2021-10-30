@@ -39,9 +39,9 @@ const NavBar = () => {
           <NavLink className="nav-item nav-link" to="/goal-setting">
             Goal Setting
           </NavLink>
-          <NavLink className="nav-item nav-link" to="/customers">
+          {/* <NavLink className="nav-item nav-link" to="/customers">
             Profile
-          </NavLink>
+          </NavLink> */}
         </div>
       </div>
 

@@ -7,7 +7,7 @@
     width:100%;
     height:100%;
     left:0px;
-    margin-top: -100px;
+    /* margin-top: -100px; */
  }
 
 #bg-loginPage {  
@@ -150,7 +150,7 @@
     padding-top:15%;
 
     padding-right: 0%;
-    padding-left: 0%;
+    padding-left: 15%;
 
     /* align-items: flex-start; */
 
@@ -158,51 +158,6 @@
 
 }
 #username{
-    /* display: inline-block;
-    width: fit-content; */
-
-
-    
-    /* position:absolute; */
-    
-    /* left:20px; */
-    
-    /* border:none;
-    border-radius: 0;
-    border-bottom: 1.5px solid black;
-    -webkit-appearance: none;
-    -ms-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background: transparent; */
-
-    /* margin-left: -60px; */
-
-    /* align-items: left; */
-    /* margin-inline-start: 10px;
-    
-    text-indent:5px;
-    vertical-align:middle; */
-
-    /* text-align: right; */
-
-    /* font: px Arial, Helvetica, sans-serif; */
-
-    
-    /* border: none;
-    border-radius: 0%;
-    border-bottom: 1.5px solid black;
-    -webkit-appearance: none;
-    -ms-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background: transparent;
-    width:300px;  */
-    /* display:inline-block; */
-    /* text-align: left;
-    padding: var(--field-padding);
-    outline: none; */
-
     display: inline-block;
     border:none;
     border-radius: 0;
@@ -223,7 +178,8 @@
     margin-inline-start: 10px;
     
     text-indent:5px;
-    
+
+
 }
 
 /* label{
@@ -336,7 +292,7 @@
     margin-top:20px;
     /* padding-left: 20px; */
     
-    margin-left: auto;
+    margin-left: 220px;
     /* margin:auto; */
     /* margin-left:3%; */
    
@@ -359,6 +315,12 @@
 
 
   
+ .alt-msg-Login{
+    font-family: Roboto;
+    font-size: 13px;
+    padding-left:200px;
+    padding-top: 2%;
+}
 
 
 

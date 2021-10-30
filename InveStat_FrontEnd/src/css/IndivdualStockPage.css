@@ -7,9 +7,10 @@
   left: 0px;
   right: 0px;
   top: 0px;
-  margin-top: 80px;
+  margin-top: 0px;
   opacity: 0.7;
-  /* padding-top: 0%; */
+  padding-top: 0% !important;
+
 
   color: black;
 }
@@ -22,6 +23,7 @@
   position: center;
   width: 100%;
   min-height: 100%;
+  margin-top: 0px;
 
   padding-top: 0px;
   padding-left: 60px;
@@ -33,6 +35,8 @@
   font-weight: bold;
   font-size: 30px;
   text-align: left;
+
+  padding-top: 0px;
 }
 
 #IndivStockPage-msg {
@@ -49,6 +53,7 @@
   padding-top: 25px;
 
   text-indent: 15px;
+  float:left;
 }
 
 #indivStockGraphWrapper {
@@ -66,7 +71,7 @@
   padding-top: 15px;
 }
 
-#IndivStockPage-add-button {
+#IndivStockPage-add-button{
   /* background-color: blueviolet; */
   background: transparent;
 
@@ -74,12 +79,13 @@
   border-bottom: 1px solid black;
   border-radius: 0%;
 
-  width: 300px;
+  width: 150px;
   color: black;
   float: right;
 
-  margin-right: 5px;
+  margin-right: 30px;
   align-items: center;
+  text-align: center;
   text-indent: 0%;
 
   float: right;

@@ -66,7 +66,7 @@ class GoalProgressPage extends Component {
                     id="setGoal-button-v2"
                     to="/goal-setting/set-goal"
                   >
-                    Set Goal
+                    Change Goal
                   </Link>
                 </p>
                 <div id="currentGoal-left">
@@ -86,12 +86,12 @@ class GoalProgressPage extends Component {
                 </div>
               </div>
 
-              <div class="group" id="goalStatsBlock-goalProgressPage">
+              {/* <div class="group" id="goalStatsBlock-goalProgressPage">
                 <p id="goalStats-title">My Performance</p>
                 <div id="performance-chart">
                   Insert performance over time line chart
                 </div>
-              </div>
+              </div> */}
             </div>
             <div id="container-goalProgress-right">
               <div id="goalPage-graph">

@@ -56,7 +56,7 @@ class LoginForm extends Form {
                   {this.renderButton("Login", "loginButton")}
                 </form> 
 
-                <div className="alt-msg">
+                <div className="alt-msg-Login">
                     Have not registered yet? <a href="/signup">Sign Up</a> here.
                 </div>
             {/* </div> */}
