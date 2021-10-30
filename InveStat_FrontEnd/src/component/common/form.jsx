@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import Joi from "joi-browser";
 import Input from "./input";
 import Select from "./select";
+import "../../css/LoginPage.css";
+
+
+// import 'react-toastify/scss/main.scss'
 
 class Form extends Component {
   state = {
@@ -45,18 +49,19 @@ class Form extends Component {
     this.setState({ data, errors });
   };
 
-  renderButton(label) {
+  renderButton(label, id="id") {
     return (
-      <button disabled={this.validate() !== null} className="btn btn-primary">
+      <button disabled={this.validate() !== null} className="btn btn-primary" id={id}>
         {label}
       </button>
     );
   }
 
-  renderInput(name, label, type = "text") {
+  renderInput(name, label,type = "text") {
     const { data, errors } = this.state;
     return (
       <Input
+        // id={id}
         type={type}
         name={name}
         value={data[name]}

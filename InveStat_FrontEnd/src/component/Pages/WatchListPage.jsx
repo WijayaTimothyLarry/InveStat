@@ -8,6 +8,8 @@ import WatchListTable from "../Tables/WatchListTable";
 import { paginate } from "./../utils/paginate";
 import SearchBox from "../common/searchBox";
 import Pagination from "../common/pagination";
+import "../../css/WatchListPage.css";
+
 
 class WatchListPage extends Component {
   state = {
@@ -90,8 +92,62 @@ class WatchListPage extends Component {
     const { totalCount, data } = this.getPagedData();
     return (
       <React.Fragment>
-        <main className="container">
-          <h1 className="watchlist-title mb-4">Watchlist</h1>
+        {/* <div className = "bg-pic"> */}
+          <div  id = "bg-watchlist">
+            <div className="container" id="container-WatchList">
+              <p id="watchlist-msg">
+                Showing {totalCount} stocks in the watchlist
+                <Link className="btn btn-primary" id = "wathlist-add-button"to="/stocklist">
+                  + Add New Stock to my Watchlist
+                </Link>
+              </p>
+
+              <SearchBox id="watchlist-searchBar"             
+                onChange={this.handleSearch}
+                 value={this.state.searchQuery}
+              /> 
+
+                  {/* <SearchBox
+                id="watchlist-searchBar"
+                 onChange={this.handleSearch}
+                 value={this.state.searchQuery}
+              /> */}
+
+
+              {/* <div id="WatchListTable"
+                    stockList={data}
+                    onLike={this.handleLike}
+                    onSort={this.handleSort}
+                    sortColumn={sortColumn}>
+              </div> */}
+
+              <div id="watchlistTableWraper">
+                <WatchListTable
+                  id="watchlistTable"
+                  stockList={data}
+                  onLike={this.handleLike}
+                  onSort={this.handleSort}
+                  sortColumn={sortColumn}
+                />
+
+                <Pagination
+                  itemsCount={totalCount}
+                  pageSize={pageSize}
+                  currentPage={currentPage}
+                  onPageChange={this.handlePageChange}
+                />
+              </div>
+
+          
+
+
+
+            </div>
+          </div>
+        {/* </div>   */}
+        {/* <body id="container-WatchList">
+          hi
+          <h1 className="watchlist-title">Watchlist</h1>
           <p>
             Showing {totalCount} stocks in the watchlist
             <Link className="btn btn-primary float-right" to="/stocklist">
@@ -114,7 +170,7 @@ class WatchListPage extends Component {
             currentPage={currentPage}
             onPageChange={this.handlePageChange}
           />
-        </main>
+        </body> */}
       </React.Fragment>
     );
   }
