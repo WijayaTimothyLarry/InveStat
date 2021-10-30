@@ -57,10 +57,8 @@ class IndividualStockPage extends Component {
     return (
       <React.Fragment>
         <div id="bg-IndivStockPage">
-          <div id="container-IndivStockPage">
-            <p id="stockName">{this.props.match.params.ticker}</p>
-
-            {/* placeholder for graph */}
+          <div className="container" id="container-IndivStockPage">
+            <h1 id="stockName">{this.props.match.params.ticker}</h1>
             <div id="indivStockGraphWrapper">
               <StockGraph stockData={stockData} />
             </div>

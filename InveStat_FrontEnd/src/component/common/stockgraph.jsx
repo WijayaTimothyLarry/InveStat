@@ -4,11 +4,11 @@ import { Line } from "react-chartjs-2";
 const StockGraph = ({ stockData }) => {
   console.log("stockdata", stockData);
   const dataStock = {
-    labels: stockData.date.reverse(),
+    labels: stockData.date,
     datasets: [
       {
         label: stockData.symbol,
-        data: stockData.price.reverse(),
+        data: stockData.price,
         fill: true,
         backgroundColor: "rgba(115, 184, 246, 0.4)",
         borderColor: "rgba(115, 184, 246, 0.6)",
@@ -22,7 +22,7 @@ const StockGraph = ({ stockData }) => {
 
   const optionsStock = {
     plugins: { legend: { display: false } },
-    layout: { padding: { bottom: 60, top: 40 } },
+    layout: { padding: { bottom: 60, top: 0 } },
     scales: {
       y: {
         ticks: {
