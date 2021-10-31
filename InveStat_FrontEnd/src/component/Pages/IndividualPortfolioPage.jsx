@@ -87,12 +87,6 @@ class IndividualPortfolioPage extends Component {
           <div  id = "bg-IndivPortPage">
             <div className="container" id="container-IndivPortPage">
             <p id="portName">{this.props.match.params.portfolioname}</p>
-
-            {/* placeholder for graph */}
-              <div id="indivPortGraphWrapper">
-                placeholder for individual portfolio graph
-              </div>
-              
               <p id="IndivPortPage-msg">Showing {totalCount} stocks in the database:
                 <Link className="btn btn-primary" id = "IndivPortPage-add-button"to="/transaction/new">
                     + Add New Transaction to my Portfolio
