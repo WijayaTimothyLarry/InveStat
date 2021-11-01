@@ -4,7 +4,6 @@ import Input from "./input";
 import Select from "./select";
 import "../../css/LoginPage.css";
 
-
 // import 'react-toastify/scss/main.scss'
 
 class Form extends Component {
@@ -16,7 +15,6 @@ class Form extends Component {
     const options = { abortEarly: false };
     const { error } = Joi.validate(this.state.data, this.schema, options);
     if (!error) return null;
-
     const errors = {};
     for (let item of error.details) errors[item.path[0]] = item.message;
     return errors;
@@ -49,15 +47,19 @@ class Form extends Component {
     this.setState({ data, errors });
   };
 
-  renderButton(label, id="id") {
+  renderButton(label, id = "id") {
     return (
-      <button disabled={this.validate() !== null} className="btn btn-primary" id={id}>
+      <button
+        disabled={this.validate() !== null}
+        className="btn btn-primary"
+        id={id}
+      >
         {label}
       </button>
     );
   }
 
-  renderInput(name, label,type = "text") {
+  renderInput(name, label, type = "text") {
     const { data, errors } = this.state;
     return (
       <Input
