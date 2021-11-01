@@ -1,7 +1,7 @@
 import Form from "../common/form";
 import React from "react";
 import Joi from "joi-browser";
-import "../../Images/bg2.png"
+import "../../Images/bg2.png";
 import "../../css/GoalSettingPage.css";
 import goalsettingService from "../../services/goalsettingService";
 
@@ -50,14 +50,16 @@ class GoalSettingPage extends Form {
       <React.Fragment>
         <div id="bg-pic-goalSetting">
           <div id="bg-goalSetting">
-            <div id = "container-goalSetting">
+            <div id="container-goalSetting">
               {/* <h1 class="welcome-msg">Welcome to InveStat, my name</h1> */}
               {/* add here the name of user later */}
               {/* <p className = "welcome-msg-2">InveStat is a platform for you to track your investment goals and analyse how your current portfolio’s perform against your goal. It aims to help investors to gain a better understanding of their investment progress overtime, and how far they have achieved against their goals. </p> */}
               {/* <p className = "welcome-msg-3">Click here and set your own investment goal now!</p>   */}
-              <h1 className = "set-goal-form-header">Set your Investment Goals</h1>
-              <div id = "form_container-goalSetting">
-              <form onSubmit={this.handleSubmit}>
+              <h1 className="set-goal-form-header">
+                Set your Investment Goals
+              </h1>
+              <div id="form_container-goalSetting">
+                <form onSubmit={this.handleSubmit}>
                   {this.renderInput(
                     "initialValue",
                     "What is your current holdings' value?"
@@ -78,15 +80,14 @@ class GoalSettingPage extends Form {
                     "overallTarget",
                     "How much do you want to have by end of your investment period?"
                   )}
-                  <h3 className = "goal-calculation-msg">
-                    By our calculation, you will have $<u>{this.calcFV()}</u> by the end of
-                    your investing period.
+                  <h3 className="goal-calculation-msg">
+                    By our calculation, you will have $<u>{this.calcFV()}</u> by
+                    the end of your investing period. All fields are required to
+                    be filled, else not allowed to submit.
                   </h3>
-                 {this.renderButton("Submit","submitButton-GoalSettingPage")}
+                  {this.renderButton("Submit", "submitButton-GoalSettingPage")}
                 </form>
               </div>
-
-
             </div>
           </div>
         </div>
@@ -125,8 +126,6 @@ class GoalSettingPage extends Form {
 }
 
 export default GoalSettingPage;
-
-
 
 // <h1>Goal Setting</h1>
 // <form onSubmit={this.handleSubmit}>
