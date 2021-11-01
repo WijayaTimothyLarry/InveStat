@@ -132,45 +132,48 @@ class TransactionPage extends Form {
   render() {
     return (
       <React.Fragment>
-        <div id = "container-transactionPage">
+        <div id="container-transactionPage">
           <div id="newTranctWrapper">
             <p id="newTranct-msg">Add Transaction</p>
 
             <div id="newTranctFormWrapper">
-                <form onSubmit={this.handleSubmit}>
-                <div id = "dateWrapper-Tranct"> 
-                  <div id= "dateWrapper-TranctLeft"> Date
-                  </div>
-                  <div id = "dateWrapper-TranctRight">                 
-                  {this.renderDateSelect("rawdate", "transactionDate", "Date")}
+              <form onSubmit={this.handleSubmit}>
+                <div id="dateWrapper-Tranct">
+                  <div id="dateWrapper-TranctLeft"> Date*</div>
+                  <div id="dateWrapper-TranctRight">
+                    {this.renderDateSelect(
+                      "rawdate",
+                      "transactionDate*",
+                      "Date*"
+                    )}
                   </div>
                 </div>
-                {this.renderSelect("transactionType", "Transaction Type", [
+                {this.renderSelect("transactionType", "Transaction Type*", [
                   { id: "Buy", name: "Buy" },
                   { id: "Sell", name: "Sell" },
                 ])}
-                {this.renderSelect("id", "Portfolio", this.state.portfolioList)}
+                {this.renderSelect(
+                  "id",
+                  "Portfolio*",
+                  this.state.portfolioList
+                )}
                 {this.renderCustomSelect(
                   "purchasedStockStockTickerId",
-                  "Stock",
+                  "Stock*",
                   this.state.stockList
                 )}
-                {this.renderInput("changeInQuantity", "Quatity", "number")}
-                {this.renderInput("TransactionPrice", "Price", "number")}
+                {this.renderInput("changeInQuantity", "Quatity*", "number")}
+                {this.renderInput("TransactionPrice", "Price*", "number")}
                 {this.renderInput("brokerageCost", "Broker Cost", "number")}
-                {this.renderButton("Submit","doneButton-newTranct")}
+                <p>* input is required, else not allowed to submit</p>
+                {this.renderButton("Submit", "doneButton-newTranct")}
               </form>
             </div>
-
+          </div>
         </div>
-        </div>
-        
-        
       </React.Fragment>
     );
   }
 }
 
 export default TransactionPage;
-
-
