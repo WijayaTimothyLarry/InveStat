@@ -89,18 +89,20 @@
     /* padding: auto; */
 
     padding-top: 10px;
+    padding:auto;
 
     display: block;
 
     /* text-align: left; */
     align-items: center;
+    text-align: center;
 }
 
 
 
 #portfolioName{
 
-    width: 200px;
+    width:30%;
     border:none;
     border-bottom: 1.5px solid black;
     border-radius: 0;
@@ -113,6 +115,8 @@
 
     display: inline-block;
     align-items: center;
+
+    /* margin-left: 30%; */
 
  
 }
