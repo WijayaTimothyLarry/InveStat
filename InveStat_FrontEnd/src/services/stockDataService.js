@@ -22,8 +22,14 @@ export async function getStockHistoricalData(tickerId) {
     apiKey;
   const { data } = await http.get(apiEndpoint);
   console.log(data);
-  const date = data.historical.slice(0, 30).map((s) => s.date);
-  const price = data.historical.slice(0, 30).map((s) => s.close.toFixed(2));
+  const date = data.historical
+    .slice(0, 30)
+    .map((s) => s.date)
+    .reverse();
+  const price = data.historical
+    .slice(0, 30)
+    .map((s) => s.close.toFixed(2))
+    .reverse();
   return { date: date, price: price, symbol: data.symbol };
 }
 

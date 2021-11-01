@@ -6,7 +6,7 @@ const MainGraph = ({ portfolioGraphData }) => {
   const datasets = portfolioTotalValue.map((d) => {
     return {
       label: d.portfolioName,
-      data: d.portfolioHistoricalValue.reverse(),
+      data: d.portfolioHistoricalValue,
       fill: true,
       backgroundColor: "rgba(255, 99, 0, 0.4)",
       borderColor: "rgba(255, 99, 0, 0.2)",
@@ -17,7 +17,7 @@ const MainGraph = ({ portfolioGraphData }) => {
     };
   });
   const data = {
-    labels: date.reverse(),
+    labels: date,
     datasets: datasets,
   };
 

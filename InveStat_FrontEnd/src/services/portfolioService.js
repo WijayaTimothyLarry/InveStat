@@ -41,6 +41,28 @@ export async function getCompletePortfolioList(token) {
   return portfolioList;
 }
 
+export async function getTotalInvestementValue(token) {
+  const { data: portfolioList } = await http.get(apiEndpoint, {
+    headers: { "x-access-token": token },
+  });
+  var currentInvestmentValue = 0;
+  for (const portfolio of portfolioList) {
+    portfolio.totalValue = 0;
+    const portfolioId = portfolio.id;
+    const { data: stockList } =
+      await purchasedStockService.getPurchasedStockList(portfolioId);
+    for (const stock of stockList) {
+      const ticker = stock.stockTickerId;
+      const data = await stockDataService.getStockQuote(ticker);
+      stock.value = data.price * stock.totalQuantity;
+      portfolio.totalValue += stock.value;
+    }
+    portfolio.totalValue = portfolio.totalValue.toFixed(2);
+    currentInvestmentValue += parseFloat(portfolio.totalValue);
+  }
+  return currentInvestmentValue.toFixed(2);
+}
+
 export async function getHistoricalData(portfolioId) {
   const { data: stockList } = await purchasedStockService.getPurchasedStockList(
     portfolioId
@@ -60,7 +82,7 @@ export async function getHistoricalData(portfolioId) {
     });
   }
 
-  return { totalValue };
+  return { totalValue: totalValue.reverse() };
 }
 
 export async function getGraphData(token) {
@@ -118,4 +140,5 @@ export default {
   deletePortfolio,
   updatePortfolio,
   getGraphData,
+  getTotalInvestementValue,
 };

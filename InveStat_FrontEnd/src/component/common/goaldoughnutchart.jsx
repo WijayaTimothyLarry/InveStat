@@ -2,7 +2,7 @@ import React from "react";
 import { Doughnut } from "react-chartjs-2";
 
 const DoughnutChart = ({ goalData, currentInvestmentValue, completion }) => {
-  const achievedgoal = currentInvestmentValue.totalValue;
+  const achievedgoal = currentInvestmentValue;
   const remaininggoal = goalData.overallTarget - achievedgoal;
   const completionPercentage = String(completion) + "%";
   console.log(completionPercentage);

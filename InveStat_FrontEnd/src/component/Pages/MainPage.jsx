@@ -79,7 +79,6 @@ class MainPage extends Component {
       <React.Fragment>
         <div id="container-mainPage">
           <div id="container-mainPage-left">
-
             <p id="welcomeBack-msg">Welcome Back, {user}. </p>
 
             <div class="group" id="goalProgressBlock-mainPage">
@@ -111,7 +110,6 @@ class MainPage extends Component {
               {totalCount ? (
                 <div>
                   <div id="mainPage-msg-1">
-
                     Showing {totalCount} portfolio in the database:
                   </div>
                   <div>
@@ -127,7 +125,6 @@ class MainPage extends Component {
               ) : (
                 <div>
                   <div id="mainPage-msg-2">
-
                     You have no portfolio right now.
                   </div>
                   <div>
@@ -160,6 +157,5 @@ class MainPage extends Component {
     );
   }
 }
-
 
 export default MainPage;

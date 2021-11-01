@@ -4,21 +4,26 @@ import "../../css/GoalProgressPage.css";
 import "../../Images/bg2.png";
 import goalsettingService from "../../services/goalsettingService";
 import portfolioHistoryService from "../../services/portfolioHistoryService";
+import auth from "../../services/authService";
 import DoughnutChart from "./../common/goaldoughnutchart";
+import portfolioService from "../../services/portfolioService";
 class GoalProgressPage extends Component {
   state = {
     goalData: {},
-    currentInvestmentValue: {},
+    currentInvestmentValue: 0,
     completion: "",
   };
   async componentDidMount() {
+    auth.checkExpiry();
+
     const goalData = await goalsettingService.getGoal();
     this.setState({ goalData });
     console.log(goalData);
     const currentInvestmentValue =
-      await portfolioHistoryService.getLatestPortfolioValue();
+      await portfolioService.getTotalInvestementValue(auth.getJwt());
+    console.log("current", currentInvestmentValue);
     this.setState({ currentInvestmentValue });
-    const achievedgoal = currentInvestmentValue.totalValue;
+    const achievedgoal = currentInvestmentValue;
     const completion = (
       (parseFloat(achievedgoal) / parseFloat(goalData.overallTarget)) *
       100
@@ -80,7 +85,7 @@ class GoalProgressPage extends Component {
                     ${this.state.goalData.overallTarget}
                   </p>
                   <p id="goalProgress-content">
-                    ${this.state.currentInvestmentValue.totalValue}
+                    ${this.state.currentInvestmentValue}
                   </p>
                   <p id="goalProgress-content"> {this.state.completion} %</p>
                 </div>
