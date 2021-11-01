@@ -27,28 +27,28 @@ router.get("/delete/:email", async function (req, res, next) {
 router.post("/", async (req, res) => {
   const userInfo = req.body;
   let currentUser = await user
-  .findOne({ where: { email: userInfo.email } })
-  .catch((e) => {
-    console.log(e.message);
-  });
+    .findOne({ where: { email: userInfo.email } })
+    .catch((e) => {
+      console.log(e.message);
+    });
 
-  if(!currentUser){
-  //Compare with existing user (if email has been used return exception saying email has been used)
+  if (!currentUser) {
+    //Compare with existing user (if email has been used return exception saying email has been used)
 
-  const salt = await bcrypt.genSalt(10);
-  userInfo.password = await bcrypt.hash(userInfo.password, salt);
+    const salt = await bcrypt.genSalt(10);
+    userInfo.password = await bcrypt.hash(userInfo.password, salt);
 
-  const currentUser = await user.create(userInfo);
-  const token = jwt.sign(
-    { email: userInfo.email, name: userInfo.name },
-    JWT_SECRET,
-    {
-      expiresIn: "1h",
-    }
-  );
-  res.json({ auth: true, token: token });
-  }else{
-    res.json({"message":"user exists."});
+    const currentUser = await user.create(userInfo);
+    const token = jwt.sign(
+      { email: userInfo.email, name: userInfo.name },
+      JWT_SECRET,
+      {
+        expiresIn: "1h",
+      }
+    );
+    res.json({ auth: true, token: token });
+  } else {
+    res.json({ auth: false, message: "This email is already registered" });
   }
   //res.json(userInfo);
 });

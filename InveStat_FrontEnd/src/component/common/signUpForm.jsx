@@ -31,8 +31,14 @@ class SignUpForm extends Form {
     try {
       const { data } = this.state;
       const response = await userService.register(data);
-      authService.loginWithJwt(response.data.token);
-      window.location = "/main-page";
+      if (response.data.auth) {
+        authService.loginWithJwt(response.data.token);
+        window.location = "/main-page";
+      } else {
+        const errors = { ...this.state.errors };
+        errors.username = response.data.message;
+        this.setState({ errors });
+      }
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };
