@@ -4,6 +4,8 @@ import MainPage from "./MainPage";
 import "../../css/WelcomePage.css";
 import "../../Images/bg2.png"
 import logo from "../../logo/InveStatLogo2.png";
+import { Link } from "react-router-dom";
+
 
 class WelcomePage extends Component {
   goToMainPage() {
@@ -23,9 +25,12 @@ class WelcomePage extends Component {
                   </p>
               </div>
               <div className="buttonWrapper">
-                <button className="login"><a href="/login"> Login</a></button>
-                <button className="signup"><a href="/signup">Sign Up</a></button>
-
+              <Link className="btn btn-primary" id = "signup" to="/signup">
+                 Sign Up
+              </Link>
+              <Link className="btn btn-primary" id = "login" to="/login">
+                 Login
+              </Link>
               </div>
              
 
