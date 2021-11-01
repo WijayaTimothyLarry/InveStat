@@ -43,7 +43,7 @@
 
     padding-left: 10%;
     padding-right: 10%;
-    padding-top: 80px;
+    padding-top: 200px;
  }
 
 
@@ -84,7 +84,7 @@
     align-items: center;
     align-self: center;
     
-    width: 2px;
+    width: 200px;
     height: 38px;
     background:#7092AD;
     border: none;
