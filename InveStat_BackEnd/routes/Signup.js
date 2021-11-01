@@ -26,11 +26,13 @@ router.get("/delete/:email", async function (req, res, next) {
 
 router.post("/", async (req, res) => {
   const userInfo = req.body;
-  console.log(userInfo);
-  console.log(userInfo.name);
-  console.log(userInfo.email);
-  console.log(userInfo.password);
+  let currentUser = await user
+  .findOne({ where: { email: userInfo.email } })
+  .catch((e) => {
+    console.log(e.message);
+  });
 
+  if(!currentUser){
   //Compare with existing user (if email has been used return exception saying email has been used)
 
   const salt = await bcrypt.genSalt(10);
@@ -45,6 +47,9 @@ router.post("/", async (req, res) => {
     }
   );
   res.json({ auth: true, token: token });
+  }else{
+    res.json({"message":"user exists."});
+  }
   //res.json(userInfo);
 });
 
