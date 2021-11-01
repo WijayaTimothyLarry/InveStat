@@ -4,7 +4,7 @@ import { Doughnut } from "react-chartjs-2";
 const DoughnutChart = ({ goalData, currentInvestmentValue, completion }) => {
   const achievedgoal = currentInvestmentValue;
   const remaininggoal = goalData.overallTarget - achievedgoal;
-  const completionPercentage = String(completion) + "%";
+  const completionPercentage = String(completion);
   console.log(completionPercentage);
   const options = {
     responsive: true,
@@ -45,10 +45,11 @@ const DoughnutChart = ({ goalData, currentInvestmentValue, completion }) => {
         const fontSize = (height / 160).toFixed(2);
         ctx.font = fontSize + "em sans-serif";
         ctx.textBaseline = "top";
-        const text = completionPercentage,
-          textX = Math.round((width - ctx.measureText(text).width) / 2),
+        const textX = Math.round(
+            (width - ctx.measureText(String(completion)).width) / 2
+          ),
           textY = height / 2;
-        ctx.fillText(text, textX, textY);
+        ctx.fillText(String(completion), textX, textY);
         ctx.save();
       },
     },
