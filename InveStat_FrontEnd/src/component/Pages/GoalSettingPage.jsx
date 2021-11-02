@@ -18,11 +18,11 @@ class GoalSettingPage extends Form {
   };
 
   schema = {
-    initialValue: Joi.string().required(),
-    duration: Joi.number().required(),
+    initialValue: Joi.string().min(0).required(),
+    duration: Joi.number().min(0).required(),
     additionalContribution: Joi.number().required(),
-    overallTarget: Joi.number().required(),
-    expectedReturnPerYear: Joi.number().required(),
+    overallTarget: Joi.number().min(0).required(),
+    expectedReturnPerYear: Joi.number().min(0).required(),
   };
 
   async doSubmit() {
@@ -66,7 +66,7 @@ class GoalSettingPage extends Form {
                   )}
                   {this.renderInput(
                     "duration",
-                    "How long will you continue to invest?"
+                    "How long will you continue to invest? (in years)"
                   )}
                   {this.renderInput(
                     "additionalContribution",
