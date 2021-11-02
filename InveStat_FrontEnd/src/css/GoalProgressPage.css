@@ -162,7 +162,7 @@
    display: block;
    
    width: 35%;
-   height: 38px;
+   min-height: 38px;
    background:#7092AD;
    border: none;
    border-radius: 0%;
@@ -170,6 +170,7 @@
    float:right;
    margin-top: 5px;
    align-items: right;
+   font-size: medium;
 }
 #setGoal-button-v2:hover{
    background-color: #2d6492;
@@ -229,7 +230,7 @@
    align-items: left;
    text-align: left;
    vertical-align: middle;
-   font-size: 20px;
+   font-size: medium;
    margin-bottom: 0;
    padding-top: 8px;
 }
@@ -251,7 +252,7 @@
    font-style: italic;
    vertical-align: bottom;
    margin-bottom: 0;
-   font-size: 20px;
+   font-size: medium;
    padding-top: 8px;
    padding-right: 8px;
 }
