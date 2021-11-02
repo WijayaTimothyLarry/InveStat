@@ -35,7 +35,7 @@ class TransactionPage extends Form {
     purchasedStockStockTickerId: Joi.string().required().label("Stock"),
     changeInQuantity: Joi.number().max(100).min(1).required().label("Quantity"),
     TransactionPrice: Joi.number().min(0).required().label("Price"),
-    brokerageCost: Joi.number().min(0).required().label("Brocker Cost"),
+    brokerageCost: Joi.number().min(0).required().label("Broker Cost"),
     userEmail: Joi.string(),
   };
 
